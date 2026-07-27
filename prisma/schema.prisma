@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RecoveryPlanStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+}
+
+enum MeasurementType {
+  FLEXION_DEGREES
+  EXTENSION_DEGREES
+  QUAD_CIRCUMFERENCE_CM
+  WEIGHT_KG
+}
+
+model RecoveryPlan {
+  id          String             @id @default(uuid())
+  userId      String
+  bodyPart    String
+  injuryType  String
+  surgeryDate DateTime
+  status      RecoveryPlanStatus @default(ACTIVE)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  exercises      Exercise[]
+  appointments   Appointment[]
+  measurements   Measurement[]
+  progressPhotos ProgressPhoto[]
+
+  @@index([userId])
+}
+
+model Exercise {
+  id                String   @id @default(uuid())
+  recoveryPlanId    String
+  recoveryPlan      RecoveryPlan @relation(fields: [recoveryPlanId], references: [id])
+  name              String
+  targetSets        Int
+  targetReps        Int
+  referenceMediaUrl String?
+  phase             Int
+  createdAt         DateTime @default(now())
+
+  logs ExerciseLog[]
+}
+
+model ExerciseLog {
+  id         String   @id @default(uuid())
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  setsDone   Int
+  repsDone   Int
+  date       DateTime
+  createdAt  DateTime @default(now())
+}
+
+model Appointment {
+  id             String       @id @default(uuid())
+  recoveryPlanId String
+  recoveryPlan   RecoveryPlan @relation(fields: [recoveryPlanId], references: [id])
+  date           DateTime
+  provider       String
+  notes          String?
+  createdAt      DateTime     @default(now())
+}
+
+model Measurement {
+  id             String          @id @default(uuid())
+  recoveryPlanId String
+  recoveryPlan   RecoveryPlan    @relation(fields: [recoveryPlanId], references: [id])
+  type           MeasurementType
+  value          Float
+  unit           String
+  date           DateTime
+  createdAt      DateTime        @default(now())
+}
+
+model ProgressPhoto {
+  id             String       @id @default(uuid())
+  recoveryPlanId String
+  recoveryPlan   RecoveryPlan @relation(fields: [recoveryPlanId], references: [id])
+  photoUrl       String
+  date           DateTime
+  createdAt      DateTime     @default(now())
+}
