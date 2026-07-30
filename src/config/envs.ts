@@ -21,7 +21,7 @@ const { error, value } = envsSchema.validate({
 }) as { error: joi.ValidationError | undefined; value: EnvVars };
 
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`);
+  throw new Error(`Config validation error : ${error.message}`);
 }
 
 const envVars: EnvVars = value;
