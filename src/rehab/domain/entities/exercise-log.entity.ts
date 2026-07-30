@@ -1,4 +1,5 @@
 import { AggregateRoot } from '../../../shared/domain/building-blocks/AggregateRoot';
+import { InvalidRehabEntityDataError } from '../exceptions/rehab.errors';
 
 export type ExerciseLogProps = {
   exerciseId: string;
@@ -10,9 +11,12 @@ export type ExerciseLogProps = {
 
 export class ExerciseLogEntity extends AggregateRoot<ExerciseLogProps> {
   constructor(props: ExerciseLogProps, id?: string) {
-    if (!props.exerciseId) throw new Error('exerciseId is required');
-    if (props.setsDone < 0) throw new Error('setsDone cannot be negative');
-    if (props.repsDone < 0) throw new Error('repsDone cannot be negative');
+    if (!props.exerciseId)
+      throw new InvalidRehabEntityDataError('exerciseId es obligatorio');
+    if (props.setsDone < 0)
+      throw new InvalidRehabEntityDataError('setsDone no puede ser negativo');
+    if (props.repsDone < 0)
+      throw new InvalidRehabEntityDataError('repsDone no puede ser negativo');
     super(props, id);
   }
 

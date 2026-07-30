@@ -1,4 +1,5 @@
 import { Entity } from '../../../shared/domain/building-blocks/Entity';
+import { InvalidRehabEntityDataError } from '../exceptions/rehab.errors';
 
 export type ExerciseProps = {
   recoveryPlanId: string;
@@ -12,10 +13,14 @@ export type ExerciseProps = {
 
 export class ExerciseEntity extends Entity<ExerciseProps> {
   constructor(props: ExerciseProps, id?: string) {
-    if (!props.recoveryPlanId) throw new Error('recoveryPlanId is required');
-    if (!props.name) throw new Error('name is required');
-    if (props.targetSets <= 0) throw new Error('targetSets must be positive');
-    if (props.targetReps <= 0) throw new Error('targetReps must be positive');
+    if (!props.recoveryPlanId)
+      throw new InvalidRehabEntityDataError('recoveryPlanId es obligatorio');
+    if (!props.name)
+      throw new InvalidRehabEntityDataError('name es obligatorio');
+    if (props.targetSets <= 0)
+      throw new InvalidRehabEntityDataError('targetSets debe ser positivo');
+    if (props.targetReps <= 0)
+      throw new InvalidRehabEntityDataError('targetReps debe ser positivo');
     super(props, id);
   }
 

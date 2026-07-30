@@ -1,4 +1,5 @@
 import { Entity } from '../../../shared/domain/building-blocks/Entity';
+import { InvalidRehabEntityDataError } from '../exceptions/rehab.errors';
 
 export enum MeasurementType {
   FLEXION_DEGREES = 'FLEXION_DEGREES',
@@ -18,9 +19,10 @@ export type MeasurementProps = {
 
 export class MeasurementEntity extends Entity<MeasurementProps> {
   constructor(props: MeasurementProps, id?: string) {
-    if (!props.recoveryPlanId) throw new Error('recoveryPlanId is required');
+    if (!props.recoveryPlanId)
+      throw new InvalidRehabEntityDataError('recoveryPlanId es obligatorio');
     if (typeof props.value !== 'number' || Number.isNaN(props.value)) {
-      throw new Error('value must be a number');
+      throw new InvalidRehabEntityDataError('value debe ser un número');
     }
     super(props, id);
   }
