@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { ExerciseNotFoundError, RecoveryPlanNotFoundError } from '../../domain/exceptions/rehab.errors';
 import type { ExerciseRepositoryPort } from '../../domain/ports/exercise.repository.port';
 import type { ExerciseLogRepositoryPort } from '../../domain/ports/exercise-log.repository.port';
@@ -6,6 +7,8 @@ import type { RecoveryPlanRepositoryPort } from '../../domain/ports/recovery-pla
 import type { LogExerciseInput } from '../dtos/log-exercise.input';
 
 export class LogExerciseUseCase {
+  private readonly logger = new Logger(LogExerciseUseCase.name);
+
   constructor(
     private readonly recoveryPlanRepository: RecoveryPlanRepositoryPort,
     private readonly exerciseRepository: ExerciseRepositoryPort,
@@ -30,16 +33,26 @@ export class LogExerciseUseCase {
       date: new Date(input.date),
     });
 
-    await this.eventPublisher.publish({
-      eventType: 'rehab.exercise_logged.v1',
-      payload: {
-        exerciseLogId: log.id,
-        exerciseId: log.exerciseId,
-        recoveryPlanId: exercise.recoveryPlanId,
-        setsDone: log.setsDone,
-        repsDone: log.repsDone,
-      },
-    });
+    try {
+      await this.eventPublisher.publish({
+        eventType: 'rehab.exercise_logged.v1',
+        payload: {
+          exerciseLogId: log.id,
+          exerciseId: log.exerciseId,
+          recoveryPlanId: exercise.recoveryPlanId,
+          setsDone: log.setsDone,
+          repsDone: log.repsDone,
+        },
+      });
+    } catch (err) {
+      // El registro del ejercicio ya se persistió con éxito: un fallo al
+      // publicar el evento no debe convertirse en un 500 para el cliente.
+      this.logger.error(
+        `Fallo al publicar rehab.exercise_logged.v1 para el log ${log.id}: ${
+          err instanceof Error ? err.message : String(err)
+        }`,
+      );
+    }
 
     return {
       exerciseLogId: log.id,
