@@ -1,4 +1,5 @@
 import { AggregateRoot } from '../../../shared/domain/building-blocks/AggregateRoot';
+import { InvalidRehabEntityDataError } from '../exceptions/rehab.errors';
 
 export type AppointmentProps = {
   recoveryPlanId: string;
@@ -10,8 +11,10 @@ export type AppointmentProps = {
 
 export class AppointmentEntity extends AggregateRoot<AppointmentProps> {
   constructor(props: AppointmentProps, id?: string) {
-    if (!props.recoveryPlanId) throw new Error('recoveryPlanId is required');
-    if (!props.provider) throw new Error('provider is required');
+    if (!props.recoveryPlanId)
+      throw new InvalidRehabEntityDataError('recoveryPlanId es obligatorio');
+    if (!props.provider)
+      throw new InvalidRehabEntityDataError('provider es obligatorio');
     super(props, id);
   }
 

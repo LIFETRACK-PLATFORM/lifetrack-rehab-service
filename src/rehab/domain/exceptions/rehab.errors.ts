@@ -11,3 +11,9 @@ export class ExerciseNotFoundError extends DomainError {
     super(`El ejercicio ${exerciseId} no existe`);
   }
 }
+
+export class InvalidRehabEntityDataError extends DomainError {
+  constructor(message: string) {
+    super(message);
+  }
+}

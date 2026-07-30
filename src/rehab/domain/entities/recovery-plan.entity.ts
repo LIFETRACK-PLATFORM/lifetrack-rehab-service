@@ -1,4 +1,5 @@
 import { AggregateRoot } from '../../../shared/domain/building-blocks/AggregateRoot';
+import { InvalidRehabEntityDataError } from '../exceptions/rehab.errors';
 
 export enum RecoveryPlanStatus {
   ACTIVE = 'ACTIVE',
@@ -18,9 +19,12 @@ export type RecoveryPlanProps = {
 
 export class RecoveryPlanEntity extends AggregateRoot<RecoveryPlanProps> {
   constructor(props: RecoveryPlanProps, id?: string) {
-    if (!props.userId) throw new Error('userId is required');
-    if (!props.bodyPart) throw new Error('bodyPart is required');
-    if (!props.injuryType) throw new Error('injuryType is required');
+    if (!props.userId)
+      throw new InvalidRehabEntityDataError('userId es obligatorio');
+    if (!props.bodyPart)
+      throw new InvalidRehabEntityDataError('bodyPart es obligatorio');
+    if (!props.injuryType)
+      throw new InvalidRehabEntityDataError('injuryType es obligatorio');
     super(props, id);
   }
 

@@ -21,20 +21,20 @@ describe('RecoveryPlanEntity', () => {
 
   it('lanza error si falta el userId', () => {
     expect(() => new RecoveryPlanEntity({ ...baseProps, userId: '' })).toThrow(
-      'userId is required',
+      'userId es obligatorio',
     );
   });
 
   it('lanza error si falta el bodyPart', () => {
     expect(
       () => new RecoveryPlanEntity({ ...baseProps, bodyPart: '' }),
-    ).toThrow('bodyPart is required');
+    ).toThrow('bodyPart es obligatorio');
   });
 
   it('lanza error si falta el injuryType', () => {
     expect(
       () => new RecoveryPlanEntity({ ...baseProps, injuryType: '' }),
-    ).toThrow('injuryType is required');
+    ).toThrow('injuryType es obligatorio');
   });
 
   it('isActive() retorna true cuando el status es ACTIVE', () => {
