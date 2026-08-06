@@ -22,9 +22,7 @@ export class AppointmentEntity extends AggregateRoot<AppointmentProps> {
     if (!props.provider)
       throw new InvalidRehabEntityDataError('provider es obligatorio');
     if (!Object.values(AppointmentType).includes(props.type)) {
-      throw new InvalidRehabEntityDataError(
-        'type debe ser THERAPY o MEDICAL',
-      );
+      throw new InvalidRehabEntityDataError('type debe ser THERAPY o MEDICAL');
     }
     super(props, id);
   }

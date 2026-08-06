@@ -19,7 +19,10 @@ describe('ExerciseEntity', () => {
   });
 
   it('crea un ejercicio agendado en días específicos', () => {
-    const exercise = new ExerciseEntity({ ...baseProps, daysOfWeek: [1, 3, 5] });
+    const exercise = new ExerciseEntity({
+      ...baseProps,
+      daysOfWeek: [1, 3, 5],
+    });
     expect(exercise.isScheduledOn(1)).toBe(true);
     expect(exercise.isScheduledOn(2)).toBe(false);
   });
@@ -31,9 +34,9 @@ describe('ExerciseEntity', () => {
   });
 
   it('lanza error si daysOfWeek tiene un valor fuera de rango', () => {
-    expect(
-      () => new ExerciseEntity({ ...baseProps, daysOfWeek: [7] }),
-    ).toThrow('daysOfWeek solo admite enteros entre 0 (domingo) y 6 (sábado)');
+    expect(() => new ExerciseEntity({ ...baseProps, daysOfWeek: [7] })).toThrow(
+      'daysOfWeek solo admite enteros entre 0 (domingo) y 6 (sábado)',
+    );
   });
 
   it('lanza error si daysOfWeek tiene un valor negativo', () => {

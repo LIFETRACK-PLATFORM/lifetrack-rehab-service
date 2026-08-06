@@ -1,5 +1,8 @@
 import { GetWeeklySummaryUseCase } from './get-weekly-summary.use-case';
-import { RecoveryPlanEntity, RecoveryPlanStatus } from '../../domain/entities/recovery-plan.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../../domain/entities/recovery-plan.entity';
 import { ExerciseEntity } from '../../domain/entities/exercise.entity';
 import { ExerciseCompletionEntity } from '../../domain/entities/exercise-completion.entity';
 import { addDays, startOfDay } from '../utils/schedule.util';
@@ -42,7 +45,9 @@ function completion(date: Date) {
 }
 
 function buildUseCase(completions: ExerciseCompletionEntity[]) {
-  const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()) };
+  const recoveryPlanRepository = {
+    findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()),
+  };
   const exerciseRepository = {
     findById: jest.fn(),
     create: jest.fn(),
@@ -62,8 +67,8 @@ function buildUseCase(completions: ExerciseCompletionEntity[]) {
   return new GetWeeklySummaryUseCase(
     recoveryPlanRepository as any,
     exerciseRepository as any,
-    exerciseCompletionRepository as any,
-    appointmentRepository as any,
+    exerciseCompletionRepository,
+    appointmentRepository,
   );
 }
 
@@ -87,7 +92,10 @@ describe('GetWeeklySummaryUseCase', () => {
     ];
     const useCase = buildUseCase(completions);
 
-    const result = await useCase.execute({ userId: 'user-1', recoveryPlanId: 'plan-1' });
+    const result = await useCase.execute({
+      userId: 'user-1',
+      recoveryPlanId: 'plan-1',
+    });
 
     expect(result.streakDays).toBe(3);
   });
@@ -101,7 +109,10 @@ describe('GetWeeklySummaryUseCase', () => {
     ];
     const useCase = buildUseCase(completions);
 
-    const result = await useCase.execute({ userId: 'user-1', recoveryPlanId: 'plan-1' });
+    const result = await useCase.execute({
+      userId: 'user-1',
+      recoveryPlanId: 'plan-1',
+    });
 
     expect(result.streakDays).toBe(2);
   });
@@ -109,7 +120,10 @@ describe('GetWeeklySummaryUseCase', () => {
   it('la racha es 0 si ayer estaba agendado y no se cumplió', async () => {
     const useCase = buildUseCase([]);
 
-    const result = await useCase.execute({ userId: 'user-1', recoveryPlanId: 'plan-1' });
+    const result = await useCase.execute({
+      userId: 'user-1',
+      recoveryPlanId: 'plan-1',
+    });
 
     expect(result.streakDays).toBe(0);
   });
@@ -120,7 +134,10 @@ describe('GetWeeklySummaryUseCase', () => {
     const completions = [completion(today), completion(addDays(today, -1))];
     const useCase = buildUseCase(completions);
 
-    const result = await useCase.execute({ userId: 'user-1', recoveryPlanId: 'plan-1' });
+    const result = await useCase.execute({
+      userId: 'user-1',
+      recoveryPlanId: 'plan-1',
+    });
 
     const evaluableDays = result.days.filter((d) => d.due > 0 && !d.isFuture);
     const compliantDays = evaluableDays.filter((d) => d.compliant);

@@ -8,9 +8,7 @@ import type {
 import { ExerciseCompletionMapper } from './exercise-completion.mapper';
 
 @Injectable()
-export class PrismaExerciseCompletionRepository
-  implements ExerciseCompletionRepositoryPort
-{
+export class PrismaExerciseCompletionRepository implements ExerciseCompletionRepositoryPort {
   constructor(private readonly prisma: PrismaService) {}
 
   async markCompleted(

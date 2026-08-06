@@ -1,7 +1,13 @@
 import { AddOrUpdatePainLogUseCase } from './add-or-update-pain-log.use-case';
-import { RecoveryPlanEntity, RecoveryPlanStatus } from '../../domain/entities/recovery-plan.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../../domain/entities/recovery-plan.entity';
 import { PainLogEntity } from '../../domain/entities/pain-log.entity';
-import { InvalidRehabEntityDataError, RecoveryPlanNotFoundError } from '../../domain/exceptions/rehab.errors';
+import {
+  InvalidRehabEntityDataError,
+  RecoveryPlanNotFoundError,
+} from '../../domain/exceptions/rehab.errors';
 
 function buildPlan() {
   return new RecoveryPlanEntity(
@@ -20,18 +26,22 @@ function buildPlan() {
 
 describe('AddOrUpdatePainLogUseCase', () => {
   it('registra un nivel de dolor válido', async () => {
-    const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()) };
+    const recoveryPlanRepository = {
+      findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()),
+    };
     const painLogRepository = {
       upsert: jest
         .fn()
         .mockImplementation((data) =>
-          Promise.resolve(new PainLogEntity({ ...data, createdAt: new Date() }, 'pain-1')),
+          Promise.resolve(
+            new PainLogEntity({ ...data, createdAt: new Date() }, 'pain-1'),
+          ),
         ),
       listByRecoveryPlanInRange: jest.fn(),
     };
     const useCase = new AddOrUpdatePainLogUseCase(
       recoveryPlanRepository as any,
-      painLogRepository as any,
+      painLogRepository,
     );
 
     const result = await useCase.execute({
@@ -48,11 +58,16 @@ describe('AddOrUpdatePainLogUseCase', () => {
   });
 
   it('rechaza un nivel de dolor fuera de rango antes de persistir', async () => {
-    const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()) };
-    const painLogRepository = { upsert: jest.fn(), listByRecoveryPlanInRange: jest.fn() };
+    const recoveryPlanRepository = {
+      findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()),
+    };
+    const painLogRepository = {
+      upsert: jest.fn(),
+      listByRecoveryPlanInRange: jest.fn(),
+    };
     const useCase = new AddOrUpdatePainLogUseCase(
       recoveryPlanRepository as any,
-      painLogRepository as any,
+      painLogRepository,
     );
 
     await expect(
@@ -67,11 +82,16 @@ describe('AddOrUpdatePainLogUseCase', () => {
   });
 
   it('lanza RecoveryPlanNotFoundError si el plan no pertenece al usuario', async () => {
-    const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(null) };
-    const painLogRepository = { upsert: jest.fn(), listByRecoveryPlanInRange: jest.fn() };
+    const recoveryPlanRepository = {
+      findByIdAndUserId: jest.fn().mockResolvedValue(null),
+    };
+    const painLogRepository = {
+      upsert: jest.fn(),
+      listByRecoveryPlanInRange: jest.fn(),
+    };
     const useCase = new AddOrUpdatePainLogUseCase(
       recoveryPlanRepository as any,
-      painLogRepository as any,
+      painLogRepository,
     );
 
     await expect(

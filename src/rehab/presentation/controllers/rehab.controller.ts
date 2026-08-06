@@ -117,10 +117,7 @@ export class RehabController {
   }
 
   @GrpcMethod('RehabService', 'MarkExerciseCompletion')
-  markExerciseCompletion(
-    data: MarkExerciseCompletionDto,
-    metadata: Metadata,
-  ) {
+  markExerciseCompletion(data: MarkExerciseCompletionDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.markExerciseCompletionUseCase.execute({ userId, ...data });
   }

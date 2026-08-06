@@ -1,5 +1,8 @@
 import { Logger } from '@nestjs/common';
-import { ExerciseNotFoundError, RecoveryPlanNotFoundError } from '../../domain/exceptions/rehab.errors';
+import {
+  ExerciseNotFoundError,
+  RecoveryPlanNotFoundError,
+} from '../../domain/exceptions/rehab.errors';
 import type { ExerciseRepositoryPort } from '../../domain/ports/exercise.repository.port';
 import type { ExerciseLogRepositoryPort } from '../../domain/ports/exercise-log.repository.port';
 import type { EventPublisherPort } from '../../domain/ports/event.publisher.port';

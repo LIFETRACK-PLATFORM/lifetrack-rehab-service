@@ -2,9 +2,7 @@ import { ExerciseCompletion as PrismaExerciseCompletion } from 'generated/prisma
 import { ExerciseCompletionEntity } from '../../../domain/entities/exercise-completion.entity';
 
 export class ExerciseCompletionMapper {
-  static toDomain(
-    raw: PrismaExerciseCompletion,
-  ): ExerciseCompletionEntity {
+  static toDomain(raw: PrismaExerciseCompletion): ExerciseCompletionEntity {
     return new ExerciseCompletionEntity(
       {
         exerciseId: raw.exerciseId,

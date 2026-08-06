@@ -1,6 +1,9 @@
 import { MarkExerciseCompletionUseCase } from './mark-exercise-completion.use-case';
 import { ExerciseEntity } from '../../domain/entities/exercise.entity';
-import { RecoveryPlanEntity, RecoveryPlanStatus } from '../../domain/entities/recovery-plan.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../../domain/entities/recovery-plan.entity';
 import {
   ExerciseNotFoundError,
   RecoveryPlanNotFoundError,
@@ -38,7 +41,9 @@ function buildPlan(userId: string) {
 
 describe('MarkExerciseCompletionUseCase', () => {
   it('marca un ejercicio como cumplido cuando el plan pertenece al usuario', async () => {
-    const exerciseRepository = { findById: jest.fn().mockResolvedValue(buildExercise()) };
+    const exerciseRepository = {
+      findById: jest.fn().mockResolvedValue(buildExercise()),
+    };
     const recoveryPlanRepository = {
       findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan('user-1')),
     };
@@ -68,7 +73,9 @@ describe('MarkExerciseCompletionUseCase', () => {
   });
 
   it('desmarca un ejercicio cuando completed es false', async () => {
-    const exerciseRepository = { findById: jest.fn().mockResolvedValue(buildExercise()) };
+    const exerciseRepository = {
+      findById: jest.fn().mockResolvedValue(buildExercise()),
+    };
     const recoveryPlanRepository = {
       findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan('user-1')),
     };
@@ -100,7 +107,10 @@ describe('MarkExerciseCompletionUseCase', () => {
   it('lanza ExerciseNotFoundError si el ejercicio no existe', async () => {
     const exerciseRepository = { findById: jest.fn().mockResolvedValue(null) };
     const recoveryPlanRepository = { findByIdAndUserId: jest.fn() };
-    const exerciseCompletionRepository = { markCompleted: jest.fn(), unmarkCompleted: jest.fn() };
+    const exerciseCompletionRepository = {
+      markCompleted: jest.fn(),
+      unmarkCompleted: jest.fn(),
+    };
 
     const useCase = new MarkExerciseCompletionUseCase(
       exerciseRepository as any,
@@ -119,9 +129,16 @@ describe('MarkExerciseCompletionUseCase', () => {
   });
 
   it('lanza RecoveryPlanNotFoundError si el ejercicio pertenece a un plan de otro usuario', async () => {
-    const exerciseRepository = { findById: jest.fn().mockResolvedValue(buildExercise()) };
-    const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(null) };
-    const exerciseCompletionRepository = { markCompleted: jest.fn(), unmarkCompleted: jest.fn() };
+    const exerciseRepository = {
+      findById: jest.fn().mockResolvedValue(buildExercise()),
+    };
+    const recoveryPlanRepository = {
+      findByIdAndUserId: jest.fn().mockResolvedValue(null),
+    };
+    const exerciseCompletionRepository = {
+      markCompleted: jest.fn(),
+      unmarkCompleted: jest.fn(),
+    };
 
     const useCase = new MarkExerciseCompletionUseCase(
       exerciseRepository as any,
