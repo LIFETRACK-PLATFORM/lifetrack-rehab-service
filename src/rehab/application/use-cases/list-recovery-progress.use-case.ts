@@ -49,6 +49,7 @@ export class ListRecoveryProgressUseCase {
           targetSets: exercise.targetSets,
           targetReps: exercise.targetReps,
           phase: exercise.phase,
+          referenceMediaUrl: exercise.referenceMediaUrl ?? null,
           daysOfWeek: exercise.daysOfWeek,
           logs: logs.map((log) => ({
             exerciseLogId: log.id,

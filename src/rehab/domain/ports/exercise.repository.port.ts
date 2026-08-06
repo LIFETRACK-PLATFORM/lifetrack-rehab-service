@@ -14,4 +14,5 @@ export interface ExerciseRepositoryPort {
   findById(id: string): Promise<ExerciseEntity | null>;
   create(data: CreateExerciseInput): Promise<ExerciseEntity>;
   listByRecoveryPlan(recoveryPlanId: string): Promise<ExerciseEntity[]>;
+  deleteById(id: string): Promise<void>;
 }

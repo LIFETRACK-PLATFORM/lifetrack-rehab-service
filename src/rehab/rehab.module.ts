@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CreateRecoveryPlanUseCase } from './application/use-cases/create-recovery-plan.use-case';
 import { AddExerciseUseCase } from './application/use-cases/add-exercise.use-case';
+import { DeleteExerciseUseCase } from './application/use-cases/delete-exercise.use-case';
 import { LogExerciseUseCase } from './application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from './application/use-cases/add-appointment.use-case';
 import { AddMeasurementUseCase } from './application/use-cases/add-measurement.use-case';
@@ -98,6 +99,14 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         recoveryPlanRepo: RecoveryPlanRepositoryPort,
         exerciseRepo: ExerciseRepositoryPort,
       ) => new AddExerciseUseCase(recoveryPlanRepo, exerciseRepo),
+      inject: [RECOVERY_PLAN_REPOSITORY, EXERCISE_REPOSITORY],
+    },
+    {
+      provide: DeleteExerciseUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseRepo: ExerciseRepositoryPort,
+      ) => new DeleteExerciseUseCase(recoveryPlanRepo, exerciseRepo),
       inject: [RECOVERY_PLAN_REPOSITORY, EXERCISE_REPOSITORY],
     },
     {
