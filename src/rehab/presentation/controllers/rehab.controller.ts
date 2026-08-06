@@ -4,6 +4,7 @@ import type { Metadata } from '@grpc/grpc-js';
 import { CreateRecoveryPlanUseCase } from '../../application/use-cases/create-recovery-plan.use-case';
 import { ListRecoveryPlansByUserUseCase } from '../../application/use-cases/list-recovery-plans-by-user.use-case';
 import { AddExerciseUseCase } from '../../application/use-cases/add-exercise.use-case';
+import { DeleteExerciseUseCase } from '../../application/use-cases/delete-exercise.use-case';
 import { LogExerciseUseCase } from '../../application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from '../../application/use-cases/add-appointment.use-case';
 import { AddMeasurementUseCase } from '../../application/use-cases/add-measurement.use-case';
@@ -16,6 +17,7 @@ import { AddOrUpdatePainLogUseCase } from '../../application/use-cases/add-or-up
 import { ListPainLogsUseCase } from '../../application/use-cases/list-pain-logs.use-case';
 import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
+import { DeleteExerciseDto } from '../dtos/delete-exercise.dto';
 import { LogExerciseDto } from '../dtos/log-exercise.dto';
 import { AddAppointmentDto } from '../dtos/add-appointment.dto';
 import { AddMeasurementDto } from '../dtos/add-measurement.dto';
@@ -36,6 +38,7 @@ export class RehabController {
     private readonly createRecoveryPlanUseCase: CreateRecoveryPlanUseCase,
     private readonly listRecoveryPlansByUserUseCase: ListRecoveryPlansByUserUseCase,
     private readonly addExerciseUseCase: AddExerciseUseCase,
+    private readonly deleteExerciseUseCase: DeleteExerciseUseCase,
     private readonly logExerciseUseCase: LogExerciseUseCase,
     private readonly addAppointmentUseCase: AddAppointmentUseCase,
     private readonly addMeasurementUseCase: AddMeasurementUseCase,
@@ -69,6 +72,15 @@ export class RehabController {
   addExercise(data: AddExerciseDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.addExerciseUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'DeleteExercise')
+  deleteExercise(data: DeleteExerciseDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.deleteExerciseUseCase.execute({
+      userId,
+      exerciseId: data.exerciseId,
+    });
   }
 
   @GrpcMethod('RehabService', 'LogExercise')

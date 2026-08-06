@@ -48,6 +48,9 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
   get targetReps(): number {
     return this.props.targetReps;
   }
+  get referenceMediaUrl(): string | null | undefined {
+    return this.props.referenceMediaUrl;
+  }
   get phase(): number {
     return this.props.phase;
   }

@@ -37,4 +37,12 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
     });
     return rows.map((row) => ExerciseMapper.toDomain(row));
   }
+
+  async deleteById(id: string): Promise<void> {
+    await this.prisma.$transaction([
+      this.prisma.exerciseLog.deleteMany({ where: { exerciseId: id } }),
+      this.prisma.exerciseCompletion.deleteMany({ where: { exerciseId: id } }),
+      this.prisma.exercise.delete({ where: { id } }),
+    ]);
+  }
 }
