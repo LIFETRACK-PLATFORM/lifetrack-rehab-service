@@ -17,10 +17,30 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
         recoveryPlanId: data.recoveryPlanId,
         date: data.date,
         provider: data.provider,
+        type: data.type,
         notes: data.notes,
       },
     });
     return AppointmentMapper.toDomain(raw);
+  }
+
+  async createMany(
+    data: CreateAppointmentInput[],
+  ): Promise<AppointmentEntity[]> {
+    const created = await this.prisma.$transaction(
+      data.map((item) =>
+        this.prisma.appointment.create({
+          data: {
+            recoveryPlanId: item.recoveryPlanId,
+            date: item.date,
+            provider: item.provider,
+            type: item.type,
+            notes: item.notes,
+          },
+        }),
+      ),
+    );
+    return created.map((raw) => AppointmentMapper.toDomain(raw));
   }
 
   async listByRecoveryPlan(
@@ -28,6 +48,17 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
   ): Promise<AppointmentEntity[]> {
     const rows = await this.prisma.appointment.findMany({
       where: { recoveryPlanId },
+    });
+    return rows.map((row) => AppointmentMapper.toDomain(row));
+  }
+
+  async listByRecoveryPlanInRange(
+    recoveryPlanId: string,
+    from: Date,
+    to: Date,
+  ): Promise<AppointmentEntity[]> {
+    const rows = await this.prisma.appointment.findMany({
+      where: { recoveryPlanId, date: { gte: from, lte: to } },
     });
     return rows.map((row) => AppointmentMapper.toDomain(row));
   }

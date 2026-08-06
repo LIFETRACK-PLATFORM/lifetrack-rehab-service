@@ -8,6 +8,7 @@ export type ExerciseProps = {
   targetReps: number;
   referenceMediaUrl?: string | null;
   phase: number;
+  daysOfWeek: number[];
   createdAt: Date;
 };
 
@@ -21,7 +22,18 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
       throw new InvalidRehabEntityDataError('targetSets debe ser positivo');
     if (props.targetReps <= 0)
       throw new InvalidRehabEntityDataError('targetReps debe ser positivo');
-    super(props, id);
+    const daysOfWeek = props.daysOfWeek ?? [];
+    if (new Set(daysOfWeek).size !== daysOfWeek.length) {
+      throw new InvalidRehabEntityDataError(
+        'daysOfWeek no puede tener días repetidos',
+      );
+    }
+    if (daysOfWeek.some((day) => !Number.isInteger(day) || day < 0 || day > 6)) {
+      throw new InvalidRehabEntityDataError(
+        'daysOfWeek solo admite enteros entre 0 (domingo) y 6 (sábado)',
+      );
+    }
+    super({ ...props, daysOfWeek }, id);
   }
 
   get recoveryPlanId(): string {
@@ -38,5 +50,13 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
   }
   get phase(): number {
     return this.props.phase;
+  }
+  get daysOfWeek(): number[] {
+    return this.props.daysOfWeek;
+  }
+
+  /** Array vacío = agendado todos los días. */
+  isScheduledOn(dayOfWeek: number): boolean {
+    return this.props.daysOfWeek.length === 0 || this.props.daysOfWeek.includes(dayOfWeek);
   }
 }

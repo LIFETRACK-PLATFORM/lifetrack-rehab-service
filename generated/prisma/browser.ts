@@ -28,6 +28,11 @@ export type RecoveryPlan = Prisma.RecoveryPlanModel
  */
 export type Exercise = Prisma.ExerciseModel
 /**
+ * Model ExerciseCompletion
+ * 
+ */
+export type ExerciseCompletion = Prisma.ExerciseCompletionModel
+/**
  * Model ExerciseLog
  * 
  */
@@ -47,3 +52,8 @@ export type Measurement = Prisma.MeasurementModel
  * 
  */
 export type ProgressPhoto = Prisma.ProgressPhotoModel
+/**
+ * Model PainLog
+ * 
+ */
+export type PainLog = Prisma.PainLogModel

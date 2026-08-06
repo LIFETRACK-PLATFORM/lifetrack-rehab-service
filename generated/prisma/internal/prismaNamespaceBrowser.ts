@@ -53,10 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   RecoveryPlan: 'RecoveryPlan',
   Exercise: 'Exercise',
+  ExerciseCompletion: 'ExerciseCompletion',
   ExerciseLog: 'ExerciseLog',
   Appointment: 'Appointment',
   Measurement: 'Measurement',
-  ProgressPhoto: 'ProgressPhoto'
+  ProgressPhoto: 'ProgressPhoto',
+  PainLog: 'PainLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -97,10 +99,21 @@ export const ExerciseScalarFieldEnum = {
   targetReps: 'targetReps',
   referenceMediaUrl: 'referenceMediaUrl',
   phase: 'phase',
+  daysOfWeek: 'daysOfWeek',
   createdAt: 'createdAt'
 } as const
 
 export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
+
+
+export const ExerciseCompletionScalarFieldEnum = {
+  id: 'id',
+  exerciseId: 'exerciseId',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type ExerciseCompletionScalarFieldEnum = (typeof ExerciseCompletionScalarFieldEnum)[keyof typeof ExerciseCompletionScalarFieldEnum]
 
 
 export const ExerciseLogScalarFieldEnum = {
@@ -121,6 +134,7 @@ export const AppointmentScalarFieldEnum = {
   date: 'date',
   provider: 'provider',
   notes: 'notes',
+  type: 'type',
   createdAt: 'createdAt'
 } as const
 
@@ -149,6 +163,18 @@ export const ProgressPhotoScalarFieldEnum = {
 } as const
 
 export type ProgressPhotoScalarFieldEnum = (typeof ProgressPhotoScalarFieldEnum)[keyof typeof ProgressPhotoScalarFieldEnum]
+
+
+export const PainLogScalarFieldEnum = {
+  id: 'id',
+  recoveryPlanId: 'recoveryPlanId',
+  date: 'date',
+  level: 'level',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type PainLogScalarFieldEnum = (typeof PainLogScalarFieldEnum)[keyof typeof PainLogScalarFieldEnum]
 
 
 export const SortOrder = {

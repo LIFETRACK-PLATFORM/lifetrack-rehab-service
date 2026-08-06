@@ -10,8 +10,10 @@
  */
 export type * from './models/RecoveryPlan'
 export type * from './models/Exercise'
+export type * from './models/ExerciseCompletion'
 export type * from './models/ExerciseLog'
 export type * from './models/Appointment'
 export type * from './models/Measurement'
 export type * from './models/ProgressPhoto'
+export type * from './models/PainLog'
 export type * from './commonInputTypes'

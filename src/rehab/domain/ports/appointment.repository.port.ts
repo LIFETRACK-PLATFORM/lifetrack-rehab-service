@@ -1,13 +1,23 @@
-import { AppointmentEntity } from '../entities/appointment.entity';
+import {
+  AppointmentEntity,
+  AppointmentType,
+} from '../entities/appointment.entity';
 
 export type CreateAppointmentInput = {
   recoveryPlanId: string;
   date: Date;
   provider: string;
+  type: AppointmentType;
   notes?: string;
 };
 
 export interface AppointmentRepositoryPort {
   create(data: CreateAppointmentInput): Promise<AppointmentEntity>;
+  createMany(data: CreateAppointmentInput[]): Promise<AppointmentEntity[]>;
   listByRecoveryPlan(recoveryPlanId: string): Promise<AppointmentEntity[]>;
+  listByRecoveryPlanInRange(
+    recoveryPlanId: string,
+    from: Date,
+    to: Date,
+  ): Promise<AppointmentEntity[]>;
 }

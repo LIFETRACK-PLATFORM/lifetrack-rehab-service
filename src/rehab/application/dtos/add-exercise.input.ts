@@ -6,4 +6,5 @@ export type AddExerciseInput = {
   targetReps: number;
   referenceMediaUrl?: string;
   phase: number;
+  daysOfWeek?: number[];
 };
