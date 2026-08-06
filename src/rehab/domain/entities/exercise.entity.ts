@@ -28,7 +28,9 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
         'daysOfWeek no puede tener días repetidos',
       );
     }
-    if (daysOfWeek.some((day) => !Number.isInteger(day) || day < 0 || day > 6)) {
+    if (
+      daysOfWeek.some((day) => !Number.isInteger(day) || day < 0 || day > 6)
+    ) {
       throw new InvalidRehabEntityDataError(
         'daysOfWeek solo admite enteros entre 0 (domingo) y 6 (sábado)',
       );
@@ -60,6 +62,9 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
 
   /** Array vacío = agendado todos los días. */
   isScheduledOn(dayOfWeek: number): boolean {
-    return this.props.daysOfWeek.length === 0 || this.props.daysOfWeek.includes(dayOfWeek);
+    return (
+      this.props.daysOfWeek.length === 0 ||
+      this.props.daysOfWeek.includes(dayOfWeek)
+    );
   }
 }

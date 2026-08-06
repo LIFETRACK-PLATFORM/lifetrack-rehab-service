@@ -7,7 +7,13 @@ import { AppointmentType } from '../../domain/entities/appointment.entity';
 import type { ExerciseEntity } from '../../domain/entities/exercise.entity';
 import type { ExerciseCompletionEntity } from '../../domain/entities/exercise-completion.entity';
 import type { GetWeeklySummaryInput } from '../dtos/get-weekly-summary.input';
-import { addDays, dayOfWeek, isSameDay, startOfDay, startOfWeek } from '../utils/schedule.util';
+import {
+  addDays,
+  dayOfWeek,
+  isSameDay,
+  startOfDay,
+  startOfWeek,
+} from '../utils/schedule.util';
 
 const STREAK_LOOKBACK_DAYS = 60;
 
@@ -61,10 +67,11 @@ export class GetWeeklySummaryUseCase {
         : streakLookbackStart;
     const queryTo = weekEnd.getTime() > today.getTime() ? weekEnd : today;
 
-    const completions = await this.exerciseCompletionRepository.listByExerciseIds(
-      exerciseIds,
-      { from: queryFrom, to: queryTo },
-    );
+    const completions =
+      await this.exerciseCompletionRepository.listByExerciseIds(exerciseIds, {
+        from: queryFrom,
+        to: queryTo,
+      });
 
     const days = Array.from({ length: 7 }, (_, i) => {
       const date = addDays(weekStart, i);

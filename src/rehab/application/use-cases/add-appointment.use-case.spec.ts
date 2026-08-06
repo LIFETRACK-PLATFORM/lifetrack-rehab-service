@@ -1,6 +1,12 @@
 import { AddAppointmentUseCase } from './add-appointment.use-case';
-import { RecoveryPlanEntity, RecoveryPlanStatus } from '../../domain/entities/recovery-plan.entity';
-import { AppointmentEntity, AppointmentType } from '../../domain/entities/appointment.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../../domain/entities/recovery-plan.entity';
+import {
+  AppointmentEntity,
+  AppointmentType,
+} from '../../domain/entities/appointment.entity';
 import { RecoveryPlanNotFoundError } from '../../domain/exceptions/rehab.errors';
 
 function buildPlan() {
@@ -19,19 +25,33 @@ function buildPlan() {
 }
 
 function buildRepos(createManyCount: number) {
-  const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()) };
+  const recoveryPlanRepository = {
+    findByIdAndUserId: jest.fn().mockResolvedValue(buildPlan()),
+  };
   const appointmentRepository = {
-    create: jest.fn().mockImplementation((data) =>
-      Promise.resolve(new AppointmentEntity({ ...data, createdAt: new Date() }, 'apt-single')),
-    ),
-    createMany: jest.fn().mockImplementation((items: any[]) =>
-      Promise.resolve(
-        items.map(
-          (data, i) =>
-            new AppointmentEntity({ ...data, createdAt: new Date() }, `apt-${i}`),
+    create: jest
+      .fn()
+      .mockImplementation((data) =>
+        Promise.resolve(
+          new AppointmentEntity(
+            { ...data, createdAt: new Date() },
+            'apt-single',
+          ),
         ),
       ),
-    ),
+    createMany: jest
+      .fn()
+      .mockImplementation((items: any[]) =>
+        Promise.resolve(
+          items.map(
+            (data, i) =>
+              new AppointmentEntity(
+                { ...data, createdAt: new Date() },
+                `apt-${i}`,
+              ),
+          ),
+        ),
+      ),
     listByRecoveryPlan: jest.fn(),
     listByRecoveryPlanInRange: jest.fn(),
   };
@@ -42,11 +62,12 @@ function buildRepos(createManyCount: number) {
 
 describe('AddAppointmentUseCase', () => {
   it('crea una única cita cuando no se pide repetición', async () => {
-    const { recoveryPlanRepository, appointmentRepository, eventPublisher } = buildRepos(0);
+    const { recoveryPlanRepository, appointmentRepository, eventPublisher } =
+      buildRepos(0);
     const useCase = new AddAppointmentUseCase(
       recoveryPlanRepository as any,
-      appointmentRepository as any,
-      eventPublisher as any,
+      appointmentRepository,
+      eventPublisher,
     );
 
     const result = await useCase.execute({
@@ -63,11 +84,12 @@ describe('AddAppointmentUseCase', () => {
   });
 
   it('crea una serie semanal cuando se pide repetición', async () => {
-    const { recoveryPlanRepository, appointmentRepository, eventPublisher } = buildRepos(6);
+    const { recoveryPlanRepository, appointmentRepository, eventPublisher } =
+      buildRepos(6);
     const useCase = new AddAppointmentUseCase(
       recoveryPlanRepository as any,
-      appointmentRepository as any,
-      eventPublisher as any,
+      appointmentRepository,
+      eventPublisher,
     );
 
     const result = await useCase.execute({
@@ -84,11 +106,12 @@ describe('AddAppointmentUseCase', () => {
   });
 
   it('limita las repeticiones a un máximo de 12 aunque se pida más', async () => {
-    const { recoveryPlanRepository, appointmentRepository, eventPublisher } = buildRepos(13);
+    const { recoveryPlanRepository, appointmentRepository, eventPublisher } =
+      buildRepos(13);
     const useCase = new AddAppointmentUseCase(
       recoveryPlanRepository as any,
-      appointmentRepository as any,
-      eventPublisher as any,
+      appointmentRepository,
+      eventPublisher,
     );
 
     const result = await useCase.execute({
@@ -104,7 +127,9 @@ describe('AddAppointmentUseCase', () => {
   });
 
   it('lanza RecoveryPlanNotFoundError si el plan no pertenece al usuario', async () => {
-    const recoveryPlanRepository = { findByIdAndUserId: jest.fn().mockResolvedValue(null) };
+    const recoveryPlanRepository = {
+      findByIdAndUserId: jest.fn().mockResolvedValue(null),
+    };
     const appointmentRepository = {
       create: jest.fn(),
       createMany: jest.fn(),
@@ -114,8 +139,8 @@ describe('AddAppointmentUseCase', () => {
     const eventPublisher = { publish: jest.fn() };
     const useCase = new AddAppointmentUseCase(
       recoveryPlanRepository as any,
-      appointmentRepository as any,
-      eventPublisher as any,
+      appointmentRepository,
+      eventPublisher,
     );
 
     await expect(
