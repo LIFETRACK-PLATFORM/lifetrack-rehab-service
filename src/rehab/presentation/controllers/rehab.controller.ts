@@ -9,6 +9,11 @@ import { AddAppointmentUseCase } from '../../application/use-cases/add-appointme
 import { AddMeasurementUseCase } from '../../application/use-cases/add-measurement.use-case';
 import { AddProgressPhotoUseCase } from '../../application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryProgressUseCase } from '../../application/use-cases/list-recovery-progress.use-case';
+import { MarkExerciseCompletionUseCase } from '../../application/use-cases/mark-exercise-completion.use-case';
+import { GetTodayExercisesUseCase } from '../../application/use-cases/get-today-exercises.use-case';
+import { GetWeeklySummaryUseCase } from '../../application/use-cases/get-weekly-summary.use-case';
+import { AddOrUpdatePainLogUseCase } from '../../application/use-cases/add-or-update-pain-log.use-case';
+import { ListPainLogsUseCase } from '../../application/use-cases/list-pain-logs.use-case';
 import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
 import { LogExerciseDto } from '../dtos/log-exercise.dto';
@@ -16,6 +21,11 @@ import { AddAppointmentDto } from '../dtos/add-appointment.dto';
 import { AddMeasurementDto } from '../dtos/add-measurement.dto';
 import { AddProgressPhotoDto } from '../dtos/add-progress-photo.dto';
 import { ListRecoveryProgressDto } from '../dtos/list-recovery-progress.dto';
+import { MarkExerciseCompletionDto } from '../dtos/mark-exercise-completion.dto';
+import { GetTodayExercisesDto } from '../dtos/get-today-exercises.dto';
+import { GetWeeklySummaryDto } from '../dtos/get-weekly-summary.dto';
+import { AddPainLogDto } from '../dtos/add-pain-log.dto';
+import { ListPainLogsDto } from '../dtos/list-pain-logs.dto';
 import { DomainExceptionFilter } from '../filters/domain-exception.filter';
 import { getAuthenticatedUserId } from '../auth/grpc-auth.context';
 
@@ -31,6 +41,11 @@ export class RehabController {
     private readonly addMeasurementUseCase: AddMeasurementUseCase,
     private readonly addProgressPhotoUseCase: AddProgressPhotoUseCase,
     private readonly listRecoveryProgressUseCase: ListRecoveryProgressUseCase,
+    private readonly markExerciseCompletionUseCase: MarkExerciseCompletionUseCase,
+    private readonly getTodayExercisesUseCase: GetTodayExercisesUseCase,
+    private readonly getWeeklySummaryUseCase: GetWeeklySummaryUseCase,
+    private readonly addOrUpdatePainLogUseCase: AddOrUpdatePainLogUseCase,
+    private readonly listPainLogsUseCase: ListPainLogsUseCase,
   ) {}
 
   @GrpcMethod('RehabService', 'CreateRecoveryPlan')
@@ -87,5 +102,40 @@ export class RehabController {
       userId,
       recoveryPlanId: data.recoveryPlanId,
     });
+  }
+
+  @GrpcMethod('RehabService', 'MarkExerciseCompletion')
+  markExerciseCompletion(
+    data: MarkExerciseCompletionDto,
+    metadata: Metadata,
+  ) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.markExerciseCompletionUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'GetTodayExercises')
+  getTodayExercises(data: GetTodayExercisesDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.getTodayExercisesUseCase
+      .execute({ userId, recoveryPlanId: data.recoveryPlanId })
+      .then((exercises) => ({ exercises }));
+  }
+
+  @GrpcMethod('RehabService', 'GetWeeklySummary')
+  getWeeklySummary(data: GetWeeklySummaryDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.getWeeklySummaryUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'AddPainLog')
+  addPainLog(data: AddPainLogDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.addOrUpdatePainLogUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'ListPainLogs')
+  listPainLogs(data: ListPainLogsDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.listPainLogsUseCase.execute({ userId, ...data });
   }
 }

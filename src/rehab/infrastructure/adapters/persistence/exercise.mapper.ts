@@ -11,6 +11,7 @@ export class ExerciseMapper {
         targetReps: raw.targetReps,
         referenceMediaUrl: raw.referenceMediaUrl,
         phase: raw.phase,
+        daysOfWeek: raw.daysOfWeek,
         createdAt: raw.createdAt,
       },
       raw.id,

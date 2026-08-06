@@ -23,6 +23,7 @@ export class AddExerciseUseCase {
       targetReps: input.targetReps,
       referenceMediaUrl: input.referenceMediaUrl,
       phase: input.phase,
+      daysOfWeek: input.daysOfWeek,
     });
 
     return {
@@ -32,6 +33,7 @@ export class AddExerciseUseCase {
       targetSets: exercise.targetSets,
       targetReps: exercise.targetReps,
       phase: exercise.phase,
+      daysOfWeek: exercise.daysOfWeek,
     };
   }
 }

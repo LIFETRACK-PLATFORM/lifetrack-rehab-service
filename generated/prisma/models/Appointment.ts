@@ -30,6 +30,7 @@ export type AppointmentMinAggregateOutputType = {
   date: Date | null
   provider: string | null
   notes: string | null
+  type: $Enums.AppointmentType | null
   createdAt: Date | null
 }
 
@@ -39,6 +40,7 @@ export type AppointmentMaxAggregateOutputType = {
   date: Date | null
   provider: string | null
   notes: string | null
+  type: $Enums.AppointmentType | null
   createdAt: Date | null
 }
 
@@ -48,6 +50,7 @@ export type AppointmentCountAggregateOutputType = {
   date: number
   provider: number
   notes: number
+  type: number
   createdAt: number
   _all: number
 }
@@ -59,6 +62,7 @@ export type AppointmentMinAggregateInputType = {
   date?: true
   provider?: true
   notes?: true
+  type?: true
   createdAt?: true
 }
 
@@ -68,6 +72,7 @@ export type AppointmentMaxAggregateInputType = {
   date?: true
   provider?: true
   notes?: true
+  type?: true
   createdAt?: true
 }
 
@@ -77,6 +82,7 @@ export type AppointmentCountAggregateInputType = {
   date?: true
   provider?: true
   notes?: true
+  type?: true
   createdAt?: true
   _all?: true
 }
@@ -159,6 +165,7 @@ export type AppointmentGroupByOutputType = {
   date: Date
   provider: string
   notes: string | null
+  type: $Enums.AppointmentType
   createdAt: Date
   _count: AppointmentCountAggregateOutputType | null
   _min: AppointmentMinAggregateOutputType | null
@@ -189,6 +196,7 @@ export type AppointmentWhereInput = {
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
+  type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
 }
@@ -199,6 +207,7 @@ export type AppointmentOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   recoveryPlan?: Prisma.RecoveryPlanOrderByWithRelationInput
 }
@@ -212,6 +221,7 @@ export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
+  type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
 }, "id">
@@ -222,6 +232,7 @@ export type AppointmentOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.AppointmentCountOrderByAggregateInput
   _max?: Prisma.AppointmentMaxOrderByAggregateInput
@@ -237,6 +248,7 @@ export type AppointmentScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"Appointment"> | Date | string
   provider?: Prisma.StringWithAggregatesFilter<"Appointment"> | string
   notes?: Prisma.StringNullableWithAggregatesFilter<"Appointment"> | string | null
+  type?: Prisma.EnumAppointmentTypeWithAggregatesFilter<"Appointment"> | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Appointment"> | Date | string
 }
 
@@ -245,6 +257,7 @@ export type AppointmentCreateInput = {
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutAppointmentsInput
 }
@@ -255,6 +268,7 @@ export type AppointmentUncheckedCreateInput = {
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
 }
 
@@ -263,6 +277,7 @@ export type AppointmentUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutAppointmentsNestedInput
 }
@@ -273,6 +288,7 @@ export type AppointmentUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -282,6 +298,7 @@ export type AppointmentCreateManyInput = {
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
 }
 
@@ -290,6 +307,7 @@ export type AppointmentUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -299,6 +317,7 @@ export type AppointmentUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -318,6 +337,7 @@ export type AppointmentCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -327,6 +347,7 @@ export type AppointmentMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -336,6 +357,7 @@ export type AppointmentMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -381,11 +403,16 @@ export type AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput = {
   deleteMany?: Prisma.AppointmentScalarWhereInput | Prisma.AppointmentScalarWhereInput[]
 }
 
+export type EnumAppointmentTypeFieldUpdateOperationsInput = {
+  set?: $Enums.AppointmentType
+}
+
 export type AppointmentCreateWithoutRecoveryPlanInput = {
   id?: string
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
 }
 
@@ -394,6 +421,7 @@ export type AppointmentUncheckedCreateWithoutRecoveryPlanInput = {
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
 }
 
@@ -432,6 +460,7 @@ export type AppointmentScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
+  type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
 }
 
@@ -440,6 +469,7 @@ export type AppointmentCreateManyRecoveryPlanInput = {
   date: Date | string
   provider: string
   notes?: string | null
+  type?: $Enums.AppointmentType
   createdAt?: Date | string
 }
 
@@ -448,6 +478,7 @@ export type AppointmentUpdateWithoutRecoveryPlanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -456,6 +487,7 @@ export type AppointmentUncheckedUpdateWithoutRecoveryPlanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -464,6 +496,7 @@ export type AppointmentUncheckedUpdateManyWithoutRecoveryPlanInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -475,6 +508,7 @@ export type AppointmentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   date?: boolean
   provider?: boolean
   notes?: boolean
+  type?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -485,6 +519,7 @@ export type AppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   provider?: boolean
   notes?: boolean
+  type?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -495,6 +530,7 @@ export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   date?: boolean
   provider?: boolean
   notes?: boolean
+  type?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -505,10 +541,11 @@ export type AppointmentSelectScalar = {
   date?: boolean
   provider?: boolean
   notes?: boolean
+  type?: boolean
   createdAt?: boolean
 }
 
-export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "date" | "provider" | "notes" | "createdAt", ExtArgs["result"]["appointment"]>
+export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "date" | "provider" | "notes" | "type" | "createdAt", ExtArgs["result"]["appointment"]>
 export type AppointmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }
@@ -530,6 +567,7 @@ export type $AppointmentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     date: Date
     provider: string
     notes: string | null
+    type: $Enums.AppointmentType
     createdAt: Date
   }, ExtArgs["result"]["appointment"]>
   composites: {}
@@ -960,6 +998,7 @@ export interface AppointmentFieldRefs {
   readonly date: Prisma.FieldRef<"Appointment", 'DateTime'>
   readonly provider: Prisma.FieldRef<"Appointment", 'String'>
   readonly notes: Prisma.FieldRef<"Appointment", 'String'>
+  readonly type: Prisma.FieldRef<"Appointment", 'AppointmentType'>
   readonly createdAt: Prisma.FieldRef<"Appointment", 'DateTime'>
 }
     

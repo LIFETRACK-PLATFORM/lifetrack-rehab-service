@@ -7,12 +7,19 @@ import { AddMeasurementUseCase } from './application/use-cases/add-measurement.u
 import { AddProgressPhotoUseCase } from './application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryPlansByUserUseCase } from './application/use-cases/list-recovery-plans-by-user.use-case';
 import { ListRecoveryProgressUseCase } from './application/use-cases/list-recovery-progress.use-case';
+import { MarkExerciseCompletionUseCase } from './application/use-cases/mark-exercise-completion.use-case';
+import { GetTodayExercisesUseCase } from './application/use-cases/get-today-exercises.use-case';
+import { GetWeeklySummaryUseCase } from './application/use-cases/get-weekly-summary.use-case';
+import { AddOrUpdatePainLogUseCase } from './application/use-cases/add-or-update-pain-log.use-case';
+import { ListPainLogsUseCase } from './application/use-cases/list-pain-logs.use-case';
 import {
   APPOINTMENT_REPOSITORY,
   EVENT_PUBLISHER,
+  EXERCISE_COMPLETION_REPOSITORY,
   EXERCISE_LOG_REPOSITORY,
   EXERCISE_REPOSITORY,
   MEASUREMENT_REPOSITORY,
+  PAIN_LOG_REPOSITORY,
   PROGRESS_PHOTO_REPOSITORY,
   RECOVERY_PLAN_REPOSITORY,
 } from './domain/ports/tokens';
@@ -23,6 +30,8 @@ import { PrismaExerciseLogRepository } from './infrastructure/adapters/persisten
 import { PrismaAppointmentRepository } from './infrastructure/adapters/persistence/prisma-appointment.repository';
 import { PrismaMeasurementRepository } from './infrastructure/adapters/persistence/prisma-measurement.repository';
 import { PrismaProgressPhotoRepository } from './infrastructure/adapters/persistence/prisma-progress-photo.repository';
+import { PrismaExerciseCompletionRepository } from './infrastructure/adapters/persistence/prisma-exercise-completion.repository';
+import { PrismaPainLogRepository } from './infrastructure/adapters/persistence/prisma-pain-log.repository';
 import { NatsEventPublisher } from './infrastructure/adapters/messaging/nats-event.publisher';
 import { RehabController } from './presentation/controllers/rehab.controller';
 import type { RecoveryPlanRepositoryPort } from './domain/ports/recovery-plan.repository.port';
@@ -31,6 +40,8 @@ import type { ExerciseLogRepositoryPort } from './domain/ports/exercise-log.repo
 import type { AppointmentRepositoryPort } from './domain/ports/appointment.repository.port';
 import type { MeasurementRepositoryPort } from './domain/ports/measurement.repository.port';
 import type { ProgressPhotoRepositoryPort } from './domain/ports/progress-photo.repository.port';
+import type { ExerciseCompletionRepositoryPort } from './domain/ports/exercise-completion.repository.port';
+import type { PainLogRepositoryPort } from './domain/ports/pain-log.repository.port';
 import type { EventPublisherPort } from './domain/ports/event.publisher.port';
 
 @Module({
@@ -60,6 +71,14 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
     {
       provide: PROGRESS_PHOTO_REPOSITORY,
       useClass: PrismaProgressPhotoRepository,
+    },
+    {
+      provide: EXERCISE_COMPLETION_REPOSITORY,
+      useClass: PrismaExerciseCompletionRepository,
+    },
+    {
+      provide: PAIN_LOG_REPOSITORY,
+      useClass: PrismaPainLogRepository,
     },
     {
       provide: EVENT_PUBLISHER,
@@ -147,6 +166,8 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         appointmentRepo: AppointmentRepositoryPort,
         measurementRepo: MeasurementRepositoryPort,
         progressPhotoRepo: ProgressPhotoRepositoryPort,
+        exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
+        painLogRepo: PainLogRepositoryPort,
       ) =>
         new ListRecoveryProgressUseCase(
           recoveryPlanRepo,
@@ -155,6 +176,8 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
           appointmentRepo,
           measurementRepo,
           progressPhotoRepo,
+          exerciseCompletionRepo,
+          painLogRepo,
         ),
       inject: [
         RECOVERY_PLAN_REPOSITORY,
@@ -163,7 +186,82 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         APPOINTMENT_REPOSITORY,
         MEASUREMENT_REPOSITORY,
         PROGRESS_PHOTO_REPOSITORY,
+        EXERCISE_COMPLETION_REPOSITORY,
+        PAIN_LOG_REPOSITORY,
       ],
+    },
+    {
+      provide: MarkExerciseCompletionUseCase,
+      useFactory: (
+        exerciseRepo: ExerciseRepositoryPort,
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
+      ) =>
+        new MarkExerciseCompletionUseCase(
+          exerciseRepo,
+          recoveryPlanRepo,
+          exerciseCompletionRepo,
+        ),
+      inject: [
+        EXERCISE_REPOSITORY,
+        RECOVERY_PLAN_REPOSITORY,
+        EXERCISE_COMPLETION_REPOSITORY,
+      ],
+    },
+    {
+      provide: GetTodayExercisesUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseRepo: ExerciseRepositoryPort,
+        exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
+      ) =>
+        new GetTodayExercisesUseCase(
+          recoveryPlanRepo,
+          exerciseRepo,
+          exerciseCompletionRepo,
+        ),
+      inject: [
+        RECOVERY_PLAN_REPOSITORY,
+        EXERCISE_REPOSITORY,
+        EXERCISE_COMPLETION_REPOSITORY,
+      ],
+    },
+    {
+      provide: GetWeeklySummaryUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseRepo: ExerciseRepositoryPort,
+        exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
+        appointmentRepo: AppointmentRepositoryPort,
+      ) =>
+        new GetWeeklySummaryUseCase(
+          recoveryPlanRepo,
+          exerciseRepo,
+          exerciseCompletionRepo,
+          appointmentRepo,
+        ),
+      inject: [
+        RECOVERY_PLAN_REPOSITORY,
+        EXERCISE_REPOSITORY,
+        EXERCISE_COMPLETION_REPOSITORY,
+        APPOINTMENT_REPOSITORY,
+      ],
+    },
+    {
+      provide: AddOrUpdatePainLogUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        painLogRepo: PainLogRepositoryPort,
+      ) => new AddOrUpdatePainLogUseCase(recoveryPlanRepo, painLogRepo),
+      inject: [RECOVERY_PLAN_REPOSITORY, PAIN_LOG_REPOSITORY],
+    },
+    {
+      provide: ListPainLogsUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        painLogRepo: PainLogRepositoryPort,
+      ) => new ListPainLogsUseCase(recoveryPlanRepo, painLogRepo),
+      inject: [RECOVERY_PLAN_REPOSITORY, PAIN_LOG_REPOSITORY],
     },
   ],
 })

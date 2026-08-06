@@ -7,6 +7,7 @@ export type CreateExerciseInput = {
   targetReps: number;
   referenceMediaUrl?: string;
   phase: number;
+  daysOfWeek?: number[];
 };
 
 export interface ExerciseRepositoryPort {

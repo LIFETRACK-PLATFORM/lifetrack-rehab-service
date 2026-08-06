@@ -386,10 +386,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   RecoveryPlan: 'RecoveryPlan',
   Exercise: 'Exercise',
+  ExerciseCompletion: 'ExerciseCompletion',
   ExerciseLog: 'ExerciseLog',
   Appointment: 'Appointment',
   Measurement: 'Measurement',
-  ProgressPhoto: 'ProgressPhoto'
+  ProgressPhoto: 'ProgressPhoto',
+  PainLog: 'PainLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "recoveryPlan" | "exercise" | "exerciseLog" | "appointment" | "measurement" | "progressPhoto"
+    modelProps: "recoveryPlan" | "exercise" | "exerciseCompletion" | "exerciseLog" | "appointment" | "measurement" | "progressPhoto" | "painLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -554,6 +556,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ExerciseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ExerciseCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExerciseCompletion: {
+      payload: Prisma.$ExerciseCompletionPayload<ExtArgs>
+      fields: Prisma.ExerciseCompletionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExerciseCompletionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExerciseCompletionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        findFirst: {
+          args: Prisma.ExerciseCompletionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExerciseCompletionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        findMany: {
+          args: Prisma.ExerciseCompletionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>[]
+        }
+        create: {
+          args: Prisma.ExerciseCompletionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        createMany: {
+          args: Prisma.ExerciseCompletionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExerciseCompletionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>[]
+        }
+        delete: {
+          args: Prisma.ExerciseCompletionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        update: {
+          args: Prisma.ExerciseCompletionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExerciseCompletionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExerciseCompletionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExerciseCompletionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExerciseCompletionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExerciseCompletionPayload>
+        }
+        aggregate: {
+          args: Prisma.ExerciseCompletionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExerciseCompletion>
+        }
+        groupBy: {
+          args: Prisma.ExerciseCompletionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExerciseCompletionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExerciseCompletionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExerciseCompletionCountAggregateOutputType> | number
         }
       }
     }
@@ -853,6 +929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PainLog: {
+      payload: Prisma.$PainLogPayload<ExtArgs>
+      fields: Prisma.PainLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PainLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PainLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        findFirst: {
+          args: Prisma.PainLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PainLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        findMany: {
+          args: Prisma.PainLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>[]
+        }
+        create: {
+          args: Prisma.PainLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        createMany: {
+          args: Prisma.PainLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PainLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>[]
+        }
+        delete: {
+          args: Prisma.PainLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        update: {
+          args: Prisma.PainLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.PainLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PainLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PainLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.PainLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PainLogPayload>
+        }
+        aggregate: {
+          args: Prisma.PainLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePainLog>
+        }
+        groupBy: {
+          args: Prisma.PainLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PainLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PainLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PainLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -914,10 +1064,21 @@ export const ExerciseScalarFieldEnum = {
   targetReps: 'targetReps',
   referenceMediaUrl: 'referenceMediaUrl',
   phase: 'phase',
+  daysOfWeek: 'daysOfWeek',
   createdAt: 'createdAt'
 } as const
 
 export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
+
+
+export const ExerciseCompletionScalarFieldEnum = {
+  id: 'id',
+  exerciseId: 'exerciseId',
+  date: 'date',
+  createdAt: 'createdAt'
+} as const
+
+export type ExerciseCompletionScalarFieldEnum = (typeof ExerciseCompletionScalarFieldEnum)[keyof typeof ExerciseCompletionScalarFieldEnum]
 
 
 export const ExerciseLogScalarFieldEnum = {
@@ -938,6 +1099,7 @@ export const AppointmentScalarFieldEnum = {
   date: 'date',
   provider: 'provider',
   notes: 'notes',
+  type: 'type',
   createdAt: 'createdAt'
 } as const
 
@@ -966,6 +1128,18 @@ export const ProgressPhotoScalarFieldEnum = {
 } as const
 
 export type ProgressPhotoScalarFieldEnum = (typeof ProgressPhotoScalarFieldEnum)[keyof typeof ProgressPhotoScalarFieldEnum]
+
+
+export const PainLogScalarFieldEnum = {
+  id: 'id',
+  recoveryPlanId: 'recoveryPlanId',
+  date: 'date',
+  level: 'level',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type PainLogScalarFieldEnum = (typeof PainLogScalarFieldEnum)[keyof typeof PainLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1051,6 +1225,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AppointmentType'
+ */
+export type EnumAppointmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentType'>
+    
+
+
+/**
+ * Reference to a field of type 'AppointmentType[]'
+ */
+export type ListEnumAppointmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentType[]'>
     
 
 
@@ -1193,10 +1381,12 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   recoveryPlan?: Prisma.RecoveryPlanOmit
   exercise?: Prisma.ExerciseOmit
+  exerciseCompletion?: Prisma.ExerciseCompletionOmit
   exerciseLog?: Prisma.ExerciseLogOmit
   appointment?: Prisma.AppointmentOmit
   measurement?: Prisma.MeasurementOmit
   progressPhoto?: Prisma.ProgressPhotoOmit
+  painLog?: Prisma.PainLogOmit
 }
 
 /* Types for Logging */

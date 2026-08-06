@@ -30,12 +30,14 @@ export type ExerciseAvgAggregateOutputType = {
   targetSets: number | null
   targetReps: number | null
   phase: number | null
+  daysOfWeek: number | null
 }
 
 export type ExerciseSumAggregateOutputType = {
   targetSets: number | null
   targetReps: number | null
   phase: number | null
+  daysOfWeek: number[]
 }
 
 export type ExerciseMinAggregateOutputType = {
@@ -68,6 +70,7 @@ export type ExerciseCountAggregateOutputType = {
   targetReps: number
   referenceMediaUrl: number
   phase: number
+  daysOfWeek: number
   createdAt: number
   _all: number
 }
@@ -77,12 +80,14 @@ export type ExerciseAvgAggregateInputType = {
   targetSets?: true
   targetReps?: true
   phase?: true
+  daysOfWeek?: true
 }
 
 export type ExerciseSumAggregateInputType = {
   targetSets?: true
   targetReps?: true
   phase?: true
+  daysOfWeek?: true
 }
 
 export type ExerciseMinAggregateInputType = {
@@ -115,6 +120,7 @@ export type ExerciseCountAggregateInputType = {
   targetReps?: true
   referenceMediaUrl?: true
   phase?: true
+  daysOfWeek?: true
   createdAt?: true
   _all?: true
 }
@@ -213,6 +219,7 @@ export type ExerciseGroupByOutputType = {
   targetReps: number
   referenceMediaUrl: string | null
   phase: number
+  daysOfWeek: number[]
   createdAt: Date
   _count: ExerciseCountAggregateOutputType | null
   _avg: ExerciseAvgAggregateOutputType | null
@@ -247,9 +254,11 @@ export type ExerciseWhereInput = {
   targetReps?: Prisma.IntFilter<"Exercise"> | number
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
   phase?: Prisma.IntFilter<"Exercise"> | number
+  daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
   logs?: Prisma.ExerciseLogListRelationFilter
+  completions?: Prisma.ExerciseCompletionListRelationFilter
 }
 
 export type ExerciseOrderByWithRelationInput = {
@@ -260,9 +269,11 @@ export type ExerciseOrderByWithRelationInput = {
   targetReps?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phase?: Prisma.SortOrder
+  daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   recoveryPlan?: Prisma.RecoveryPlanOrderByWithRelationInput
   logs?: Prisma.ExerciseLogOrderByRelationAggregateInput
+  completions?: Prisma.ExerciseCompletionOrderByRelationAggregateInput
 }
 
 export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
@@ -276,9 +287,11 @@ export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
   targetReps?: Prisma.IntFilter<"Exercise"> | number
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
   phase?: Prisma.IntFilter<"Exercise"> | number
+  daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
   logs?: Prisma.ExerciseLogListRelationFilter
+  completions?: Prisma.ExerciseCompletionListRelationFilter
 }, "id">
 
 export type ExerciseOrderByWithAggregationInput = {
@@ -289,6 +302,7 @@ export type ExerciseOrderByWithAggregationInput = {
   targetReps?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phase?: Prisma.SortOrder
+  daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ExerciseCountOrderByAggregateInput
   _avg?: Prisma.ExerciseAvgOrderByAggregateInput
@@ -308,6 +322,7 @@ export type ExerciseScalarWhereWithAggregatesInput = {
   targetReps?: Prisma.IntWithAggregatesFilter<"Exercise"> | number
   referenceMediaUrl?: Prisma.StringNullableWithAggregatesFilter<"Exercise"> | string | null
   phase?: Prisma.IntWithAggregatesFilter<"Exercise"> | number
+  daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Exercise"> | Date | string
 }
 
@@ -318,9 +333,11 @@ export type ExerciseCreateInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
   logs?: Prisma.ExerciseLogCreateNestedManyWithoutExerciseInput
+  completions?: Prisma.ExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseUncheckedCreateInput = {
@@ -331,8 +348,10 @@ export type ExerciseUncheckedCreateInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
+  completions?: Prisma.ExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseUpdateInput = {
@@ -342,9 +361,11 @@ export type ExerciseUpdateInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
   logs?: Prisma.ExerciseLogUpdateManyWithoutExerciseNestedInput
+  completions?: Prisma.ExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseUncheckedUpdateInput = {
@@ -355,8 +376,10 @@ export type ExerciseUncheckedUpdateInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
+  completions?: Prisma.ExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseCreateManyInput = {
@@ -367,6 +390,7 @@ export type ExerciseCreateManyInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
 }
 
@@ -377,6 +401,7 @@ export type ExerciseUpdateManyMutationInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -388,6 +413,7 @@ export type ExerciseUncheckedUpdateManyInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -401,6 +427,14 @@ export type ExerciseOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type IntNullableListFilter<$PrismaModel = never> = {
+  equals?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  has?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
+  hasEvery?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+  hasSome?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type ExerciseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
@@ -409,6 +443,7 @@ export type ExerciseCountOrderByAggregateInput = {
   targetReps?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrder
   phase?: Prisma.SortOrder
+  daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -416,6 +451,7 @@ export type ExerciseAvgOrderByAggregateInput = {
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
   phase?: Prisma.SortOrder
+  daysOfWeek?: Prisma.SortOrder
 }
 
 export type ExerciseMaxOrderByAggregateInput = {
@@ -444,6 +480,7 @@ export type ExerciseSumOrderByAggregateInput = {
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
   phase?: Prisma.SortOrder
+  daysOfWeek?: Prisma.SortOrder
 }
 
 export type ExerciseScalarRelationFilter = {
@@ -493,6 +530,10 @@ export type ExerciseUncheckedUpdateManyWithoutRecoveryPlanNestedInput = {
   deleteMany?: Prisma.ExerciseScalarWhereInput | Prisma.ExerciseScalarWhereInput[]
 }
 
+export type ExerciseCreatedaysOfWeekInput = {
+  set: number[]
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -503,6 +544,25 @@ export type IntFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type ExerciseUpdatedaysOfWeekInput = {
+  set?: number[]
+  push?: number | number[]
+}
+
+export type ExerciseCreateNestedOneWithoutCompletionsInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutCompletionsInput, Prisma.ExerciseUncheckedCreateWithoutCompletionsInput>
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutCompletionsInput
+  connect?: Prisma.ExerciseWhereUniqueInput
+}
+
+export type ExerciseUpdateOneRequiredWithoutCompletionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutCompletionsInput, Prisma.ExerciseUncheckedCreateWithoutCompletionsInput>
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutCompletionsInput
+  upsert?: Prisma.ExerciseUpsertWithoutCompletionsInput
+  connect?: Prisma.ExerciseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExerciseUpdateToOneWithWhereWithoutCompletionsInput, Prisma.ExerciseUpdateWithoutCompletionsInput>, Prisma.ExerciseUncheckedUpdateWithoutCompletionsInput>
 }
 
 export type ExerciseCreateNestedOneWithoutLogsInput = {
@@ -526,8 +586,10 @@ export type ExerciseCreateWithoutRecoveryPlanInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogCreateNestedManyWithoutExerciseInput
+  completions?: Prisma.ExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseUncheckedCreateWithoutRecoveryPlanInput = {
@@ -537,8 +599,10 @@ export type ExerciseUncheckedCreateWithoutRecoveryPlanInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
+  completions?: Prisma.ExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseCreateOrConnectWithoutRecoveryPlanInput = {
@@ -578,7 +642,76 @@ export type ExerciseScalarWhereInput = {
   targetReps?: Prisma.IntFilter<"Exercise"> | number
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
   phase?: Prisma.IntFilter<"Exercise"> | number
+  daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
+}
+
+export type ExerciseCreateWithoutCompletionsInput = {
+  id?: string
+  name: string
+  targetSets: number
+  targetReps: number
+  referenceMediaUrl?: string | null
+  phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
+  createdAt?: Date | string
+  recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
+  logs?: Prisma.ExerciseLogCreateNestedManyWithoutExerciseInput
+}
+
+export type ExerciseUncheckedCreateWithoutCompletionsInput = {
+  id?: string
+  recoveryPlanId: string
+  name: string
+  targetSets: number
+  targetReps: number
+  referenceMediaUrl?: string | null
+  phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
+  createdAt?: Date | string
+  logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
+}
+
+export type ExerciseCreateOrConnectWithoutCompletionsInput = {
+  where: Prisma.ExerciseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExerciseCreateWithoutCompletionsInput, Prisma.ExerciseUncheckedCreateWithoutCompletionsInput>
+}
+
+export type ExerciseUpsertWithoutCompletionsInput = {
+  update: Prisma.XOR<Prisma.ExerciseUpdateWithoutCompletionsInput, Prisma.ExerciseUncheckedUpdateWithoutCompletionsInput>
+  create: Prisma.XOR<Prisma.ExerciseCreateWithoutCompletionsInput, Prisma.ExerciseUncheckedCreateWithoutCompletionsInput>
+  where?: Prisma.ExerciseWhereInput
+}
+
+export type ExerciseUpdateToOneWithWhereWithoutCompletionsInput = {
+  where?: Prisma.ExerciseWhereInput
+  data: Prisma.XOR<Prisma.ExerciseUpdateWithoutCompletionsInput, Prisma.ExerciseUncheckedUpdateWithoutCompletionsInput>
+}
+
+export type ExerciseUpdateWithoutCompletionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  targetSets?: Prisma.IntFieldUpdateOperationsInput | number
+  targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
+  logs?: Prisma.ExerciseLogUpdateManyWithoutExerciseNestedInput
+}
+
+export type ExerciseUncheckedUpdateWithoutCompletionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  targetSets?: Prisma.IntFieldUpdateOperationsInput | number
+  targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseCreateWithoutLogsInput = {
@@ -588,8 +721,10 @@ export type ExerciseCreateWithoutLogsInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
+  completions?: Prisma.ExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseUncheckedCreateWithoutLogsInput = {
@@ -600,7 +735,9 @@ export type ExerciseUncheckedCreateWithoutLogsInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
+  completions?: Prisma.ExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
 export type ExerciseCreateOrConnectWithoutLogsInput = {
@@ -626,8 +763,10 @@ export type ExerciseUpdateWithoutLogsInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
+  completions?: Prisma.ExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseUncheckedUpdateWithoutLogsInput = {
@@ -638,7 +777,9 @@ export type ExerciseUncheckedUpdateWithoutLogsInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completions?: Prisma.ExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseCreateManyRecoveryPlanInput = {
@@ -648,6 +789,7 @@ export type ExerciseCreateManyRecoveryPlanInput = {
   targetReps: number
   referenceMediaUrl?: string | null
   phase: number
+  daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
 }
 
@@ -658,8 +800,10 @@ export type ExerciseUpdateWithoutRecoveryPlanInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUpdateManyWithoutExerciseNestedInput
+  completions?: Prisma.ExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseUncheckedUpdateWithoutRecoveryPlanInput = {
@@ -669,8 +813,10 @@ export type ExerciseUncheckedUpdateWithoutRecoveryPlanInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
+  completions?: Prisma.ExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
 export type ExerciseUncheckedUpdateManyWithoutRecoveryPlanInput = {
@@ -680,6 +826,7 @@ export type ExerciseUncheckedUpdateManyWithoutRecoveryPlanInput = {
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phase?: Prisma.IntFieldUpdateOperationsInput | number
+  daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -690,10 +837,12 @@ export type ExerciseUncheckedUpdateManyWithoutRecoveryPlanInput = {
 
 export type ExerciseCountOutputType = {
   logs: number
+  completions: number
 }
 
 export type ExerciseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   logs?: boolean | ExerciseCountOutputTypeCountLogsArgs
+  completions?: boolean | ExerciseCountOutputTypeCountCompletionsArgs
 }
 
 /**
@@ -713,6 +862,13 @@ export type ExerciseCountOutputTypeCountLogsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ExerciseLogWhereInput
 }
 
+/**
+ * ExerciseCountOutputType without action
+ */
+export type ExerciseCountOutputTypeCountCompletionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExerciseCompletionWhereInput
+}
+
 
 export type ExerciseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -722,9 +878,11 @@ export type ExerciseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   targetReps?: boolean
   referenceMediaUrl?: boolean
   phase?: boolean
+  daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
   logs?: boolean | Prisma.Exercise$logsArgs<ExtArgs>
+  completions?: boolean | Prisma.Exercise$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exercise"]>
 
@@ -736,6 +894,7 @@ export type ExerciseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   targetReps?: boolean
   referenceMediaUrl?: boolean
   phase?: boolean
+  daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exercise"]>
@@ -748,6 +907,7 @@ export type ExerciseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   targetReps?: boolean
   referenceMediaUrl?: boolean
   phase?: boolean
+  daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exercise"]>
@@ -760,13 +920,15 @@ export type ExerciseSelectScalar = {
   targetReps?: boolean
   referenceMediaUrl?: boolean
   phase?: boolean
+  daysOfWeek?: boolean
   createdAt?: boolean
 }
 
-export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "name" | "targetSets" | "targetReps" | "referenceMediaUrl" | "phase" | "createdAt", ExtArgs["result"]["exercise"]>
+export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "name" | "targetSets" | "targetReps" | "referenceMediaUrl" | "phase" | "daysOfWeek" | "createdAt", ExtArgs["result"]["exercise"]>
 export type ExerciseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
   logs?: boolean | Prisma.Exercise$logsArgs<ExtArgs>
+  completions?: boolean | Prisma.Exercise$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ExerciseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -781,6 +943,7 @@ export type $ExercisePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     recoveryPlan: Prisma.$RecoveryPlanPayload<ExtArgs>
     logs: Prisma.$ExerciseLogPayload<ExtArgs>[]
+    completions: Prisma.$ExerciseCompletionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -790,6 +953,7 @@ export type $ExercisePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     targetReps: number
     referenceMediaUrl: string | null
     phase: number
+    daysOfWeek: number[]
     createdAt: Date
   }, ExtArgs["result"]["exercise"]>
   composites: {}
@@ -1187,6 +1351,7 @@ export interface Prisma__ExerciseClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   recoveryPlan<T extends Prisma.RecoveryPlanDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecoveryPlanDefaultArgs<ExtArgs>>): Prisma.Prisma__RecoveryPlanClient<runtime.Types.Result.GetResult<Prisma.$RecoveryPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   logs<T extends Prisma.Exercise$logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExerciseLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  completions<T extends Prisma.Exercise$completionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$completionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExerciseCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1223,6 +1388,7 @@ export interface ExerciseFieldRefs {
   readonly targetReps: Prisma.FieldRef<"Exercise", 'Int'>
   readonly referenceMediaUrl: Prisma.FieldRef<"Exercise", 'String'>
   readonly phase: Prisma.FieldRef<"Exercise", 'Int'>
+  readonly daysOfWeek: Prisma.FieldRef<"Exercise", 'Int[]'>
   readonly createdAt: Prisma.FieldRef<"Exercise", 'DateTime'>
 }
     
@@ -1646,6 +1812,30 @@ export type Exercise$logsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ExerciseLogScalarFieldEnum | Prisma.ExerciseLogScalarFieldEnum[]
+}
+
+/**
+ * Exercise.completions
+ */
+export type Exercise$completionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExerciseCompletion
+   */
+  select?: Prisma.ExerciseCompletionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExerciseCompletion
+   */
+  omit?: Prisma.ExerciseCompletionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExerciseCompletionInclude<ExtArgs> | null
+  where?: Prisma.ExerciseCompletionWhereInput
+  orderBy?: Prisma.ExerciseCompletionOrderByWithRelationInput | Prisma.ExerciseCompletionOrderByWithRelationInput[]
+  cursor?: Prisma.ExerciseCompletionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExerciseCompletionScalarFieldEnum | Prisma.ExerciseCompletionScalarFieldEnum[]
 }
 
 /**

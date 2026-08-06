@@ -25,6 +25,7 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
         targetReps: data.targetReps,
         referenceMediaUrl: data.referenceMediaUrl,
         phase: data.phase,
+        daysOfWeek: data.daysOfWeek ?? [],
       },
     });
     return ExerciseMapper.toDomain(raw);

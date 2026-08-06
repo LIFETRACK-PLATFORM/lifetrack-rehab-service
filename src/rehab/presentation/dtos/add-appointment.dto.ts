@@ -1,4 +1,14 @@
-import { IsDateString, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsInt,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+  MinLength,
+} from 'class-validator';
+import { AppointmentType } from '../../domain/entities/appointment.entity';
 
 export class AddAppointmentDto {
   @IsString()
@@ -11,7 +21,16 @@ export class AddAppointmentDto {
   @MinLength(2)
   provider: string;
 
+  @IsEnum(AppointmentType)
+  type: AppointmentType;
+
   @IsOptional()
   @IsString()
   notes?: string;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  @Max(12)
+  repeatWeeks?: number;
 }

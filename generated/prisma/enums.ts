@@ -26,3 +26,11 @@ export const MeasurementType = {
 } as const
 
 export type MeasurementType = (typeof MeasurementType)[keyof typeof MeasurementType]
+
+
+export const AppointmentType = {
+  THERAPY: 'THERAPY',
+  MEDICAL: 'MEDICAL'
+} as const
+
+export type AppointmentType = (typeof AppointmentType)[keyof typeof AppointmentType]

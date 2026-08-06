@@ -210,6 +210,7 @@ export type RecoveryPlanWhereInput = {
   appointments?: Prisma.AppointmentListRelationFilter
   measurements?: Prisma.MeasurementListRelationFilter
   progressPhotos?: Prisma.ProgressPhotoListRelationFilter
+  painLogs?: Prisma.PainLogListRelationFilter
 }
 
 export type RecoveryPlanOrderByWithRelationInput = {
@@ -225,6 +226,7 @@ export type RecoveryPlanOrderByWithRelationInput = {
   appointments?: Prisma.AppointmentOrderByRelationAggregateInput
   measurements?: Prisma.MeasurementOrderByRelationAggregateInput
   progressPhotos?: Prisma.ProgressPhotoOrderByRelationAggregateInput
+  painLogs?: Prisma.PainLogOrderByRelationAggregateInput
 }
 
 export type RecoveryPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -243,6 +245,7 @@ export type RecoveryPlanWhereUniqueInput = Prisma.AtLeast<{
   appointments?: Prisma.AppointmentListRelationFilter
   measurements?: Prisma.MeasurementListRelationFilter
   progressPhotos?: Prisma.ProgressPhotoListRelationFilter
+  painLogs?: Prisma.PainLogListRelationFilter
 }, "id">
 
 export type RecoveryPlanOrderByWithAggregationInput = {
@@ -286,6 +289,7 @@ export type RecoveryPlanCreateInput = {
   appointments?: Prisma.AppointmentCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUncheckedCreateInput = {
@@ -301,6 +305,7 @@ export type RecoveryPlanUncheckedCreateInput = {
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementUncheckedCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogUncheckedCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUpdateInput = {
@@ -316,6 +321,7 @@ export type RecoveryPlanUpdateInput = {
   appointments?: Prisma.AppointmentUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanUncheckedUpdateInput = {
@@ -331,6 +337,7 @@ export type RecoveryPlanUncheckedUpdateInput = {
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUncheckedUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanCreateManyInput = {
@@ -472,6 +479,20 @@ export type RecoveryPlanUpdateOneRequiredWithoutProgressPhotosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RecoveryPlanUpdateToOneWithWhereWithoutProgressPhotosInput, Prisma.RecoveryPlanUpdateWithoutProgressPhotosInput>, Prisma.RecoveryPlanUncheckedUpdateWithoutProgressPhotosInput>
 }
 
+export type RecoveryPlanCreateNestedOneWithoutPainLogsInput = {
+  create?: Prisma.XOR<Prisma.RecoveryPlanCreateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedCreateWithoutPainLogsInput>
+  connectOrCreate?: Prisma.RecoveryPlanCreateOrConnectWithoutPainLogsInput
+  connect?: Prisma.RecoveryPlanWhereUniqueInput
+}
+
+export type RecoveryPlanUpdateOneRequiredWithoutPainLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecoveryPlanCreateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedCreateWithoutPainLogsInput>
+  connectOrCreate?: Prisma.RecoveryPlanCreateOrConnectWithoutPainLogsInput
+  upsert?: Prisma.RecoveryPlanUpsertWithoutPainLogsInput
+  connect?: Prisma.RecoveryPlanWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecoveryPlanUpdateToOneWithWhereWithoutPainLogsInput, Prisma.RecoveryPlanUpdateWithoutPainLogsInput>, Prisma.RecoveryPlanUncheckedUpdateWithoutPainLogsInput>
+}
+
 export type RecoveryPlanCreateWithoutExercisesInput = {
   id?: string
   userId: string
@@ -484,6 +505,7 @@ export type RecoveryPlanCreateWithoutExercisesInput = {
   appointments?: Prisma.AppointmentCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUncheckedCreateWithoutExercisesInput = {
@@ -498,6 +520,7 @@ export type RecoveryPlanUncheckedCreateWithoutExercisesInput = {
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementUncheckedCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogUncheckedCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanCreateOrConnectWithoutExercisesInput = {
@@ -528,6 +551,7 @@ export type RecoveryPlanUpdateWithoutExercisesInput = {
   appointments?: Prisma.AppointmentUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanUncheckedUpdateWithoutExercisesInput = {
@@ -542,6 +566,7 @@ export type RecoveryPlanUncheckedUpdateWithoutExercisesInput = {
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUncheckedUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanCreateWithoutAppointmentsInput = {
@@ -556,6 +581,7 @@ export type RecoveryPlanCreateWithoutAppointmentsInput = {
   exercises?: Prisma.ExerciseCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUncheckedCreateWithoutAppointmentsInput = {
@@ -570,6 +596,7 @@ export type RecoveryPlanUncheckedCreateWithoutAppointmentsInput = {
   exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementUncheckedCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogUncheckedCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanCreateOrConnectWithoutAppointmentsInput = {
@@ -600,6 +627,7 @@ export type RecoveryPlanUpdateWithoutAppointmentsInput = {
   exercises?: Prisma.ExerciseUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanUncheckedUpdateWithoutAppointmentsInput = {
@@ -614,6 +642,7 @@ export type RecoveryPlanUncheckedUpdateWithoutAppointmentsInput = {
   exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUncheckedUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanCreateWithoutMeasurementsInput = {
@@ -628,6 +657,7 @@ export type RecoveryPlanCreateWithoutMeasurementsInput = {
   exercises?: Prisma.ExerciseCreateNestedManyWithoutRecoveryPlanInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUncheckedCreateWithoutMeasurementsInput = {
@@ -642,6 +672,7 @@ export type RecoveryPlanUncheckedCreateWithoutMeasurementsInput = {
   exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutRecoveryPlanInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutRecoveryPlanInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogUncheckedCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanCreateOrConnectWithoutMeasurementsInput = {
@@ -672,6 +703,7 @@ export type RecoveryPlanUpdateWithoutMeasurementsInput = {
   exercises?: Prisma.ExerciseUpdateManyWithoutRecoveryPlanNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanUncheckedUpdateWithoutMeasurementsInput = {
@@ -686,6 +718,7 @@ export type RecoveryPlanUncheckedUpdateWithoutMeasurementsInput = {
   exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   progressPhotos?: Prisma.ProgressPhotoUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUncheckedUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanCreateWithoutProgressPhotosInput = {
@@ -700,6 +733,7 @@ export type RecoveryPlanCreateWithoutProgressPhotosInput = {
   exercises?: Prisma.ExerciseCreateNestedManyWithoutRecoveryPlanInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanUncheckedCreateWithoutProgressPhotosInput = {
@@ -714,6 +748,7 @@ export type RecoveryPlanUncheckedCreateWithoutProgressPhotosInput = {
   exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutRecoveryPlanInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutRecoveryPlanInput
   measurements?: Prisma.MeasurementUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  painLogs?: Prisma.PainLogUncheckedCreateNestedManyWithoutRecoveryPlanInput
 }
 
 export type RecoveryPlanCreateOrConnectWithoutProgressPhotosInput = {
@@ -744,6 +779,7 @@ export type RecoveryPlanUpdateWithoutProgressPhotosInput = {
   exercises?: Prisma.ExerciseUpdateManyWithoutRecoveryPlanNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 export type RecoveryPlanUncheckedUpdateWithoutProgressPhotosInput = {
@@ -758,6 +794,83 @@ export type RecoveryPlanUncheckedUpdateWithoutProgressPhotosInput = {
   exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput
   measurements?: Prisma.MeasurementUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  painLogs?: Prisma.PainLogUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+}
+
+export type RecoveryPlanCreateWithoutPainLogsInput = {
+  id?: string
+  userId: string
+  bodyPart: string
+  injuryType: string
+  surgeryDate: Date | string
+  status?: $Enums.RecoveryPlanStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  exercises?: Prisma.ExerciseCreateNestedManyWithoutRecoveryPlanInput
+  appointments?: Prisma.AppointmentCreateNestedManyWithoutRecoveryPlanInput
+  measurements?: Prisma.MeasurementCreateNestedManyWithoutRecoveryPlanInput
+  progressPhotos?: Prisma.ProgressPhotoCreateNestedManyWithoutRecoveryPlanInput
+}
+
+export type RecoveryPlanUncheckedCreateWithoutPainLogsInput = {
+  id?: string
+  userId: string
+  bodyPart: string
+  injuryType: string
+  surgeryDate: Date | string
+  status?: $Enums.RecoveryPlanStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  measurements?: Prisma.MeasurementUncheckedCreateNestedManyWithoutRecoveryPlanInput
+  progressPhotos?: Prisma.ProgressPhotoUncheckedCreateNestedManyWithoutRecoveryPlanInput
+}
+
+export type RecoveryPlanCreateOrConnectWithoutPainLogsInput = {
+  where: Prisma.RecoveryPlanWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecoveryPlanCreateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedCreateWithoutPainLogsInput>
+}
+
+export type RecoveryPlanUpsertWithoutPainLogsInput = {
+  update: Prisma.XOR<Prisma.RecoveryPlanUpdateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedUpdateWithoutPainLogsInput>
+  create: Prisma.XOR<Prisma.RecoveryPlanCreateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedCreateWithoutPainLogsInput>
+  where?: Prisma.RecoveryPlanWhereInput
+}
+
+export type RecoveryPlanUpdateToOneWithWhereWithoutPainLogsInput = {
+  where?: Prisma.RecoveryPlanWhereInput
+  data: Prisma.XOR<Prisma.RecoveryPlanUpdateWithoutPainLogsInput, Prisma.RecoveryPlanUncheckedUpdateWithoutPainLogsInput>
+}
+
+export type RecoveryPlanUpdateWithoutPainLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyPart?: Prisma.StringFieldUpdateOperationsInput | string
+  injuryType?: Prisma.StringFieldUpdateOperationsInput | string
+  surgeryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumRecoveryPlanStatusFieldUpdateOperationsInput | $Enums.RecoveryPlanStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exercises?: Prisma.ExerciseUpdateManyWithoutRecoveryPlanNestedInput
+  appointments?: Prisma.AppointmentUpdateManyWithoutRecoveryPlanNestedInput
+  measurements?: Prisma.MeasurementUpdateManyWithoutRecoveryPlanNestedInput
+  progressPhotos?: Prisma.ProgressPhotoUpdateManyWithoutRecoveryPlanNestedInput
+}
+
+export type RecoveryPlanUncheckedUpdateWithoutPainLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyPart?: Prisma.StringFieldUpdateOperationsInput | string
+  injuryType?: Prisma.StringFieldUpdateOperationsInput | string
+  surgeryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumRecoveryPlanStatusFieldUpdateOperationsInput | $Enums.RecoveryPlanStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  measurements?: Prisma.MeasurementUncheckedUpdateManyWithoutRecoveryPlanNestedInput
+  progressPhotos?: Prisma.ProgressPhotoUncheckedUpdateManyWithoutRecoveryPlanNestedInput
 }
 
 
@@ -770,6 +883,7 @@ export type RecoveryPlanCountOutputType = {
   appointments: number
   measurements: number
   progressPhotos: number
+  painLogs: number
 }
 
 export type RecoveryPlanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -777,6 +891,7 @@ export type RecoveryPlanCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   appointments?: boolean | RecoveryPlanCountOutputTypeCountAppointmentsArgs
   measurements?: boolean | RecoveryPlanCountOutputTypeCountMeasurementsArgs
   progressPhotos?: boolean | RecoveryPlanCountOutputTypeCountProgressPhotosArgs
+  painLogs?: boolean | RecoveryPlanCountOutputTypeCountPainLogsArgs
 }
 
 /**
@@ -817,6 +932,13 @@ export type RecoveryPlanCountOutputTypeCountProgressPhotosArgs<ExtArgs extends r
   where?: Prisma.ProgressPhotoWhereInput
 }
 
+/**
+ * RecoveryPlanCountOutputType without action
+ */
+export type RecoveryPlanCountOutputTypeCountPainLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PainLogWhereInput
+}
+
 
 export type RecoveryPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -831,6 +953,7 @@ export type RecoveryPlanSelect<ExtArgs extends runtime.Types.Extensions.Internal
   appointments?: boolean | Prisma.RecoveryPlan$appointmentsArgs<ExtArgs>
   measurements?: boolean | Prisma.RecoveryPlan$measurementsArgs<ExtArgs>
   progressPhotos?: boolean | Prisma.RecoveryPlan$progressPhotosArgs<ExtArgs>
+  painLogs?: boolean | Prisma.RecoveryPlan$painLogsArgs<ExtArgs>
   _count?: boolean | Prisma.RecoveryPlanCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recoveryPlan"]>
 
@@ -873,6 +996,7 @@ export type RecoveryPlanInclude<ExtArgs extends runtime.Types.Extensions.Interna
   appointments?: boolean | Prisma.RecoveryPlan$appointmentsArgs<ExtArgs>
   measurements?: boolean | Prisma.RecoveryPlan$measurementsArgs<ExtArgs>
   progressPhotos?: boolean | Prisma.RecoveryPlan$progressPhotosArgs<ExtArgs>
+  painLogs?: boolean | Prisma.RecoveryPlan$painLogsArgs<ExtArgs>
   _count?: boolean | Prisma.RecoveryPlanCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RecoveryPlanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -885,6 +1009,7 @@ export type $RecoveryPlanPayload<ExtArgs extends runtime.Types.Extensions.Intern
     appointments: Prisma.$AppointmentPayload<ExtArgs>[]
     measurements: Prisma.$MeasurementPayload<ExtArgs>[]
     progressPhotos: Prisma.$ProgressPhotoPayload<ExtArgs>[]
+    painLogs: Prisma.$PainLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1293,6 +1418,7 @@ export interface Prisma__RecoveryPlanClient<T, Null = never, ExtArgs extends run
   appointments<T extends Prisma.RecoveryPlan$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecoveryPlan$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   measurements<T extends Prisma.RecoveryPlan$measurementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecoveryPlan$measurementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeasurementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progressPhotos<T extends Prisma.RecoveryPlan$progressPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecoveryPlan$progressPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgressPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  painLogs<T extends Prisma.RecoveryPlan$painLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecoveryPlan$painLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PainLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1816,6 +1942,30 @@ export type RecoveryPlan$progressPhotosArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.ProgressPhotoScalarFieldEnum | Prisma.ProgressPhotoScalarFieldEnum[]
+}
+
+/**
+ * RecoveryPlan.painLogs
+ */
+export type RecoveryPlan$painLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PainLog
+   */
+  select?: Prisma.PainLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PainLog
+   */
+  omit?: Prisma.PainLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PainLogInclude<ExtArgs> | null
+  where?: Prisma.PainLogWhereInput
+  orderBy?: Prisma.PainLogOrderByWithRelationInput | Prisma.PainLogOrderByWithRelationInput[]
+  cursor?: Prisma.PainLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PainLogScalarFieldEnum | Prisma.PainLogScalarFieldEnum[]
 }
 
 /**
