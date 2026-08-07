@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/RecoveryPlan'
+export type * from './models/AdHocProtocolDay'
 export type * from './models/Exercise'
 export type * from './models/ExerciseCompletion'
 export type * from './models/ExerciseLog'

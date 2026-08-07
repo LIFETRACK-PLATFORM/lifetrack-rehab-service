@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   RecoveryPlan: 'RecoveryPlan',
+  AdHocProtocolDay: 'AdHocProtocolDay',
   Exercise: 'Exercise',
   ExerciseCompletion: 'ExerciseCompletion',
   ExerciseLog: 'ExerciseLog',
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "recoveryPlan" | "exercise" | "exerciseCompletion" | "exerciseLog" | "appointment" | "measurement" | "progressPhoto" | "painLog"
+    modelProps: "recoveryPlan" | "adHocProtocolDay" | "exercise" | "exerciseCompletion" | "exerciseLog" | "appointment" | "measurement" | "progressPhoto" | "painLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -482,6 +483,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RecoveryPlanCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RecoveryPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdHocProtocolDay: {
+      payload: Prisma.$AdHocProtocolDayPayload<ExtArgs>
+      fields: Prisma.AdHocProtocolDayFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdHocProtocolDayFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdHocProtocolDayFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        findFirst: {
+          args: Prisma.AdHocProtocolDayFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdHocProtocolDayFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        findMany: {
+          args: Prisma.AdHocProtocolDayFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>[]
+        }
+        create: {
+          args: Prisma.AdHocProtocolDayCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        createMany: {
+          args: Prisma.AdHocProtocolDayCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdHocProtocolDayCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>[]
+        }
+        delete: {
+          args: Prisma.AdHocProtocolDayDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        update: {
+          args: Prisma.AdHocProtocolDayUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdHocProtocolDayDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdHocProtocolDayUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdHocProtocolDayUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdHocProtocolDayUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdHocProtocolDayPayload>
+        }
+        aggregate: {
+          args: Prisma.AdHocProtocolDayAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdHocProtocolDay>
+        }
+        groupBy: {
+          args: Prisma.AdHocProtocolDayGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdHocProtocolDayGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdHocProtocolDayCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdHocProtocolDayCountAggregateOutputType> | number
         }
       }
     }
@@ -1056,6 +1131,17 @@ export const RecoveryPlanScalarFieldEnum = {
 export type RecoveryPlanScalarFieldEnum = (typeof RecoveryPlanScalarFieldEnum)[keyof typeof RecoveryPlanScalarFieldEnum]
 
 
+export const AdHocProtocolDayScalarFieldEnum = {
+  id: 'id',
+  recoveryPlanId: 'recoveryPlanId',
+  targetDate: 'targetDate',
+  sourceDate: 'sourceDate',
+  createdAt: 'createdAt'
+} as const
+
+export type AdHocProtocolDayScalarFieldEnum = (typeof AdHocProtocolDayScalarFieldEnum)[keyof typeof AdHocProtocolDayScalarFieldEnum]
+
+
 export const ExerciseScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
@@ -1405,6 +1491,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   recoveryPlan?: Prisma.RecoveryPlanOmit
+  adHocProtocolDay?: Prisma.AdHocProtocolDayOmit
   exercise?: Prisma.ExerciseOmit
   exerciseCompletion?: Prisma.ExerciseCompletionOmit
   exerciseLog?: Prisma.ExerciseLogOmit

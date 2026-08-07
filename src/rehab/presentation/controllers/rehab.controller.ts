@@ -20,6 +20,8 @@ import { GetTodayExercisesUseCase } from '../../application/use-cases/get-today-
 import { GetWeeklySummaryUseCase } from '../../application/use-cases/get-weekly-summary.use-case';
 import { AddOrUpdatePainLogUseCase } from '../../application/use-cases/add-or-update-pain-log.use-case';
 import { ListPainLogsUseCase } from '../../application/use-cases/list-pain-logs.use-case';
+import { SetAdHocProtocolDayUseCase } from '../../application/use-cases/set-ad-hoc-protocol-day.use-case';
+import { ClearAdHocProtocolDayUseCase } from '../../application/use-cases/clear-ad-hoc-protocol-day.use-case';
 import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
 import { UpdateRecoveryPlanStatusDto } from '../dtos/update-recovery-plan-status.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
@@ -38,6 +40,10 @@ import { GetTodayExercisesDto } from '../dtos/get-today-exercises.dto';
 import { GetWeeklySummaryDto } from '../dtos/get-weekly-summary.dto';
 import { AddPainLogDto } from '../dtos/add-pain-log.dto';
 import { ListPainLogsDto } from '../dtos/list-pain-logs.dto';
+import {
+  ClearAdHocProtocolDayDto,
+  SetAdHocProtocolDayDto,
+} from '../dtos/ad-hoc-protocol-day.dto';
 import { DomainExceptionFilter } from '../filters/domain-exception.filter';
 import { getAuthenticatedUserId } from '../auth/grpc-auth.context';
 
@@ -64,6 +70,8 @@ export class RehabController {
     private readonly getWeeklySummaryUseCase: GetWeeklySummaryUseCase,
     private readonly addOrUpdatePainLogUseCase: AddOrUpdatePainLogUseCase,
     private readonly listPainLogsUseCase: ListPainLogsUseCase,
+    private readonly setAdHocProtocolDayUseCase: SetAdHocProtocolDayUseCase,
+    private readonly clearAdHocProtocolDayUseCase: ClearAdHocProtocolDayUseCase,
   ) {}
 
   @GrpcMethod('RehabService', 'CreateRecoveryPlan')
@@ -207,5 +215,17 @@ export class RehabController {
   listPainLogs(data: ListPainLogsDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.listPainLogsUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'SetAdHocProtocolDay')
+  setAdHocProtocolDay(data: SetAdHocProtocolDayDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.setAdHocProtocolDayUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'ClearAdHocProtocolDay')
+  clearAdHocProtocolDay(data: ClearAdHocProtocolDayDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.clearAdHocProtocolDayUseCase.execute({ userId, ...data });
   }
 }
