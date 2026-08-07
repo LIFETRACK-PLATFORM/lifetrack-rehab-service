@@ -43,6 +43,22 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
     return created.map((raw) => AppointmentMapper.toDomain(raw));
   }
 
+  async findById(id: string): Promise<AppointmentEntity | null> {
+    const raw = await this.prisma.appointment.findUnique({ where: { id } });
+    return raw ? AppointmentMapper.toDomain(raw) : null;
+  }
+
+  async updateAttendance(
+    id: string,
+    attended: boolean,
+  ): Promise<AppointmentEntity> {
+    const raw = await this.prisma.appointment.update({
+      where: { id },
+      data: { attended },
+    });
+    return AppointmentMapper.toDomain(raw);
+  }
+
   async listByRecoveryPlan(
     recoveryPlanId: string,
   ): Promise<AppointmentEntity[]> {

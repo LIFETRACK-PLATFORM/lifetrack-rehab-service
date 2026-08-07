@@ -63,6 +63,8 @@ function buildUseCase(completions: ExerciseCompletionEntity[]) {
     createMany: jest.fn(),
     listByRecoveryPlan: jest.fn(),
     listByRecoveryPlanInRange: jest.fn().mockResolvedValue([]),
+    findById: jest.fn(),
+    updateAttendance: jest.fn(),
   };
   return new GetWeeklySummaryUseCase(
     recoveryPlanRepository as any,

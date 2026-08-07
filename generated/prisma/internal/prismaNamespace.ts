@@ -1100,6 +1100,7 @@ export const AppointmentScalarFieldEnum = {
   provider: 'provider',
   notes: 'notes',
   type: 'type',
+  attended: 'attended',
   createdAt: 'createdAt'
 } as const
 
@@ -1239,6 +1240,13 @@ export type EnumAppointmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'AppointmentType[]'
  */
 export type ListEnumAppointmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

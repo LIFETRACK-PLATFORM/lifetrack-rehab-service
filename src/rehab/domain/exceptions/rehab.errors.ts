@@ -12,6 +12,12 @@ export class ExerciseNotFoundError extends DomainError {
   }
 }
 
+export class AppointmentNotFoundError extends DomainError {
+  constructor(appointmentId: string) {
+    super(`La cita ${appointmentId} no existe`);
+  }
+}
+
 export class InvalidRehabEntityDataError extends DomainError {
   constructor(message: string) {
     super(message);

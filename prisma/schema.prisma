@@ -92,6 +92,7 @@ model Appointment {
   provider       String
   notes          String?
   type           AppointmentType @default(MEDICAL)
+  attended       Boolean?
   createdAt      DateTime        @default(now())
 }
 

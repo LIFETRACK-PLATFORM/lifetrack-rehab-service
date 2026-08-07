@@ -13,6 +13,7 @@ export class AppointmentMapper {
         provider: raw.provider,
         type: raw.type as AppointmentType,
         notes: raw.notes,
+        attended: raw.attended,
         createdAt: raw.createdAt,
       },
       raw.id,

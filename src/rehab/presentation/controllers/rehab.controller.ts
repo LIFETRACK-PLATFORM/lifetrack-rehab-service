@@ -8,6 +8,7 @@ import { AddExerciseUseCase } from '../../application/use-cases/add-exercise.use
 import { DeleteExerciseUseCase } from '../../application/use-cases/delete-exercise.use-case';
 import { LogExerciseUseCase } from '../../application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from '../../application/use-cases/add-appointment.use-case';
+import { MarkAppointmentAttendanceUseCase } from '../../application/use-cases/mark-appointment-attendance.use-case';
 import { AddMeasurementUseCase } from '../../application/use-cases/add-measurement.use-case';
 import { AddProgressPhotoUseCase } from '../../application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryProgressUseCase } from '../../application/use-cases/list-recovery-progress.use-case';
@@ -22,6 +23,7 @@ import { AddExerciseDto } from '../dtos/add-exercise.dto';
 import { DeleteExerciseDto } from '../dtos/delete-exercise.dto';
 import { LogExerciseDto } from '../dtos/log-exercise.dto';
 import { AddAppointmentDto } from '../dtos/add-appointment.dto';
+import { MarkAppointmentAttendanceDto } from '../dtos/mark-appointment-attendance.dto';
 import { AddMeasurementDto } from '../dtos/add-measurement.dto';
 import { AddProgressPhotoDto } from '../dtos/add-progress-photo.dto';
 import { ListRecoveryProgressDto } from '../dtos/list-recovery-progress.dto';
@@ -44,6 +46,7 @@ export class RehabController {
     private readonly deleteExerciseUseCase: DeleteExerciseUseCase,
     private readonly logExerciseUseCase: LogExerciseUseCase,
     private readonly addAppointmentUseCase: AddAppointmentUseCase,
+    private readonly markAppointmentAttendanceUseCase: MarkAppointmentAttendanceUseCase,
     private readonly addMeasurementUseCase: AddMeasurementUseCase,
     private readonly addProgressPhotoUseCase: AddProgressPhotoUseCase,
     private readonly listRecoveryProgressUseCase: ListRecoveryProgressUseCase,
@@ -109,6 +112,18 @@ export class RehabController {
   addAppointment(data: AddAppointmentDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.addAppointmentUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'MarkAppointmentAttendance')
+  markAppointmentAttendance(
+    data: MarkAppointmentAttendanceDto,
+    metadata: Metadata,
+  ) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.markAppointmentAttendanceUseCase.execute({
+      userId,
+      ...data,
+    });
   }
 
   @GrpcMethod('RehabService', 'AddMeasurement')
