@@ -38,6 +38,7 @@ export class AddAppointmentUseCase {
     occurrenceDates.forEach((date) => {
       new AppointmentEntity({
         recoveryPlanId: input.recoveryPlanId,
+        title: input.title,
         date,
         provider: input.provider,
         type: input.type,
@@ -51,6 +52,7 @@ export class AddAppointmentUseCase {
         ? [
             await this.appointmentRepository.create({
               recoveryPlanId: input.recoveryPlanId,
+              title: input.title,
               date: occurrenceDates[0],
               provider: input.provider,
               type: input.type,
@@ -60,6 +62,7 @@ export class AddAppointmentUseCase {
         : await this.appointmentRepository.createMany(
             occurrenceDates.map((date) => ({
               recoveryPlanId: input.recoveryPlanId,
+              title: input.title,
               date,
               provider: input.provider,
               type: input.type,
@@ -95,6 +98,7 @@ export class AddAppointmentUseCase {
       appointments: created.map((appointment) => ({
         appointmentId: appointment.id,
         recoveryPlanId: appointment.recoveryPlanId,
+        title: appointment.title ?? undefined,
         date: appointment.date.toISOString(),
         provider: appointment.provider,
         type: appointment.type,

@@ -19,10 +19,12 @@ export class AddExerciseUseCase {
     const exercise = await this.exerciseRepository.create({
       recoveryPlanId: input.recoveryPlanId,
       name: input.name,
+      metricType: input.metricType,
       targetSets: input.targetSets,
       targetReps: input.targetReps,
+      targetDurationMinutes: input.targetDurationMinutes,
       referenceMediaUrl: input.referenceMediaUrl,
-      phase: input.phase,
+      notes: input.notes,
       daysOfWeek: input.daysOfWeek,
     });
 
@@ -30,9 +32,11 @@ export class AddExerciseUseCase {
       exerciseId: exercise.id,
       recoveryPlanId: exercise.recoveryPlanId,
       name: exercise.name,
+      metricType: exercise.metricType,
       targetSets: exercise.targetSets,
       targetReps: exercise.targetReps,
-      phase: exercise.phase,
+      targetDurationMinutes: exercise.targetDurationMinutes ?? undefined,
+      notes: exercise.notes ?? undefined,
       daysOfWeek: exercise.daysOfWeek,
     };
   }

@@ -29,7 +29,7 @@ export class LogExerciseUseCase {
     );
     if (!plan) throw new RecoveryPlanNotFoundError(exercise.recoveryPlanId);
 
-    const log = await this.exerciseLogRepository.create({
+    const log = await this.exerciseLogRepository.upsertForDay({
       exerciseId: input.exerciseId,
       setsDone: input.setsDone,
       repsDone: input.repsDone,

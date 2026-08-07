@@ -59,7 +59,6 @@ export class GetTodayExercisesUseCase {
         name: exercise.name,
         targetSets: exercise.targetSets,
         targetReps: exercise.targetReps,
-        phase: exercise.phase,
         scheduledToday: dueToday.some((e) => e.id === exercise.id),
         completedToday,
         urgent,

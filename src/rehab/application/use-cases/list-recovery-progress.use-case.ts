@@ -8,7 +8,7 @@ import type { MeasurementRepositoryPort } from '../../domain/ports/measurement.r
 import type { ProgressPhotoRepositoryPort } from '../../domain/ports/progress-photo.repository.port';
 import type { PainLogRepositoryPort } from '../../domain/ports/pain-log.repository.port';
 import type { ListRecoveryProgressInput } from '../dtos/list-recovery-progress.input';
-import { addDays, startOfDay } from '../utils/schedule.util';
+import { addDays, isSameDay, startOfDay } from '../utils/schedule.util';
 
 const PAIN_LOG_LOOKBACK_DAYS = 30;
 
@@ -34,23 +34,36 @@ export class ListRecoveryProgressUseCase {
     const exercises = await this.exerciseRepository.listByRecoveryPlan(
       input.recoveryPlanId,
     );
+    const today = startOfDay(new Date());
     const exercisesWithLogs = await Promise.all(
       exercises.map(async (exercise) => {
-        const logs = await this.exerciseLogRepository.listByExercise(
+        // El progreso (current/target) es por día: solo cuentan los logs de hoy,
+        // si no cada tap de + acumularía sobre el historial de todos los días.
+        const allLogs = await this.exerciseLogRepository.listByExercise(
           exercise.id,
         );
+        const logs = allLogs.filter((log) => isSameDay(log.date, today));
         const completions =
           await this.exerciseCompletionRepository.listByExerciseIds([
             exercise.id,
           ]);
+        // completedToday se calcula aca, no via GetTodayExercises: ese endpoint
+        // solo incluye ejercicios "due" hoy/ayer, y un ejercicio marcado como
+        // hecho pero fuera de esa ventana nunca se reflejaba como completado.
+        const completedToday = completions.some((c) =>
+          isSameDay(c.date, today),
+        );
         return {
           exerciseId: exercise.id,
           name: exercise.name,
+          metricType: exercise.metricType,
           targetSets: exercise.targetSets,
           targetReps: exercise.targetReps,
-          phase: exercise.phase,
+          targetDurationMinutes: exercise.targetDurationMinutes ?? undefined,
+          notes: exercise.notes ?? undefined,
           referenceMediaUrl: exercise.referenceMediaUrl ?? null,
           daysOfWeek: exercise.daysOfWeek,
+          completedToday,
           logs: logs.map((log) => ({
             exerciseLogId: log.id,
             setsDone: log.setsDone,
@@ -75,7 +88,6 @@ export class ListRecoveryProgressUseCase {
       await this.progressPhotoRepository.listByRecoveryPlan(
         input.recoveryPlanId,
       );
-    const today = startOfDay(new Date());
     const painLogs = await this.painLogRepository.listByRecoveryPlanInRange(
       input.recoveryPlanId,
       addDays(today, -PAIN_LOG_LOOKBACK_DAYS),
@@ -92,6 +104,7 @@ export class ListRecoveryProgressUseCase {
       appointments: appointments.map((a) => ({
         appointmentId: a.id,
         recoveryPlanId: a.recoveryPlanId,
+        title: a.title ?? undefined,
         date: a.date.toISOString(),
         provider: a.provider,
         type: a.type,

@@ -34,3 +34,11 @@ export const AppointmentType = {
 } as const
 
 export type AppointmentType = (typeof AppointmentType)[keyof typeof AppointmentType]
+
+
+export const ExerciseMetricType = {
+  REPS: 'REPS',
+  DURATION: 'DURATION'
+} as const
+
+export type ExerciseMetricType = (typeof ExerciseMetricType)[keyof typeof ExerciseMetricType]

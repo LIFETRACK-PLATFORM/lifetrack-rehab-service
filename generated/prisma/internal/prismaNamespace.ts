@@ -1060,10 +1060,12 @@ export const ExerciseScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
   name: 'name',
+  metricType: 'metricType',
   targetSets: 'targetSets',
   targetReps: 'targetReps',
+  targetDurationMinutes: 'targetDurationMinutes',
   referenceMediaUrl: 'referenceMediaUrl',
-  phase: 'phase',
+  notes: 'notes',
   daysOfWeek: 'daysOfWeek',
   createdAt: 'createdAt'
 } as const
@@ -1096,6 +1098,7 @@ export type ExerciseLogScalarFieldEnum = (typeof ExerciseLogScalarFieldEnum)[key
 export const AppointmentScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
+  title: 'title',
   date: 'date',
   provider: 'provider',
   notes: 'notes',
@@ -1212,6 +1215,20 @@ export type EnumRecoveryPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'RecoveryPlanStatus[]'
  */
 export type ListEnumRecoveryPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RecoveryPlanStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExerciseMetricType'
+ */
+export type EnumExerciseMetricTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseMetricType'>
+    
+
+
+/**
+ * Reference to a field of type 'ExerciseMetricType[]'
+ */
+export type ListEnumExerciseMetricTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseMetricType[]'>
     
 
 

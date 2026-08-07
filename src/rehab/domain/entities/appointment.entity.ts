@@ -8,10 +8,11 @@ export enum AppointmentType {
 
 export type AppointmentProps = {
   recoveryPlanId: string;
+  title?: string | null;
   date: Date;
   provider: string;
-  type: AppointmentType;
   notes?: string | null;
+  type: AppointmentType;
   attended?: boolean | null;
   createdAt: Date;
 };
@@ -30,6 +31,9 @@ export class AppointmentEntity extends AggregateRoot<AppointmentProps> {
 
   get recoveryPlanId(): string {
     return this.props.recoveryPlanId;
+  }
+  get title(): string | null | undefined {
+    return this.props.title;
   }
   get date(): Date {
     return this.props.date;

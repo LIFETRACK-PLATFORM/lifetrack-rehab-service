@@ -27,6 +27,7 @@ export type AggregateAppointment = {
 export type AppointmentMinAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
+  title: string | null
   date: Date | null
   provider: string | null
   notes: string | null
@@ -38,6 +39,7 @@ export type AppointmentMinAggregateOutputType = {
 export type AppointmentMaxAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
+  title: string | null
   date: Date | null
   provider: string | null
   notes: string | null
@@ -49,6 +51,7 @@ export type AppointmentMaxAggregateOutputType = {
 export type AppointmentCountAggregateOutputType = {
   id: number
   recoveryPlanId: number
+  title: number
   date: number
   provider: number
   notes: number
@@ -62,6 +65,7 @@ export type AppointmentCountAggregateOutputType = {
 export type AppointmentMinAggregateInputType = {
   id?: true
   recoveryPlanId?: true
+  title?: true
   date?: true
   provider?: true
   notes?: true
@@ -73,6 +77,7 @@ export type AppointmentMinAggregateInputType = {
 export type AppointmentMaxAggregateInputType = {
   id?: true
   recoveryPlanId?: true
+  title?: true
   date?: true
   provider?: true
   notes?: true
@@ -84,6 +89,7 @@ export type AppointmentMaxAggregateInputType = {
 export type AppointmentCountAggregateInputType = {
   id?: true
   recoveryPlanId?: true
+  title?: true
   date?: true
   provider?: true
   notes?: true
@@ -168,6 +174,7 @@ export type AppointmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type AppointmentGroupByOutputType = {
   id: string
   recoveryPlanId: string
+  title: string | null
   date: Date
   provider: string
   notes: string | null
@@ -200,6 +207,7 @@ export type AppointmentWhereInput = {
   NOT?: Prisma.AppointmentWhereInput | Prisma.AppointmentWhereInput[]
   id?: Prisma.StringFilter<"Appointment"> | string
   recoveryPlanId?: Prisma.StringFilter<"Appointment"> | string
+  title?: Prisma.StringNullableFilter<"Appointment"> | string | null
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
@@ -212,6 +220,7 @@ export type AppointmentWhereInput = {
 export type AppointmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -227,6 +236,7 @@ export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AppointmentWhereInput[]
   NOT?: Prisma.AppointmentWhereInput | Prisma.AppointmentWhereInput[]
   recoveryPlanId?: Prisma.StringFilter<"Appointment"> | string
+  title?: Prisma.StringNullableFilter<"Appointment"> | string | null
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
@@ -239,6 +249,7 @@ export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
 export type AppointmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -256,6 +267,7 @@ export type AppointmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AppointmentScalarWhereWithAggregatesInput | Prisma.AppointmentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Appointment"> | string
   recoveryPlanId?: Prisma.StringWithAggregatesFilter<"Appointment"> | string
+  title?: Prisma.StringNullableWithAggregatesFilter<"Appointment"> | string | null
   date?: Prisma.DateTimeWithAggregatesFilter<"Appointment"> | Date | string
   provider?: Prisma.StringWithAggregatesFilter<"Appointment"> | string
   notes?: Prisma.StringNullableWithAggregatesFilter<"Appointment"> | string | null
@@ -266,6 +278,7 @@ export type AppointmentScalarWhereWithAggregatesInput = {
 
 export type AppointmentCreateInput = {
   id?: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -278,6 +291,7 @@ export type AppointmentCreateInput = {
 export type AppointmentUncheckedCreateInput = {
   id?: string
   recoveryPlanId: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -288,6 +302,7 @@ export type AppointmentUncheckedCreateInput = {
 
 export type AppointmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -300,6 +315,7 @@ export type AppointmentUpdateInput = {
 export type AppointmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -311,6 +327,7 @@ export type AppointmentUncheckedUpdateInput = {
 export type AppointmentCreateManyInput = {
   id?: string
   recoveryPlanId: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -321,6 +338,7 @@ export type AppointmentCreateManyInput = {
 
 export type AppointmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -332,6 +350,7 @@ export type AppointmentUpdateManyMutationInput = {
 export type AppointmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -353,6 +372,7 @@ export type AppointmentOrderByRelationAggregateInput = {
 export type AppointmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -364,6 +384,7 @@ export type AppointmentCountOrderByAggregateInput = {
 export type AppointmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -375,6 +396,7 @@ export type AppointmentMaxOrderByAggregateInput = {
 export type AppointmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   notes?: Prisma.SortOrder
@@ -435,6 +457,7 @@ export type NullableBoolFieldUpdateOperationsInput = {
 
 export type AppointmentCreateWithoutRecoveryPlanInput = {
   id?: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -445,6 +468,7 @@ export type AppointmentCreateWithoutRecoveryPlanInput = {
 
 export type AppointmentUncheckedCreateWithoutRecoveryPlanInput = {
   id?: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -485,6 +509,7 @@ export type AppointmentScalarWhereInput = {
   NOT?: Prisma.AppointmentScalarWhereInput | Prisma.AppointmentScalarWhereInput[]
   id?: Prisma.StringFilter<"Appointment"> | string
   recoveryPlanId?: Prisma.StringFilter<"Appointment"> | string
+  title?: Prisma.StringNullableFilter<"Appointment"> | string | null
   date?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   provider?: Prisma.StringFilter<"Appointment"> | string
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
@@ -495,6 +520,7 @@ export type AppointmentScalarWhereInput = {
 
 export type AppointmentCreateManyRecoveryPlanInput = {
   id?: string
+  title?: string | null
   date: Date | string
   provider: string
   notes?: string | null
@@ -505,6 +531,7 @@ export type AppointmentCreateManyRecoveryPlanInput = {
 
 export type AppointmentUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -515,6 +542,7 @@ export type AppointmentUpdateWithoutRecoveryPlanInput = {
 
 export type AppointmentUncheckedUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -525,6 +553,7 @@ export type AppointmentUncheckedUpdateWithoutRecoveryPlanInput = {
 
 export type AppointmentUncheckedUpdateManyWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -538,6 +567,7 @@ export type AppointmentUncheckedUpdateManyWithoutRecoveryPlanInput = {
 export type AppointmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recoveryPlanId?: boolean
+  title?: boolean
   date?: boolean
   provider?: boolean
   notes?: boolean
@@ -550,6 +580,7 @@ export type AppointmentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type AppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recoveryPlanId?: boolean
+  title?: boolean
   date?: boolean
   provider?: boolean
   notes?: boolean
@@ -562,6 +593,7 @@ export type AppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   recoveryPlanId?: boolean
+  title?: boolean
   date?: boolean
   provider?: boolean
   notes?: boolean
@@ -574,6 +606,7 @@ export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type AppointmentSelectScalar = {
   id?: boolean
   recoveryPlanId?: boolean
+  title?: boolean
   date?: boolean
   provider?: boolean
   notes?: boolean
@@ -582,7 +615,7 @@ export type AppointmentSelectScalar = {
   createdAt?: boolean
 }
 
-export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "date" | "provider" | "notes" | "type" | "attended" | "createdAt", ExtArgs["result"]["appointment"]>
+export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "title" | "date" | "provider" | "notes" | "type" | "attended" | "createdAt", ExtArgs["result"]["appointment"]>
 export type AppointmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }
@@ -601,6 +634,7 @@ export type $AppointmentPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     recoveryPlanId: string
+    title: string | null
     date: Date
     provider: string
     notes: string | null
@@ -1033,6 +1067,7 @@ export interface Prisma__AppointmentClient<T, Null = never, ExtArgs extends runt
 export interface AppointmentFieldRefs {
   readonly id: Prisma.FieldRef<"Appointment", 'String'>
   readonly recoveryPlanId: Prisma.FieldRef<"Appointment", 'String'>
+  readonly title: Prisma.FieldRef<"Appointment", 'String'>
   readonly date: Prisma.FieldRef<"Appointment", 'DateTime'>
   readonly provider: Prisma.FieldRef<"Appointment", 'String'>
   readonly notes: Prisma.FieldRef<"Appointment", 'String'>

@@ -1,5 +1,8 @@
 import { MarkExerciseCompletionUseCase } from './mark-exercise-completion.use-case';
-import { ExerciseEntity } from '../../domain/entities/exercise.entity';
+import {
+  ExerciseEntity,
+  ExerciseMetricType,
+} from '../../domain/entities/exercise.entity';
 import {
   RecoveryPlanEntity,
   RecoveryPlanStatus,
@@ -14,9 +17,9 @@ function buildExercise() {
     {
       recoveryPlanId: 'plan-1',
       name: 'Sentadilla',
+      metricType: ExerciseMetricType.REPS,
       targetSets: 3,
       targetReps: 10,
-      phase: 1,
       daysOfWeek: [],
       createdAt: new Date(),
     },

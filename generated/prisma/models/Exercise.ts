@@ -29,14 +29,14 @@ export type AggregateExercise = {
 export type ExerciseAvgAggregateOutputType = {
   targetSets: number | null
   targetReps: number | null
-  phase: number | null
+  targetDurationMinutes: number | null
   daysOfWeek: number | null
 }
 
 export type ExerciseSumAggregateOutputType = {
   targetSets: number | null
   targetReps: number | null
-  phase: number | null
+  targetDurationMinutes: number | null
   daysOfWeek: number[]
 }
 
@@ -44,10 +44,12 @@ export type ExerciseMinAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
   name: string | null
+  metricType: $Enums.ExerciseMetricType | null
   targetSets: number | null
   targetReps: number | null
+  targetDurationMinutes: number | null
   referenceMediaUrl: string | null
-  phase: number | null
+  notes: string | null
   createdAt: Date | null
 }
 
@@ -55,10 +57,12 @@ export type ExerciseMaxAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
   name: string | null
+  metricType: $Enums.ExerciseMetricType | null
   targetSets: number | null
   targetReps: number | null
+  targetDurationMinutes: number | null
   referenceMediaUrl: string | null
-  phase: number | null
+  notes: string | null
   createdAt: Date | null
 }
 
@@ -66,10 +70,12 @@ export type ExerciseCountAggregateOutputType = {
   id: number
   recoveryPlanId: number
   name: number
+  metricType: number
   targetSets: number
   targetReps: number
+  targetDurationMinutes: number
   referenceMediaUrl: number
-  phase: number
+  notes: number
   daysOfWeek: number
   createdAt: number
   _all: number
@@ -79,14 +85,14 @@ export type ExerciseCountAggregateOutputType = {
 export type ExerciseAvgAggregateInputType = {
   targetSets?: true
   targetReps?: true
-  phase?: true
+  targetDurationMinutes?: true
   daysOfWeek?: true
 }
 
 export type ExerciseSumAggregateInputType = {
   targetSets?: true
   targetReps?: true
-  phase?: true
+  targetDurationMinutes?: true
   daysOfWeek?: true
 }
 
@@ -94,10 +100,12 @@ export type ExerciseMinAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   name?: true
+  metricType?: true
   targetSets?: true
   targetReps?: true
+  targetDurationMinutes?: true
   referenceMediaUrl?: true
-  phase?: true
+  notes?: true
   createdAt?: true
 }
 
@@ -105,10 +113,12 @@ export type ExerciseMaxAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   name?: true
+  metricType?: true
   targetSets?: true
   targetReps?: true
+  targetDurationMinutes?: true
   referenceMediaUrl?: true
-  phase?: true
+  notes?: true
   createdAt?: true
 }
 
@@ -116,10 +126,12 @@ export type ExerciseCountAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   name?: true
+  metricType?: true
   targetSets?: true
   targetReps?: true
+  targetDurationMinutes?: true
   referenceMediaUrl?: true
-  phase?: true
+  notes?: true
   daysOfWeek?: true
   createdAt?: true
   _all?: true
@@ -215,10 +227,12 @@ export type ExerciseGroupByOutputType = {
   id: string
   recoveryPlanId: string
   name: string
+  metricType: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes: number | null
   referenceMediaUrl: string | null
-  phase: number
+  notes: string | null
   daysOfWeek: number[]
   createdAt: Date
   _count: ExerciseCountAggregateOutputType | null
@@ -250,10 +264,12 @@ export type ExerciseWhereInput = {
   id?: Prisma.StringFilter<"Exercise"> | string
   recoveryPlanId?: Prisma.StringFilter<"Exercise"> | string
   name?: Prisma.StringFilter<"Exercise"> | string
+  metricType?: Prisma.EnumExerciseMetricTypeFilter<"Exercise"> | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFilter<"Exercise"> | number
   targetReps?: Prisma.IntFilter<"Exercise"> | number
+  targetDurationMinutes?: Prisma.IntNullableFilter<"Exercise"> | number | null
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
-  phase?: Prisma.IntFilter<"Exercise"> | number
+  notes?: Prisma.StringNullableFilter<"Exercise"> | string | null
   daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
@@ -265,10 +281,12 @@ export type ExerciseOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  metricType?: Prisma.SortOrder
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   recoveryPlan?: Prisma.RecoveryPlanOrderByWithRelationInput
@@ -283,10 +301,12 @@ export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ExerciseWhereInput | Prisma.ExerciseWhereInput[]
   recoveryPlanId?: Prisma.StringFilter<"Exercise"> | string
   name?: Prisma.StringFilter<"Exercise"> | string
+  metricType?: Prisma.EnumExerciseMetricTypeFilter<"Exercise"> | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFilter<"Exercise"> | number
   targetReps?: Prisma.IntFilter<"Exercise"> | number
+  targetDurationMinutes?: Prisma.IntNullableFilter<"Exercise"> | number | null
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
-  phase?: Prisma.IntFilter<"Exercise"> | number
+  notes?: Prisma.StringNullableFilter<"Exercise"> | string | null
   daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
@@ -298,10 +318,12 @@ export type ExerciseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  metricType?: Prisma.SortOrder
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrderInput | Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ExerciseCountOrderByAggregateInput
@@ -318,10 +340,12 @@ export type ExerciseScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Exercise"> | string
   recoveryPlanId?: Prisma.StringWithAggregatesFilter<"Exercise"> | string
   name?: Prisma.StringWithAggregatesFilter<"Exercise"> | string
+  metricType?: Prisma.EnumExerciseMetricTypeWithAggregatesFilter<"Exercise"> | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntWithAggregatesFilter<"Exercise"> | number
   targetReps?: Prisma.IntWithAggregatesFilter<"Exercise"> | number
+  targetDurationMinutes?: Prisma.IntNullableWithAggregatesFilter<"Exercise"> | number | null
   referenceMediaUrl?: Prisma.StringNullableWithAggregatesFilter<"Exercise"> | string | null
-  phase?: Prisma.IntWithAggregatesFilter<"Exercise"> | number
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Exercise"> | string | null
   daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Exercise"> | Date | string
 }
@@ -329,10 +353,12 @@ export type ExerciseScalarWhereWithAggregatesInput = {
 export type ExerciseCreateInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
@@ -344,10 +370,12 @@ export type ExerciseUncheckedCreateInput = {
   id?: string
   recoveryPlanId: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
@@ -357,10 +385,12 @@ export type ExerciseUncheckedCreateInput = {
 export type ExerciseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
@@ -372,10 +402,12 @@ export type ExerciseUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
@@ -386,10 +418,12 @@ export type ExerciseCreateManyInput = {
   id?: string
   recoveryPlanId: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
 }
@@ -397,10 +431,12 @@ export type ExerciseCreateManyInput = {
 export type ExerciseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -409,10 +445,12 @@ export type ExerciseUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -439,10 +477,12 @@ export type ExerciseCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  metricType?: Prisma.SortOrder
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   daysOfWeek?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -450,7 +490,7 @@ export type ExerciseCountOrderByAggregateInput = {
 export type ExerciseAvgOrderByAggregateInput = {
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrder
   daysOfWeek?: Prisma.SortOrder
 }
 
@@ -458,10 +498,12 @@ export type ExerciseMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  metricType?: Prisma.SortOrder
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -469,17 +511,19 @@ export type ExerciseMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  metricType?: Prisma.SortOrder
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrder
   referenceMediaUrl?: Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ExerciseSumOrderByAggregateInput = {
   targetSets?: Prisma.SortOrder
   targetReps?: Prisma.SortOrder
-  phase?: Prisma.SortOrder
+  targetDurationMinutes?: Prisma.SortOrder
   daysOfWeek?: Prisma.SortOrder
 }
 
@@ -534,8 +578,20 @@ export type ExerciseCreatedaysOfWeekInput = {
   set: number[]
 }
 
+export type EnumExerciseMetricTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ExerciseMetricType
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -582,10 +638,12 @@ export type ExerciseUpdateOneRequiredWithoutLogsNestedInput = {
 export type ExerciseCreateWithoutRecoveryPlanInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogCreateNestedManyWithoutExerciseInput
@@ -595,10 +653,12 @@ export type ExerciseCreateWithoutRecoveryPlanInput = {
 export type ExerciseUncheckedCreateWithoutRecoveryPlanInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
@@ -638,10 +698,12 @@ export type ExerciseScalarWhereInput = {
   id?: Prisma.StringFilter<"Exercise"> | string
   recoveryPlanId?: Prisma.StringFilter<"Exercise"> | string
   name?: Prisma.StringFilter<"Exercise"> | string
+  metricType?: Prisma.EnumExerciseMetricTypeFilter<"Exercise"> | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFilter<"Exercise"> | number
   targetReps?: Prisma.IntFilter<"Exercise"> | number
+  targetDurationMinutes?: Prisma.IntNullableFilter<"Exercise"> | number | null
   referenceMediaUrl?: Prisma.StringNullableFilter<"Exercise"> | string | null
-  phase?: Prisma.IntFilter<"Exercise"> | number
+  notes?: Prisma.StringNullableFilter<"Exercise"> | string | null
   daysOfWeek?: Prisma.IntNullableListFilter<"Exercise">
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
 }
@@ -649,10 +711,12 @@ export type ExerciseScalarWhereInput = {
 export type ExerciseCreateWithoutCompletionsInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
@@ -663,10 +727,12 @@ export type ExerciseUncheckedCreateWithoutCompletionsInput = {
   id?: string
   recoveryPlanId: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   logs?: Prisma.ExerciseLogUncheckedCreateNestedManyWithoutExerciseInput
@@ -691,10 +757,12 @@ export type ExerciseUpdateToOneWithWhereWithoutCompletionsInput = {
 export type ExerciseUpdateWithoutCompletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
@@ -705,10 +773,12 @@ export type ExerciseUncheckedUpdateWithoutCompletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
@@ -717,10 +787,12 @@ export type ExerciseUncheckedUpdateWithoutCompletionsInput = {
 export type ExerciseCreateWithoutLogsInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutExercisesInput
@@ -731,10 +803,12 @@ export type ExerciseUncheckedCreateWithoutLogsInput = {
   id?: string
   recoveryPlanId: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
   completions?: Prisma.ExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
@@ -759,10 +833,12 @@ export type ExerciseUpdateToOneWithWhereWithoutLogsInput = {
 export type ExerciseUpdateWithoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutExercisesNestedInput
@@ -773,10 +849,12 @@ export type ExerciseUncheckedUpdateWithoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completions?: Prisma.ExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
@@ -785,10 +863,12 @@ export type ExerciseUncheckedUpdateWithoutLogsInput = {
 export type ExerciseCreateManyRecoveryPlanInput = {
   id?: string
   name: string
+  metricType?: $Enums.ExerciseMetricType
   targetSets: number
   targetReps: number
+  targetDurationMinutes?: number | null
   referenceMediaUrl?: string | null
-  phase: number
+  notes?: string | null
   daysOfWeek?: Prisma.ExerciseCreatedaysOfWeekInput | number[]
   createdAt?: Date | string
 }
@@ -796,10 +876,12 @@ export type ExerciseCreateManyRecoveryPlanInput = {
 export type ExerciseUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUpdateManyWithoutExerciseNestedInput
@@ -809,10 +891,12 @@ export type ExerciseUpdateWithoutRecoveryPlanInput = {
 export type ExerciseUncheckedUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logs?: Prisma.ExerciseLogUncheckedUpdateManyWithoutExerciseNestedInput
@@ -822,10 +906,12 @@ export type ExerciseUncheckedUpdateWithoutRecoveryPlanInput = {
 export type ExerciseUncheckedUpdateManyWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  metricType?: Prisma.EnumExerciseMetricTypeFieldUpdateOperationsInput | $Enums.ExerciseMetricType
   targetSets?: Prisma.IntFieldUpdateOperationsInput | number
   targetReps?: Prisma.IntFieldUpdateOperationsInput | number
+  targetDurationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   referenceMediaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phase?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   daysOfWeek?: Prisma.ExerciseUpdatedaysOfWeekInput | number[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -874,10 +960,12 @@ export type ExerciseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   recoveryPlanId?: boolean
   name?: boolean
+  metricType?: boolean
   targetSets?: boolean
   targetReps?: boolean
+  targetDurationMinutes?: boolean
   referenceMediaUrl?: boolean
-  phase?: boolean
+  notes?: boolean
   daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
@@ -890,10 +978,12 @@ export type ExerciseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   recoveryPlanId?: boolean
   name?: boolean
+  metricType?: boolean
   targetSets?: boolean
   targetReps?: boolean
+  targetDurationMinutes?: boolean
   referenceMediaUrl?: boolean
-  phase?: boolean
+  notes?: boolean
   daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
@@ -903,10 +993,12 @@ export type ExerciseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   recoveryPlanId?: boolean
   name?: boolean
+  metricType?: boolean
   targetSets?: boolean
   targetReps?: boolean
+  targetDurationMinutes?: boolean
   referenceMediaUrl?: boolean
-  phase?: boolean
+  notes?: boolean
   daysOfWeek?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
@@ -916,15 +1008,17 @@ export type ExerciseSelectScalar = {
   id?: boolean
   recoveryPlanId?: boolean
   name?: boolean
+  metricType?: boolean
   targetSets?: boolean
   targetReps?: boolean
+  targetDurationMinutes?: boolean
   referenceMediaUrl?: boolean
-  phase?: boolean
+  notes?: boolean
   daysOfWeek?: boolean
   createdAt?: boolean
 }
 
-export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "name" | "targetSets" | "targetReps" | "referenceMediaUrl" | "phase" | "daysOfWeek" | "createdAt", ExtArgs["result"]["exercise"]>
+export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "name" | "metricType" | "targetSets" | "targetReps" | "targetDurationMinutes" | "referenceMediaUrl" | "notes" | "daysOfWeek" | "createdAt", ExtArgs["result"]["exercise"]>
 export type ExerciseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
   logs?: boolean | Prisma.Exercise$logsArgs<ExtArgs>
@@ -949,10 +1043,12 @@ export type $ExercisePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     recoveryPlanId: string
     name: string
+    metricType: $Enums.ExerciseMetricType
     targetSets: number
     targetReps: number
+    targetDurationMinutes: number | null
     referenceMediaUrl: string | null
-    phase: number
+    notes: string | null
     daysOfWeek: number[]
     createdAt: Date
   }, ExtArgs["result"]["exercise"]>
@@ -1384,10 +1480,12 @@ export interface ExerciseFieldRefs {
   readonly id: Prisma.FieldRef<"Exercise", 'String'>
   readonly recoveryPlanId: Prisma.FieldRef<"Exercise", 'String'>
   readonly name: Prisma.FieldRef<"Exercise", 'String'>
+  readonly metricType: Prisma.FieldRef<"Exercise", 'ExerciseMetricType'>
   readonly targetSets: Prisma.FieldRef<"Exercise", 'Int'>
   readonly targetReps: Prisma.FieldRef<"Exercise", 'Int'>
+  readonly targetDurationMinutes: Prisma.FieldRef<"Exercise", 'Int'>
   readonly referenceMediaUrl: Prisma.FieldRef<"Exercise", 'String'>
-  readonly phase: Prisma.FieldRef<"Exercise", 'Int'>
+  readonly notes: Prisma.FieldRef<"Exercise", 'String'>
   readonly daysOfWeek: Prisma.FieldRef<"Exercise", 'Int[]'>
   readonly createdAt: Prisma.FieldRef<"Exercise", 'DateTime'>
 }

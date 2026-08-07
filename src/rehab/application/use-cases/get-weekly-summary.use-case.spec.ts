@@ -3,7 +3,10 @@ import {
   RecoveryPlanEntity,
   RecoveryPlanStatus,
 } from '../../domain/entities/recovery-plan.entity';
-import { ExerciseEntity } from '../../domain/entities/exercise.entity';
+import {
+  ExerciseEntity,
+  ExerciseMetricType,
+} from '../../domain/entities/exercise.entity';
 import { ExerciseCompletionEntity } from '../../domain/entities/exercise-completion.entity';
 import { addDays, startOfDay } from '../utils/schedule.util';
 
@@ -27,9 +30,9 @@ function buildDailyExercise() {
     {
       recoveryPlanId: 'plan-1',
       name: 'Sentadilla',
+      metricType: ExerciseMetricType.REPS,
       targetSets: 3,
       targetReps: 10,
-      phase: 1,
       daysOfWeek: [],
       createdAt: new Date(),
     },
@@ -65,6 +68,8 @@ function buildUseCase(completions: ExerciseCompletionEntity[]) {
     listByRecoveryPlanInRange: jest.fn().mockResolvedValue([]),
     findById: jest.fn(),
     updateAttendance: jest.fn(),
+    deleteById: jest.fn(),
+    updateById: jest.fn(),
   };
   return new GetWeeklySummaryUseCase(
     recoveryPlanRepository as any,
