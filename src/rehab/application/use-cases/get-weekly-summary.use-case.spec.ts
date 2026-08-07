@@ -195,9 +195,11 @@ describe('GetWeeklySummaryUseCase', () => {
 
     it('un día prestado completado en su totalidad cuenta como cumplido', async () => {
       const completions = [completion(thursday, 'exercise-monday')];
-      const useCase = buildUseCase(completions, [mondayExercise], [
-        { targetDate: thursday, sourceDate: monday },
-      ]);
+      const useCase = buildUseCase(
+        completions,
+        [mondayExercise],
+        [{ targetDate: thursday, sourceDate: monday }],
+      );
 
       const result = await useCase.execute({
         userId: 'user-1',
@@ -239,9 +241,11 @@ describe('GetWeeklySummaryUseCase', () => {
 
     it('la racha no se corta por un día prestado completado (y sin el fix daría 0)', async () => {
       const completions = [completion(thursday, 'exercise-monday')];
-      const useCase = buildUseCase(completions, [mondayExercise], [
-        { targetDate: thursday, sourceDate: monday },
-      ]);
+      const useCase = buildUseCase(
+        completions,
+        [mondayExercise],
+        [{ targetDate: thursday, sourceDate: monday }],
+      );
 
       const result = await useCase.execute({
         userId: 'user-1',

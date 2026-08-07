@@ -76,9 +76,10 @@ export class GetWeeklySummaryUseCase {
         to: queryTo,
       });
 
-    const adHocProtocolDays = await this.adHocProtocolDayRepository.listByRecoveryPlan(
-      input.recoveryPlanId,
-    );
+    const adHocProtocolDays =
+      await this.adHocProtocolDayRepository.listByRecoveryPlan(
+        input.recoveryPlanId,
+      );
     const adHocSourceByTargetDate = new Map(
       adHocProtocolDays.map((d) => [
         d.targetDate.toISOString().slice(0, 10),

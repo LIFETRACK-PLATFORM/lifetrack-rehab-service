@@ -83,7 +83,11 @@ describe('MeasurementEntity', () => {
 
   it('customLabel es opcional para tipos que no son OTHER', () => {
     expect(
-      () => new MeasurementEntity({ ...baseProps, type: MeasurementType.WEIGHT_KG }),
+      () =>
+        new MeasurementEntity({
+          ...baseProps,
+          type: MeasurementType.WEIGHT_KG,
+        }),
     ).not.toThrow();
   });
 });

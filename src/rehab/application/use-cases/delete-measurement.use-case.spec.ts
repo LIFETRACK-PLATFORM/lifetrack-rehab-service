@@ -44,7 +44,10 @@ function buildMeasurement() {
 function buildRepos({
   measurement = buildMeasurement(),
   plan = buildPlan(),
-}: { measurement?: MeasurementEntity | null; plan?: RecoveryPlanEntity | null } = {}) {
+}: {
+  measurement?: MeasurementEntity | null;
+  plan?: RecoveryPlanEntity | null;
+} = {}) {
   const measurementRepository = {
     create: jest.fn(),
     findById: jest.fn().mockResolvedValue(measurement),
@@ -62,7 +65,7 @@ describe('DeleteMeasurementUseCase', () => {
   it('elimina la medición cuando el usuario es dueño del plan', async () => {
     const { measurementRepository, recoveryPlanRepository } = buildRepos();
     const useCase = new DeleteMeasurementUseCase(
-      measurementRepository as any,
+      measurementRepository,
       recoveryPlanRepository as any,
     );
 
@@ -82,7 +85,7 @@ describe('DeleteMeasurementUseCase', () => {
       measurement: null,
     });
     const useCase = new DeleteMeasurementUseCase(
-      measurementRepository as any,
+      measurementRepository,
       recoveryPlanRepository as any,
     );
 
@@ -97,7 +100,7 @@ describe('DeleteMeasurementUseCase', () => {
       plan: null,
     });
     const useCase = new DeleteMeasurementUseCase(
-      measurementRepository as any,
+      measurementRepository,
       recoveryPlanRepository as any,
     );
 

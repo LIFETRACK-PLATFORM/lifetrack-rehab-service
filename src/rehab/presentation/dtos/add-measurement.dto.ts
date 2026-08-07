@@ -16,7 +16,7 @@ export class AddMeasurementDto {
   @IsEnum(MeasurementType)
   type: MeasurementType;
 
-  @ValidateIf((o) => o.type === MeasurementType.OTHER)
+  @ValidateIf((o: AddMeasurementDto) => o.type === MeasurementType.OTHER)
   @IsNotEmpty({ message: 'customLabel es obligatorio cuando type es OTHER' })
   @IsString()
   customLabel?: string;
