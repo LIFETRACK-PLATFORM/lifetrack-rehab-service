@@ -29,6 +29,11 @@ enum AppointmentType {
   MEDICAL
 }
 
+enum ExerciseMetricType {
+  REPS
+  DURATION
+}
+
 model RecoveryPlan {
   id          String             @id @default(uuid())
   userId      String
@@ -49,16 +54,18 @@ model RecoveryPlan {
 }
 
 model Exercise {
-  id                String   @id @default(uuid())
-  recoveryPlanId    String
-  recoveryPlan      RecoveryPlan @relation(fields: [recoveryPlanId], references: [id])
-  name              String
-  targetSets        Int
-  targetReps        Int
-  referenceMediaUrl String?
-  phase             Int
-  daysOfWeek        Int[]    @default([])
-  createdAt         DateTime @default(now())
+  id                    String             @id @default(uuid())
+  recoveryPlanId        String
+  recoveryPlan          RecoveryPlan       @relation(fields: [recoveryPlanId], references: [id])
+  name                  String
+  metricType            ExerciseMetricType @default(REPS)
+  targetSets            Int
+  targetReps            Int
+  targetDurationMinutes Int?
+  referenceMediaUrl     String?
+  notes                 String?
+  daysOfWeek            Int[]              @default([])
+  createdAt             DateTime           @default(now())
 
   logs        ExerciseLog[]
   completions ExerciseCompletion[]
@@ -88,6 +95,7 @@ model Appointment {
   id             String          @id @default(uuid())
   recoveryPlanId String
   recoveryPlan   RecoveryPlan    @relation(fields: [recoveryPlanId], references: [id])
+  title          String?
   date           DateTime
   provider       String
   notes          String?

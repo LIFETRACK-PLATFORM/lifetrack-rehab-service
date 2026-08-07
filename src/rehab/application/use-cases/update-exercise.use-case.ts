@@ -21,9 +21,11 @@ export class UpdateExerciseUseCase {
 
     const updated = await this.exerciseRepository.update(input.exerciseId, {
       name: input.name,
+      metricType: input.metricType,
       targetSets: input.targetSets,
       targetReps: input.targetReps,
-      phase: input.phase,
+      targetDurationMinutes: input.targetDurationMinutes,
+      notes: input.notes,
       daysOfWeek: input.daysOfWeek,
     });
 
@@ -31,9 +33,11 @@ export class UpdateExerciseUseCase {
       exerciseId: updated.id,
       recoveryPlanId: updated.recoveryPlanId,
       name: updated.name,
+      metricType: updated.metricType,
       targetSets: updated.targetSets,
       targetReps: updated.targetReps,
-      phase: updated.phase,
+      targetDurationMinutes: updated.targetDurationMinutes ?? undefined,
+      notes: updated.notes ?? undefined,
       daysOfWeek: updated.daysOfWeek,
     };
   }

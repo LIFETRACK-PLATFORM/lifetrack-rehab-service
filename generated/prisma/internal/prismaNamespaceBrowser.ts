@@ -95,10 +95,12 @@ export const ExerciseScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
   name: 'name',
+  metricType: 'metricType',
   targetSets: 'targetSets',
   targetReps: 'targetReps',
+  targetDurationMinutes: 'targetDurationMinutes',
   referenceMediaUrl: 'referenceMediaUrl',
-  phase: 'phase',
+  notes: 'notes',
   daysOfWeek: 'daysOfWeek',
   createdAt: 'createdAt'
 } as const
@@ -131,6 +133,7 @@ export type ExerciseLogScalarFieldEnum = (typeof ExerciseLogScalarFieldEnum)[key
 export const AppointmentScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
+  title: 'title',
   date: 'date',
   provider: 'provider',
   notes: 'notes',

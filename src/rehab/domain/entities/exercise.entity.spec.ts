@@ -1,11 +1,11 @@
-import { ExerciseEntity } from './exercise.entity';
+import { ExerciseEntity, ExerciseMetricType } from './exercise.entity';
 
 const baseProps = {
   recoveryPlanId: 'plan-1',
   name: 'Sentadilla',
+  metricType: ExerciseMetricType.REPS,
   targetSets: 3,
   targetReps: 10,
-  phase: 1,
   daysOfWeek: [] as number[],
   createdAt: new Date(),
 };
@@ -43,5 +43,27 @@ describe('ExerciseEntity', () => {
     expect(
       () => new ExerciseEntity({ ...baseProps, daysOfWeek: [-1] }),
     ).toThrow('daysOfWeek solo admite enteros entre 0 (domingo) y 6 (sábado)');
+  });
+
+  it('crea un ejercicio de duración con targetDurationMinutes', () => {
+    const exercise = new ExerciseEntity({
+      ...baseProps,
+      metricType: ExerciseMetricType.DURATION,
+      targetDurationMinutes: 20,
+    });
+    expect(exercise.metricType).toBe(ExerciseMetricType.DURATION);
+    expect(exercise.targetDurationMinutes).toBe(20);
+  });
+
+  it('lanza error si un ejercicio de duración no tiene targetDurationMinutes', () => {
+    expect(
+      () =>
+        new ExerciseEntity({
+          ...baseProps,
+          metricType: ExerciseMetricType.DURATION,
+        }),
+    ).toThrow(
+      'targetDurationMinutes debe ser positivo para ejercicios de duracion',
+    );
   });
 });

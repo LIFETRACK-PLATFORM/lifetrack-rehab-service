@@ -6,6 +6,7 @@ import { UpdateExerciseUseCase } from './application/use-cases/update-exercise.u
 import { LogExerciseUseCase } from './application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from './application/use-cases/add-appointment.use-case';
 import { MarkAppointmentAttendanceUseCase } from './application/use-cases/mark-appointment-attendance.use-case';
+import { UpdateAppointmentUseCase } from './application/use-cases/update-appointment.use-case';
 import { DeleteAppointmentUseCase } from './application/use-cases/delete-appointment.use-case';
 import { AddMeasurementUseCase } from './application/use-cases/add-measurement.use-case';
 import { AddProgressPhotoUseCase } from './application/use-cases/add-progress-photo.use-case';
@@ -175,6 +176,14 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         recoveryPlanRepo: RecoveryPlanRepositoryPort,
       ) =>
         new MarkAppointmentAttendanceUseCase(appointmentRepo, recoveryPlanRepo),
+      inject: [APPOINTMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
+    },
+    {
+      provide: UpdateAppointmentUseCase,
+      useFactory: (
+        appointmentRepo: AppointmentRepositoryPort,
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+      ) => new UpdateAppointmentUseCase(appointmentRepo, recoveryPlanRepo),
       inject: [APPOINTMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
     },
     {

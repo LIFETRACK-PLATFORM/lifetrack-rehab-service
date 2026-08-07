@@ -1,12 +1,14 @@
 import { Type } from 'class-transformer';
 import {
   IsArray,
+  IsIn,
   IsInt,
   IsOptional,
   IsString,
   IsUUID,
   Min,
 } from 'class-validator';
+import { ExerciseMetricType } from '../../domain/entities/exercise.entity';
 
 export class UpdateExerciseDto {
   @IsUUID()
@@ -14,6 +16,9 @@ export class UpdateExerciseDto {
 
   @IsString()
   name!: string;
+
+  @IsIn(Object.values(ExerciseMetricType))
+  metricType!: ExerciseMetricType;
 
   @Type(() => Number)
   @IsInt()
@@ -25,10 +30,15 @@ export class UpdateExerciseDto {
   @Min(1)
   targetReps!: number;
 
+  @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  phase!: number;
+  targetDurationMinutes?: number;
+
+  @IsOptional()
+  @IsString()
+  notes?: string;
 
   @IsOptional()
   @IsArray()

@@ -22,10 +22,12 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
       data: {
         recoveryPlanId: data.recoveryPlanId,
         name: data.name,
+        metricType: data.metricType,
         targetSets: data.targetSets,
         targetReps: data.targetReps,
+        targetDurationMinutes: data.targetDurationMinutes,
         referenceMediaUrl: data.referenceMediaUrl,
-        phase: data.phase,
+        notes: data.notes,
         daysOfWeek: data.daysOfWeek ?? [],
       },
     });
@@ -37,9 +39,11 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
       where: { id },
       data: {
         name: data.name,
+        metricType: data.metricType,
         targetSets: data.targetSets,
         targetReps: data.targetReps,
-        phase: data.phase,
+        targetDurationMinutes: data.targetDurationMinutes,
+        notes: data.notes,
         daysOfWeek: data.daysOfWeek ?? [],
       },
     });

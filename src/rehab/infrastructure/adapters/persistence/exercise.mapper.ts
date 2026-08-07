@@ -1,5 +1,8 @@
 import { Exercise as PrismaExercise } from 'generated/prisma/client';
-import { ExerciseEntity } from '../../../domain/entities/exercise.entity';
+import {
+  ExerciseEntity,
+  ExerciseMetricType,
+} from '../../../domain/entities/exercise.entity';
 
 export class ExerciseMapper {
   static toDomain(raw: PrismaExercise): ExerciseEntity {
@@ -7,10 +10,12 @@ export class ExerciseMapper {
       {
         recoveryPlanId: raw.recoveryPlanId,
         name: raw.name,
+        metricType: raw.metricType as ExerciseMetricType,
         targetSets: raw.targetSets,
         targetReps: raw.targetReps,
+        targetDurationMinutes: raw.targetDurationMinutes,
         referenceMediaUrl: raw.referenceMediaUrl,
-        phase: raw.phase,
+        notes: raw.notes,
         daysOfWeek: raw.daysOfWeek,
         createdAt: raw.createdAt,
       },

@@ -1,6 +1,7 @@
 import {
   ArrayUnique,
   IsArray,
+  IsIn,
   IsInt,
   IsOptional,
   IsString,
@@ -8,6 +9,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
+import { ExerciseMetricType } from '../../domain/entities/exercise.entity';
 
 export class AddExerciseDto {
   @IsString()
@@ -16,6 +18,9 @@ export class AddExerciseDto {
   @IsString()
   @MinLength(2)
   name: string;
+
+  @IsIn(Object.values(ExerciseMetricType))
+  metricType: ExerciseMetricType;
 
   @IsInt()
   @Min(1)
@@ -26,12 +31,17 @@ export class AddExerciseDto {
   targetReps: number;
 
   @IsOptional()
+  @IsInt()
+  @Min(1)
+  targetDurationMinutes?: number;
+
+  @IsOptional()
   @IsString()
   referenceMediaUrl?: string;
 
-  @IsInt()
-  @Min(1)
-  phase: number;
+  @IsOptional()
+  @IsString()
+  notes?: string;
 
   @IsOptional()
   @IsArray()

@@ -56,9 +56,11 @@ export class ListRecoveryProgressUseCase {
         return {
           exerciseId: exercise.id,
           name: exercise.name,
+          metricType: exercise.metricType,
           targetSets: exercise.targetSets,
           targetReps: exercise.targetReps,
-          phase: exercise.phase,
+          targetDurationMinutes: exercise.targetDurationMinutes ?? undefined,
+          notes: exercise.notes ?? undefined,
           referenceMediaUrl: exercise.referenceMediaUrl ?? null,
           daysOfWeek: exercise.daysOfWeek,
           completedToday,
@@ -102,6 +104,7 @@ export class ListRecoveryProgressUseCase {
       appointments: appointments.map((a) => ({
         appointmentId: a.id,
         recoveryPlanId: a.recoveryPlanId,
+        title: a.title ?? undefined,
         date: a.date.toISOString(),
         provider: a.provider,
         type: a.type,

@@ -5,6 +5,15 @@ import {
 
 export type CreateAppointmentInput = {
   recoveryPlanId: string;
+  title?: string;
+  date: Date;
+  provider: string;
+  type: AppointmentType;
+  notes?: string;
+};
+
+export type UpdateAppointmentInput = {
+  title?: string;
   date: Date;
   provider: string;
   type: AppointmentType;
@@ -24,6 +33,10 @@ export interface AppointmentRepositoryPort {
   updateAttendance(
     id: string,
     attended: boolean,
+  ): Promise<AppointmentEntity>;
+  updateById(
+    id: string,
+    data: UpdateAppointmentInput,
   ): Promise<AppointmentEntity>;
   deleteById(id: string): Promise<void>;
 }

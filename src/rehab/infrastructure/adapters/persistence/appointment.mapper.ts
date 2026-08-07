@@ -9,6 +9,7 @@ export class AppointmentMapper {
     return new AppointmentEntity(
       {
         recoveryPlanId: raw.recoveryPlanId,
+        title: raw.title,
         date: raw.date,
         provider: raw.provider,
         type: raw.type as AppointmentType,

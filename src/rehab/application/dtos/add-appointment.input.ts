@@ -3,6 +3,7 @@ import { AppointmentType } from '../../domain/entities/appointment.entity';
 export type AddAppointmentInput = {
   userId: string;
   recoveryPlanId: string;
+  title?: string;
   date: string;
   provider: string;
   type: AppointmentType;

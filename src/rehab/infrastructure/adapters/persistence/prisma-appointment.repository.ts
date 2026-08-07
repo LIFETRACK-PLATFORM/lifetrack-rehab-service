@@ -4,6 +4,7 @@ import { AppointmentEntity } from '../../../domain/entities/appointment.entity';
 import type {
   AppointmentRepositoryPort,
   CreateAppointmentInput,
+  UpdateAppointmentInput,
 } from '../../../domain/ports/appointment.repository.port';
 import { AppointmentMapper } from './appointment.mapper';
 
@@ -15,6 +16,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
     const raw = await this.prisma.appointment.create({
       data: {
         recoveryPlanId: data.recoveryPlanId,
+        title: data.title,
         date: data.date,
         provider: data.provider,
         type: data.type,
@@ -32,6 +34,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
         this.prisma.appointment.create({
           data: {
             recoveryPlanId: item.recoveryPlanId,
+            title: item.title,
             date: item.date,
             provider: item.provider,
             type: item.type,
@@ -41,6 +44,23 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
       ),
     );
     return created.map((raw) => AppointmentMapper.toDomain(raw));
+  }
+
+  async updateById(
+    id: string,
+    data: UpdateAppointmentInput,
+  ): Promise<AppointmentEntity> {
+    const raw = await this.prisma.appointment.update({
+      where: { id },
+      data: {
+        title: data.title,
+        date: data.date,
+        provider: data.provider,
+        type: data.type,
+        notes: data.notes,
+      },
+    });
+    return AppointmentMapper.toDomain(raw);
   }
 
   async findById(id: string): Promise<AppointmentEntity | null> {

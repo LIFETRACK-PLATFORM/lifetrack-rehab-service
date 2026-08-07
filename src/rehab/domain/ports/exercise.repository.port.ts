@@ -1,20 +1,24 @@
-import { ExerciseEntity } from '../entities/exercise.entity';
+import { ExerciseEntity, ExerciseMetricType } from '../entities/exercise.entity';
 
 export type CreateExerciseInput = {
   recoveryPlanId: string;
   name: string;
+  metricType: ExerciseMetricType;
   targetSets: number;
   targetReps: number;
+  targetDurationMinutes?: number | null;
   referenceMediaUrl?: string;
-  phase: number;
+  notes?: string | null;
   daysOfWeek?: number[];
 };
 
 export type UpdateExerciseInput = {
   name: string;
+  metricType: ExerciseMetricType;
   targetSets: number;
   targetReps: number;
-  phase: number;
+  targetDurationMinutes?: number | null;
+  notes?: string | null;
   daysOfWeek?: number[];
 };
 
