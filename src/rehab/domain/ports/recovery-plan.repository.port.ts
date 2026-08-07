@@ -1,4 +1,7 @@
-import { RecoveryPlanEntity } from '../entities/recovery-plan.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../entities/recovery-plan.entity';
 
 export type CreateRecoveryPlanInput = {
   userId: string;
@@ -15,4 +18,8 @@ export interface RecoveryPlanRepositoryPort {
   ): Promise<RecoveryPlanEntity | null>;
   listByUserId(userId: string): Promise<RecoveryPlanEntity[]>;
   create(data: CreateRecoveryPlanInput): Promise<RecoveryPlanEntity>;
+  updateStatus(
+    id: string,
+    status: RecoveryPlanStatus,
+  ): Promise<RecoveryPlanEntity>;
 }

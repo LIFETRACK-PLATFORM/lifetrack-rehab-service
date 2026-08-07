@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { RecoveryPlanEntity } from '../../../domain/entities/recovery-plan.entity';
+import {
+  RecoveryPlanEntity,
+  RecoveryPlanStatus,
+} from '../../../domain/entities/recovery-plan.entity';
 import type {
   CreateRecoveryPlanInput,
   RecoveryPlanRepositoryPort,
@@ -42,6 +45,17 @@ export class PrismaRecoveryPlanRepository implements RecoveryPlanRepositoryPort 
         injuryType: data.injuryType,
         surgeryDate: data.surgeryDate,
       },
+    });
+    return RecoveryPlanMapper.toDomain(raw);
+  }
+
+  async updateStatus(
+    id: string,
+    status: RecoveryPlanStatus,
+  ): Promise<RecoveryPlanEntity> {
+    const raw = await this.prisma.recoveryPlan.update({
+      where: { id },
+      data: { status },
     });
     return RecoveryPlanMapper.toDomain(raw);
   }

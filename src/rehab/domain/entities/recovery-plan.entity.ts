@@ -47,4 +47,8 @@ export class RecoveryPlanEntity extends AggregateRoot<RecoveryPlanProps> {
   isActive(): boolean {
     return this.props.status === RecoveryPlanStatus.ACTIVE;
   }
+
+  changeStatus(status: RecoveryPlanStatus): void {
+    this.props.status = status;
+  }
 }

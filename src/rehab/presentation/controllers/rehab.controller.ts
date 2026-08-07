@@ -3,6 +3,7 @@ import { GrpcMethod } from '@nestjs/microservices';
 import type { Metadata } from '@grpc/grpc-js';
 import { CreateRecoveryPlanUseCase } from '../../application/use-cases/create-recovery-plan.use-case';
 import { ListRecoveryPlansByUserUseCase } from '../../application/use-cases/list-recovery-plans-by-user.use-case';
+import { UpdateRecoveryPlanStatusUseCase } from '../../application/use-cases/update-recovery-plan-status.use-case';
 import { AddExerciseUseCase } from '../../application/use-cases/add-exercise.use-case';
 import { DeleteExerciseUseCase } from '../../application/use-cases/delete-exercise.use-case';
 import { LogExerciseUseCase } from '../../application/use-cases/log-exercise.use-case';
@@ -16,6 +17,7 @@ import { GetWeeklySummaryUseCase } from '../../application/use-cases/get-weekly-
 import { AddOrUpdatePainLogUseCase } from '../../application/use-cases/add-or-update-pain-log.use-case';
 import { ListPainLogsUseCase } from '../../application/use-cases/list-pain-logs.use-case';
 import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
+import { UpdateRecoveryPlanStatusDto } from '../dtos/update-recovery-plan-status.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
 import { DeleteExerciseDto } from '../dtos/delete-exercise.dto';
 import { LogExerciseDto } from '../dtos/log-exercise.dto';
@@ -37,6 +39,7 @@ export class RehabController {
   constructor(
     private readonly createRecoveryPlanUseCase: CreateRecoveryPlanUseCase,
     private readonly listRecoveryPlansByUserUseCase: ListRecoveryPlansByUserUseCase,
+    private readonly updateRecoveryPlanStatusUseCase: UpdateRecoveryPlanStatusUseCase,
     private readonly addExerciseUseCase: AddExerciseUseCase,
     private readonly deleteExerciseUseCase: DeleteExerciseUseCase,
     private readonly logExerciseUseCase: LogExerciseUseCase,
@@ -66,6 +69,19 @@ export class RehabController {
   listRecoveryPlansByUser(_data: Record<string, never>, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.listRecoveryPlansByUserUseCase.execute(userId);
+  }
+
+  @GrpcMethod('RehabService', 'UpdateRecoveryPlanStatus')
+  updateRecoveryPlanStatus(
+    data: UpdateRecoveryPlanStatusDto,
+    metadata: Metadata,
+  ) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.updateRecoveryPlanStatusUseCase.execute({
+      userId,
+      recoveryPlanId: data.recoveryPlanId,
+      status: data.status,
+    });
   }
 
   @GrpcMethod('RehabService', 'AddExercise')

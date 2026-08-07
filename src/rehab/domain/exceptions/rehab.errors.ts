@@ -17,3 +17,9 @@ export class InvalidRehabEntityDataError extends DomainError {
     super(message);
   }
 }
+
+export class InvalidRecoveryPlanStatusError extends DomainError {
+  constructor(status: string) {
+    super(`Estado de plan de recuperación inválido: ${status}`);
+  }
+}
