@@ -298,18 +298,21 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         exerciseRepo: ExerciseRepositoryPort,
         exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
         appointmentRepo: AppointmentRepositoryPort,
+        adHocProtocolDayRepo: AdHocProtocolDayRepositoryPort,
       ) =>
         new GetWeeklySummaryUseCase(
           recoveryPlanRepo,
           exerciseRepo,
           exerciseCompletionRepo,
           appointmentRepo,
+          adHocProtocolDayRepo,
         ),
       inject: [
         RECOVERY_PLAN_REPOSITORY,
         EXERCISE_REPOSITORY,
         EXERCISE_COMPLETION_REPOSITORY,
         APPOINTMENT_REPOSITORY,
+        AD_HOC_PROTOCOL_DAY_REPOSITORY,
       ],
     },
     {
