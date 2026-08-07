@@ -47,6 +47,12 @@ export class ListRecoveryProgressUseCase {
           await this.exerciseCompletionRepository.listByExerciseIds([
             exercise.id,
           ]);
+        // completedToday se calcula aca, no via GetTodayExercises: ese endpoint
+        // solo incluye ejercicios "due" hoy/ayer, y un ejercicio marcado como
+        // hecho pero fuera de esa ventana nunca se reflejaba como completado.
+        const completedToday = completions.some((c) =>
+          isSameDay(c.date, today),
+        );
         return {
           exerciseId: exercise.id,
           name: exercise.name,
@@ -55,6 +61,7 @@ export class ListRecoveryProgressUseCase {
           phase: exercise.phase,
           referenceMediaUrl: exercise.referenceMediaUrl ?? null,
           daysOfWeek: exercise.daysOfWeek,
+          completedToday,
           logs: logs.map((log) => ({
             exerciseLogId: log.id,
             setsDone: log.setsDone,

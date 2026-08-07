@@ -216,6 +216,7 @@ message ExerciseProgress {
   repeated ExerciseLogEntry logs = 6;
   repeated int32 daysOfWeek = 7;
   repeated ExerciseCompletionEntry completions = 8;
+  bool completedToday = 9;
 }
 
 message PainLogResponse {
