@@ -56,6 +56,7 @@ function buildRepos(createManyCount: number) {
     listByRecoveryPlanInRange: jest.fn(),
     findById: jest.fn(),
     updateAttendance: jest.fn(),
+    deleteById: jest.fn(),
   };
   const eventPublisher = { publish: jest.fn().mockResolvedValue(undefined) };
   void createManyCount;
@@ -139,6 +140,7 @@ describe('AddAppointmentUseCase', () => {
       listByRecoveryPlanInRange: jest.fn(),
       findById: jest.fn(),
       updateAttendance: jest.fn(),
+      deleteById: jest.fn(),
     };
     const eventPublisher = { publish: jest.fn() };
     const useCase = new AddAppointmentUseCase(
