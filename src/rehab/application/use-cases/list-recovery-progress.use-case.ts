@@ -121,6 +121,7 @@ export class ListRecoveryProgressUseCase {
         measurementId: m.id,
         recoveryPlanId: m.recoveryPlanId,
         type: m.type,
+        customLabel: m.customLabel ?? undefined,
         value: m.value,
         unit: m.unit,
         date: m.date.toISOString(),

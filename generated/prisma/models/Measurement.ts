@@ -38,6 +38,7 @@ export type MeasurementMinAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
   type: $Enums.MeasurementType | null
+  customLabel: string | null
   value: number | null
   unit: string | null
   date: Date | null
@@ -48,6 +49,7 @@ export type MeasurementMaxAggregateOutputType = {
   id: string | null
   recoveryPlanId: string | null
   type: $Enums.MeasurementType | null
+  customLabel: string | null
   value: number | null
   unit: string | null
   date: Date | null
@@ -58,6 +60,7 @@ export type MeasurementCountAggregateOutputType = {
   id: number
   recoveryPlanId: number
   type: number
+  customLabel: number
   value: number
   unit: number
   date: number
@@ -78,6 +81,7 @@ export type MeasurementMinAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   type?: true
+  customLabel?: true
   value?: true
   unit?: true
   date?: true
@@ -88,6 +92,7 @@ export type MeasurementMaxAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   type?: true
+  customLabel?: true
   value?: true
   unit?: true
   date?: true
@@ -98,6 +103,7 @@ export type MeasurementCountAggregateInputType = {
   id?: true
   recoveryPlanId?: true
   type?: true
+  customLabel?: true
   value?: true
   unit?: true
   date?: true
@@ -195,6 +201,7 @@ export type MeasurementGroupByOutputType = {
   id: string
   recoveryPlanId: string
   type: $Enums.MeasurementType
+  customLabel: string | null
   value: number
   unit: string
   date: Date
@@ -228,6 +235,7 @@ export type MeasurementWhereInput = {
   id?: Prisma.StringFilter<"Measurement"> | string
   recoveryPlanId?: Prisma.StringFilter<"Measurement"> | string
   type?: Prisma.EnumMeasurementTypeFilter<"Measurement"> | $Enums.MeasurementType
+  customLabel?: Prisma.StringNullableFilter<"Measurement"> | string | null
   value?: Prisma.FloatFilter<"Measurement"> | number
   unit?: Prisma.StringFilter<"Measurement"> | string
   date?: Prisma.DateTimeFilter<"Measurement"> | Date | string
@@ -239,6 +247,7 @@ export type MeasurementOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  customLabel?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -253,6 +262,7 @@ export type MeasurementWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MeasurementWhereInput | Prisma.MeasurementWhereInput[]
   recoveryPlanId?: Prisma.StringFilter<"Measurement"> | string
   type?: Prisma.EnumMeasurementTypeFilter<"Measurement"> | $Enums.MeasurementType
+  customLabel?: Prisma.StringNullableFilter<"Measurement"> | string | null
   value?: Prisma.FloatFilter<"Measurement"> | number
   unit?: Prisma.StringFilter<"Measurement"> | string
   date?: Prisma.DateTimeFilter<"Measurement"> | Date | string
@@ -264,6 +274,7 @@ export type MeasurementOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  customLabel?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -282,6 +293,7 @@ export type MeasurementScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Measurement"> | string
   recoveryPlanId?: Prisma.StringWithAggregatesFilter<"Measurement"> | string
   type?: Prisma.EnumMeasurementTypeWithAggregatesFilter<"Measurement"> | $Enums.MeasurementType
+  customLabel?: Prisma.StringNullableWithAggregatesFilter<"Measurement"> | string | null
   value?: Prisma.FloatWithAggregatesFilter<"Measurement"> | number
   unit?: Prisma.StringWithAggregatesFilter<"Measurement"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Measurement"> | Date | string
@@ -291,6 +303,7 @@ export type MeasurementScalarWhereWithAggregatesInput = {
 export type MeasurementCreateInput = {
   id?: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -302,6 +315,7 @@ export type MeasurementUncheckedCreateInput = {
   id?: string
   recoveryPlanId: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -311,6 +325,7 @@ export type MeasurementUncheckedCreateInput = {
 export type MeasurementUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -322,6 +337,7 @@ export type MeasurementUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -332,6 +348,7 @@ export type MeasurementCreateManyInput = {
   id?: string
   recoveryPlanId: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -341,6 +358,7 @@ export type MeasurementCreateManyInput = {
 export type MeasurementUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -351,6 +369,7 @@ export type MeasurementUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recoveryPlanId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -371,6 +390,7 @@ export type MeasurementCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  customLabel?: Prisma.SortOrder
   value?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -385,6 +405,7 @@ export type MeasurementMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  customLabel?: Prisma.SortOrder
   value?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -395,6 +416,7 @@ export type MeasurementMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recoveryPlanId?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  customLabel?: Prisma.SortOrder
   value?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -462,6 +484,7 @@ export type FloatFieldUpdateOperationsInput = {
 export type MeasurementCreateWithoutRecoveryPlanInput = {
   id?: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -471,6 +494,7 @@ export type MeasurementCreateWithoutRecoveryPlanInput = {
 export type MeasurementUncheckedCreateWithoutRecoveryPlanInput = {
   id?: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -510,6 +534,7 @@ export type MeasurementScalarWhereInput = {
   id?: Prisma.StringFilter<"Measurement"> | string
   recoveryPlanId?: Prisma.StringFilter<"Measurement"> | string
   type?: Prisma.EnumMeasurementTypeFilter<"Measurement"> | $Enums.MeasurementType
+  customLabel?: Prisma.StringNullableFilter<"Measurement"> | string | null
   value?: Prisma.FloatFilter<"Measurement"> | number
   unit?: Prisma.StringFilter<"Measurement"> | string
   date?: Prisma.DateTimeFilter<"Measurement"> | Date | string
@@ -519,6 +544,7 @@ export type MeasurementScalarWhereInput = {
 export type MeasurementCreateManyRecoveryPlanInput = {
   id?: string
   type: $Enums.MeasurementType
+  customLabel?: string | null
   value: number
   unit: string
   date: Date | string
@@ -528,6 +554,7 @@ export type MeasurementCreateManyRecoveryPlanInput = {
 export type MeasurementUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -537,6 +564,7 @@ export type MeasurementUpdateWithoutRecoveryPlanInput = {
 export type MeasurementUncheckedUpdateWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -546,6 +574,7 @@ export type MeasurementUncheckedUpdateWithoutRecoveryPlanInput = {
 export type MeasurementUncheckedUpdateManyWithoutRecoveryPlanInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeasurementTypeFieldUpdateOperationsInput | $Enums.MeasurementType
+  customLabel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.FloatFieldUpdateOperationsInput | number
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -558,6 +587,7 @@ export type MeasurementSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   recoveryPlanId?: boolean
   type?: boolean
+  customLabel?: boolean
   value?: boolean
   unit?: boolean
   date?: boolean
@@ -569,6 +599,7 @@ export type MeasurementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   recoveryPlanId?: boolean
   type?: boolean
+  customLabel?: boolean
   value?: boolean
   unit?: boolean
   date?: boolean
@@ -580,6 +611,7 @@ export type MeasurementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   recoveryPlanId?: boolean
   type?: boolean
+  customLabel?: boolean
   value?: boolean
   unit?: boolean
   date?: boolean
@@ -591,13 +623,14 @@ export type MeasurementSelectScalar = {
   id?: boolean
   recoveryPlanId?: boolean
   type?: boolean
+  customLabel?: boolean
   value?: boolean
   unit?: boolean
   date?: boolean
   createdAt?: boolean
 }
 
-export type MeasurementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "type" | "value" | "unit" | "date" | "createdAt", ExtArgs["result"]["measurement"]>
+export type MeasurementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "type" | "customLabel" | "value" | "unit" | "date" | "createdAt", ExtArgs["result"]["measurement"]>
 export type MeasurementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }
@@ -617,6 +650,7 @@ export type $MeasurementPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     recoveryPlanId: string
     type: $Enums.MeasurementType
+    customLabel: string | null
     value: number
     unit: string
     date: Date
@@ -1048,6 +1082,7 @@ export interface MeasurementFieldRefs {
   readonly id: Prisma.FieldRef<"Measurement", 'String'>
   readonly recoveryPlanId: Prisma.FieldRef<"Measurement", 'String'>
   readonly type: Prisma.FieldRef<"Measurement", 'MeasurementType'>
+  readonly customLabel: Prisma.FieldRef<"Measurement", 'String'>
   readonly value: Prisma.FieldRef<"Measurement", 'Float'>
   readonly unit: Prisma.FieldRef<"Measurement", 'String'>
   readonly date: Prisma.FieldRef<"Measurement", 'DateTime'>

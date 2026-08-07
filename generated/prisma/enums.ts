@@ -25,7 +25,8 @@ export const MeasurementType = {
   WEIGHT_KG: 'WEIGHT_KG',
   WAIST_CM: 'WAIST_CM',
   HIP_CM: 'HIP_CM',
-  NECK_CM: 'NECK_CM'
+  NECK_CM: 'NECK_CM',
+  OTHER: 'OTHER'
 } as const
 
 export type MeasurementType = (typeof MeasurementType)[keyof typeof MeasurementType]

@@ -9,11 +9,13 @@ export enum MeasurementType {
   WAIST_CM = 'WAIST_CM',
   HIP_CM = 'HIP_CM',
   NECK_CM = 'NECK_CM',
+  OTHER = 'OTHER',
 }
 
 export type MeasurementProps = {
   recoveryPlanId: string;
   type: MeasurementType;
+  customLabel?: string | null;
   value: number;
   unit: string;
   date: Date;
@@ -30,6 +32,11 @@ export class MeasurementEntity extends Entity<MeasurementProps> {
     if (props.value <= 0) {
       throw new InvalidRehabEntityDataError('value debe ser mayor a 0');
     }
+    if (props.type === MeasurementType.OTHER && !props.customLabel?.trim()) {
+      throw new InvalidRehabEntityDataError(
+        'customLabel es obligatorio cuando type es OTHER',
+      );
+    }
     super(props, id);
   }
 
@@ -38,6 +45,9 @@ export class MeasurementEntity extends Entity<MeasurementProps> {
   }
   get type(): MeasurementType {
     return this.props.type;
+  }
+  get customLabel(): string | null {
+    return this.props.customLabel ?? null;
   }
   get value(): number {
     return this.props.value;

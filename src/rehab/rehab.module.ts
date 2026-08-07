@@ -9,6 +9,8 @@ import { MarkAppointmentAttendanceUseCase } from './application/use-cases/mark-a
 import { UpdateAppointmentUseCase } from './application/use-cases/update-appointment.use-case';
 import { DeleteAppointmentUseCase } from './application/use-cases/delete-appointment.use-case';
 import { AddMeasurementUseCase } from './application/use-cases/add-measurement.use-case';
+import { UpdateMeasurementUseCase } from './application/use-cases/update-measurement.use-case';
+import { DeleteMeasurementUseCase } from './application/use-cases/delete-measurement.use-case';
 import { AddProgressPhotoUseCase } from './application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryPlansByUserUseCase } from './application/use-cases/list-recovery-plans-by-user.use-case';
 import { UpdateRecoveryPlanStatusUseCase } from './application/use-cases/update-recovery-plan-status.use-case';
@@ -210,6 +212,22 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         measurementRepo: MeasurementRepositoryPort,
       ) => new AddMeasurementUseCase(recoveryPlanRepo, measurementRepo),
       inject: [RECOVERY_PLAN_REPOSITORY, MEASUREMENT_REPOSITORY],
+    },
+    {
+      provide: UpdateMeasurementUseCase,
+      useFactory: (
+        measurementRepo: MeasurementRepositoryPort,
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+      ) => new UpdateMeasurementUseCase(measurementRepo, recoveryPlanRepo),
+      inject: [MEASUREMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
+    },
+    {
+      provide: DeleteMeasurementUseCase,
+      useFactory: (
+        measurementRepo: MeasurementRepositoryPort,
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+      ) => new DeleteMeasurementUseCase(measurementRepo, recoveryPlanRepo),
+      inject: [MEASUREMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
     },
     {
       provide: AddProgressPhotoUseCase,

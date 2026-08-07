@@ -13,6 +13,8 @@ import { MarkAppointmentAttendanceUseCase } from '../../application/use-cases/ma
 import { UpdateAppointmentUseCase } from '../../application/use-cases/update-appointment.use-case';
 import { DeleteAppointmentUseCase } from '../../application/use-cases/delete-appointment.use-case';
 import { AddMeasurementUseCase } from '../../application/use-cases/add-measurement.use-case';
+import { UpdateMeasurementUseCase } from '../../application/use-cases/update-measurement.use-case';
+import { DeleteMeasurementUseCase } from '../../application/use-cases/delete-measurement.use-case';
 import { AddProgressPhotoUseCase } from '../../application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryProgressUseCase } from '../../application/use-cases/list-recovery-progress.use-case';
 import { MarkExerciseCompletionUseCase } from '../../application/use-cases/mark-exercise-completion.use-case';
@@ -33,6 +35,8 @@ import { MarkAppointmentAttendanceDto } from '../dtos/mark-appointment-attendanc
 import { UpdateAppointmentDto } from '../dtos/update-appointment.dto';
 import { DeleteAppointmentDto } from '../dtos/delete-appointment.dto';
 import { AddMeasurementDto } from '../dtos/add-measurement.dto';
+import { UpdateMeasurementDto } from '../dtos/update-measurement.dto';
+import { DeleteMeasurementDto } from '../dtos/delete-measurement.dto';
 import { AddProgressPhotoDto } from '../dtos/add-progress-photo.dto';
 import { ListRecoveryProgressDto } from '../dtos/list-recovery-progress.dto';
 import { MarkExerciseCompletionDto } from '../dtos/mark-exercise-completion.dto';
@@ -63,6 +67,8 @@ export class RehabController {
     private readonly updateAppointmentUseCase: UpdateAppointmentUseCase,
     private readonly deleteAppointmentUseCase: DeleteAppointmentUseCase,
     private readonly addMeasurementUseCase: AddMeasurementUseCase,
+    private readonly updateMeasurementUseCase: UpdateMeasurementUseCase,
+    private readonly deleteMeasurementUseCase: DeleteMeasurementUseCase,
     private readonly addProgressPhotoUseCase: AddProgressPhotoUseCase,
     private readonly listRecoveryProgressUseCase: ListRecoveryProgressUseCase,
     private readonly markExerciseCompletionUseCase: MarkExerciseCompletionUseCase,
@@ -168,6 +174,21 @@ export class RehabController {
   addMeasurement(data: AddMeasurementDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.addMeasurementUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'UpdateMeasurement')
+  updateMeasurement(data: UpdateMeasurementDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.updateMeasurementUseCase.execute({ userId, ...data });
+  }
+
+  @GrpcMethod('RehabService', 'DeleteMeasurement')
+  deleteMeasurement(data: DeleteMeasurementDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.deleteMeasurementUseCase.execute({
+      userId,
+      measurementId: data.measurementId,
+    });
   }
 
   @GrpcMethod('RehabService', 'AddProgressPhoto')

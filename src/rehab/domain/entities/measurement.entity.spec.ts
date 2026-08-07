@@ -53,4 +53,37 @@ describe('MeasurementEntity', () => {
       () => new MeasurementEntity({ ...baseProps, recoveryPlanId: '' }),
     ).toThrow('recoveryPlanId es obligatorio');
   });
+
+  it('acepta OTHER con customLabel', () => {
+    const measurement = new MeasurementEntity({
+      ...baseProps,
+      type: MeasurementType.OTHER,
+      customLabel: 'Muleta',
+    });
+    expect(measurement.customLabel).toBe('Muleta');
+  });
+
+  it('lanza error si type es OTHER sin customLabel', () => {
+    expect(
+      () =>
+        new MeasurementEntity({ ...baseProps, type: MeasurementType.OTHER }),
+    ).toThrow('customLabel es obligatorio cuando type es OTHER');
+  });
+
+  it('lanza error si type es OTHER con customLabel vacío', () => {
+    expect(
+      () =>
+        new MeasurementEntity({
+          ...baseProps,
+          type: MeasurementType.OTHER,
+          customLabel: '   ',
+        }),
+    ).toThrow('customLabel es obligatorio cuando type es OTHER');
+  });
+
+  it('customLabel es opcional para tipos que no son OTHER', () => {
+    expect(
+      () => new MeasurementEntity({ ...baseProps, type: MeasurementType.WEIGHT_KG }),
+    ).not.toThrow();
+  });
 });

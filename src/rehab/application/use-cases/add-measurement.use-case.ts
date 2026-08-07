@@ -19,6 +19,7 @@ export class AddMeasurementUseCase {
     const measurement = await this.measurementRepository.create({
       recoveryPlanId: input.recoveryPlanId,
       type: input.type,
+      customLabel: input.customLabel,
       value: input.value,
       unit: input.unit,
       date: new Date(input.date),
@@ -28,6 +29,7 @@ export class AddMeasurementUseCase {
       measurementId: measurement.id,
       recoveryPlanId: measurement.recoveryPlanId,
       type: measurement.type,
+      customLabel: measurement.customLabel ?? undefined,
       value: measurement.value,
       unit: measurement.unit,
       date: measurement.date.toISOString(),

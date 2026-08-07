@@ -10,6 +10,7 @@ export class MeasurementMapper {
       {
         recoveryPlanId: raw.recoveryPlanId,
         type: raw.type as MeasurementType,
+        customLabel: raw.customLabel,
         value: raw.value,
         unit: raw.unit,
         date: raw.date,

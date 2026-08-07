@@ -4,6 +4,7 @@ export type AddMeasurementInput = {
   userId: string;
   recoveryPlanId: string;
   type: MeasurementType;
+  customLabel?: string;
   value: number;
   unit: string;
   date: string;
