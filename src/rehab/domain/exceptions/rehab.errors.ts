@@ -18,6 +18,12 @@ export class AppointmentNotFoundError extends DomainError {
   }
 }
 
+export class MeasurementNotFoundError extends DomainError {
+  constructor(measurementId: string) {
+    super(`La medición ${measurementId} no existe`);
+  }
+}
+
 export class InvalidRehabEntityDataError extends DomainError {
   constructor(message: string) {
     super(message);

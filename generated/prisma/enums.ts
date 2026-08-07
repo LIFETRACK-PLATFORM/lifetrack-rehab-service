@@ -22,7 +22,11 @@ export const MeasurementType = {
   FLEXION_DEGREES: 'FLEXION_DEGREES',
   EXTENSION_DEGREES: 'EXTENSION_DEGREES',
   QUAD_CIRCUMFERENCE_CM: 'QUAD_CIRCUMFERENCE_CM',
-  WEIGHT_KG: 'WEIGHT_KG'
+  WEIGHT_KG: 'WEIGHT_KG',
+  WAIST_CM: 'WAIST_CM',
+  HIP_CM: 'HIP_CM',
+  NECK_CM: 'NECK_CM',
+  OTHER: 'OTHER'
 } as const
 
 export type MeasurementType = (typeof MeasurementType)[keyof typeof MeasurementType]

@@ -25,6 +25,7 @@ enum MeasurementType {
   WAIST_CM
   HIP_CM
   NECK_CM
+  OTHER
 }
 
 enum AppointmentType {
@@ -124,6 +125,7 @@ model Measurement {
   recoveryPlanId String
   recoveryPlan   RecoveryPlan    @relation(fields: [recoveryPlanId], references: [id])
   type           MeasurementType
+  customLabel    String?
   value          Float
   unit           String
   date           DateTime

@@ -9,14 +9,14 @@ import {
 } from 'class-validator';
 import { MeasurementType } from '../../domain/entities/measurement.entity';
 
-export class AddMeasurementDto {
+export class UpdateMeasurementDto {
   @IsString()
-  recoveryPlanId: string;
+  measurementId: string;
 
   @IsEnum(MeasurementType)
   type: MeasurementType;
 
-  @ValidateIf((o: AddMeasurementDto) => o.type === MeasurementType.OTHER)
+  @ValidateIf((o: UpdateMeasurementDto) => o.type === MeasurementType.OTHER)
   @IsNotEmpty({ message: 'customLabel es obligatorio cuando type es OTHER' })
   @IsString()
   customLabel?: string;

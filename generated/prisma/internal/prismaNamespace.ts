@@ -1200,6 +1200,7 @@ export const MeasurementScalarFieldEnum = {
   id: 'id',
   recoveryPlanId: 'recoveryPlanId',
   type: 'type',
+  customLabel: 'customLabel',
   value: 'value',
   unit: 'unit',
   date: 'date',

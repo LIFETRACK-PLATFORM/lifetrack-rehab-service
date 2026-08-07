@@ -6,6 +6,7 @@ import {
   AppointmentNotFoundError,
   DomainError,
   ExerciseNotFoundError,
+  MeasurementNotFoundError,
   RecoveryPlanNotFoundError,
 } from '../../domain/exceptions/rehab.errors';
 
@@ -15,6 +16,7 @@ const ERROR_CODE_MAP = new Map<DomainErrorConstructor, GrpcStatus>([
   [RecoveryPlanNotFoundError, GrpcStatus.NOT_FOUND],
   [ExerciseNotFoundError, GrpcStatus.NOT_FOUND],
   [AppointmentNotFoundError, GrpcStatus.NOT_FOUND],
+  [MeasurementNotFoundError, GrpcStatus.NOT_FOUND],
 ]);
 
 @Catch(DomainError)
