@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   RecoveryPlan: 'RecoveryPlan',
+  AdHocProtocolDay: 'AdHocProtocolDay',
   Exercise: 'Exercise',
   ExerciseCompletion: 'ExerciseCompletion',
   ExerciseLog: 'ExerciseLog',
@@ -89,6 +90,17 @@ export const RecoveryPlanScalarFieldEnum = {
 } as const
 
 export type RecoveryPlanScalarFieldEnum = (typeof RecoveryPlanScalarFieldEnum)[keyof typeof RecoveryPlanScalarFieldEnum]
+
+
+export const AdHocProtocolDayScalarFieldEnum = {
+  id: 'id',
+  recoveryPlanId: 'recoveryPlanId',
+  targetDate: 'targetDate',
+  sourceDate: 'sourceDate',
+  createdAt: 'createdAt'
+} as const
+
+export type AdHocProtocolDayScalarFieldEnum = (typeof AdHocProtocolDayScalarFieldEnum)[keyof typeof AdHocProtocolDayScalarFieldEnum]
 
 
 export const ExerciseScalarFieldEnum = {

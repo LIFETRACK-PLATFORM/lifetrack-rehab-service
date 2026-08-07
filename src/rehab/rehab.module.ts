@@ -18,7 +18,10 @@ import { GetTodayExercisesUseCase } from './application/use-cases/get-today-exer
 import { GetWeeklySummaryUseCase } from './application/use-cases/get-weekly-summary.use-case';
 import { AddOrUpdatePainLogUseCase } from './application/use-cases/add-or-update-pain-log.use-case';
 import { ListPainLogsUseCase } from './application/use-cases/list-pain-logs.use-case';
+import { SetAdHocProtocolDayUseCase } from './application/use-cases/set-ad-hoc-protocol-day.use-case';
+import { ClearAdHocProtocolDayUseCase } from './application/use-cases/clear-ad-hoc-protocol-day.use-case';
 import {
+  AD_HOC_PROTOCOL_DAY_REPOSITORY,
   APPOINTMENT_REPOSITORY,
   EVENT_PUBLISHER,
   EXERCISE_COMPLETION_REPOSITORY,
@@ -38,6 +41,7 @@ import { PrismaMeasurementRepository } from './infrastructure/adapters/persisten
 import { PrismaProgressPhotoRepository } from './infrastructure/adapters/persistence/prisma-progress-photo.repository';
 import { PrismaExerciseCompletionRepository } from './infrastructure/adapters/persistence/prisma-exercise-completion.repository';
 import { PrismaPainLogRepository } from './infrastructure/adapters/persistence/prisma-pain-log.repository';
+import { PrismaAdHocProtocolDayRepository } from './infrastructure/adapters/persistence/prisma-ad-hoc-protocol-day.repository';
 import { NatsEventPublisher } from './infrastructure/adapters/messaging/nats-event.publisher';
 import { RehabController } from './presentation/controllers/rehab.controller';
 import type { RecoveryPlanRepositoryPort } from './domain/ports/recovery-plan.repository.port';
@@ -48,6 +52,7 @@ import type { MeasurementRepositoryPort } from './domain/ports/measurement.repos
 import type { ProgressPhotoRepositoryPort } from './domain/ports/progress-photo.repository.port';
 import type { ExerciseCompletionRepositoryPort } from './domain/ports/exercise-completion.repository.port';
 import type { PainLogRepositoryPort } from './domain/ports/pain-log.repository.port';
+import type { AdHocProtocolDayRepositoryPort } from './domain/ports/ad-hoc-protocol-day.repository.port';
 import type { EventPublisherPort } from './domain/ports/event.publisher.port';
 
 @Module({
@@ -85,6 +90,10 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
     {
       provide: PAIN_LOG_REPOSITORY,
       useClass: PrismaPainLogRepository,
+    },
+    {
+      provide: AD_HOC_PROTOCOL_DAY_REPOSITORY,
+      useClass: PrismaAdHocProtocolDayRepository,
     },
     {
       provide: EVENT_PUBLISHER,
@@ -221,6 +230,7 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         progressPhotoRepo: ProgressPhotoRepositoryPort,
         exerciseCompletionRepo: ExerciseCompletionRepositoryPort,
         painLogRepo: PainLogRepositoryPort,
+        adHocProtocolDayRepo: AdHocProtocolDayRepositoryPort,
       ) =>
         new ListRecoveryProgressUseCase(
           recoveryPlanRepo,
@@ -231,6 +241,7 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
           progressPhotoRepo,
           exerciseCompletionRepo,
           painLogRepo,
+          adHocProtocolDayRepo,
         ),
       inject: [
         RECOVERY_PLAN_REPOSITORY,
@@ -241,6 +252,7 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         PROGRESS_PHOTO_REPOSITORY,
         EXERCISE_COMPLETION_REPOSITORY,
         PAIN_LOG_REPOSITORY,
+        AD_HOC_PROTOCOL_DAY_REPOSITORY,
       ],
     },
     {
@@ -315,6 +327,36 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         painLogRepo: PainLogRepositoryPort,
       ) => new ListPainLogsUseCase(recoveryPlanRepo, painLogRepo),
       inject: [RECOVERY_PLAN_REPOSITORY, PAIN_LOG_REPOSITORY],
+    },
+    {
+      provide: SetAdHocProtocolDayUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseRepo: ExerciseRepositoryPort,
+        adHocProtocolDayRepo: AdHocProtocolDayRepositoryPort,
+      ) =>
+        new SetAdHocProtocolDayUseCase(
+          recoveryPlanRepo,
+          exerciseRepo,
+          adHocProtocolDayRepo,
+        ),
+      inject: [
+        RECOVERY_PLAN_REPOSITORY,
+        EXERCISE_REPOSITORY,
+        AD_HOC_PROTOCOL_DAY_REPOSITORY,
+      ],
+    },
+    {
+      provide: ClearAdHocProtocolDayUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        adHocProtocolDayRepo: AdHocProtocolDayRepositoryPort,
+      ) =>
+        new ClearAdHocProtocolDayUseCase(
+          recoveryPlanRepo,
+          adHocProtocolDayRepo,
+        ),
+      inject: [RECOVERY_PLAN_REPOSITORY, AD_HOC_PROTOCOL_DAY_REPOSITORY],
     },
   ],
 })

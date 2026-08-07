@@ -7,6 +7,7 @@ import type { AppointmentRepositoryPort } from '../../domain/ports/appointment.r
 import type { MeasurementRepositoryPort } from '../../domain/ports/measurement.repository.port';
 import type { ProgressPhotoRepositoryPort } from '../../domain/ports/progress-photo.repository.port';
 import type { PainLogRepositoryPort } from '../../domain/ports/pain-log.repository.port';
+import type { AdHocProtocolDayRepositoryPort } from '../../domain/ports/ad-hoc-protocol-day.repository.port';
 import type { ListRecoveryProgressInput } from '../dtos/list-recovery-progress.input';
 import { addDays, isSameDay, startOfDay } from '../utils/schedule.util';
 
@@ -22,6 +23,7 @@ export class ListRecoveryProgressUseCase {
     private readonly progressPhotoRepository: ProgressPhotoRepositoryPort,
     private readonly exerciseCompletionRepository: ExerciseCompletionRepositoryPort,
     private readonly painLogRepository: PainLogRepositoryPort,
+    private readonly adHocProtocolDayRepository: AdHocProtocolDayRepositoryPort,
   ) {}
 
   async execute(input: ListRecoveryProgressInput) {
@@ -93,6 +95,10 @@ export class ListRecoveryProgressUseCase {
       addDays(today, -PAIN_LOG_LOOKBACK_DAYS),
       today,
     );
+    const adHocProtocolDays =
+      await this.adHocProtocolDayRepository.listByRecoveryPlan(
+        input.recoveryPlanId,
+      );
 
     return {
       recoveryPlanId: plan.id,
@@ -131,6 +137,11 @@ export class ListRecoveryProgressUseCase {
         date: p.date.toISOString().slice(0, 10),
         level: p.level,
         note: p.note ?? undefined,
+      })),
+      adHocProtocolDays: adHocProtocolDays.map((d) => ({
+        adHocProtocolDayId: d.id,
+        targetDate: d.targetDate.toISOString().slice(0, 10),
+        sourceDate: d.sourceDate.toISOString().slice(0, 10),
       })),
     };
   }

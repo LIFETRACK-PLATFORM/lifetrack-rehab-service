@@ -47,10 +47,22 @@ model RecoveryPlan {
   exercises      Exercise[]
   appointments   Appointment[]
   measurements   Measurement[]
-  progressPhotos ProgressPhoto[]
-  painLogs       PainLog[]
+  progressPhotos     ProgressPhoto[]
+  painLogs           PainLog[]
+  adHocProtocolDays  AdHocProtocolDay[]
 
   @@index([userId])
+}
+
+model AdHocProtocolDay {
+  id             String       @id @default(uuid())
+  recoveryPlanId String
+  recoveryPlan   RecoveryPlan @relation(fields: [recoveryPlanId], references: [id])
+  targetDate     DateTime     @db.Date
+  sourceDate     DateTime     @db.Date
+  createdAt      DateTime     @default(now())
+
+  @@unique([recoveryPlanId, targetDate])
 }
 
 model Exercise {

@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type RecoveryPlan = Prisma.RecoveryPlanModel
 /**
+ * Model AdHocProtocolDay
+ * 
+ */
+export type AdHocProtocolDay = Prisma.AdHocProtocolDayModel
+/**
  * Model Exercise
  * 
  */
