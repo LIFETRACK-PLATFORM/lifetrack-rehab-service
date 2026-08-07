@@ -25,4 +25,5 @@ export interface AppointmentRepositoryPort {
     id: string,
     attended: boolean,
   ): Promise<AppointmentEntity>;
+  deleteById(id: string): Promise<void>;
 }

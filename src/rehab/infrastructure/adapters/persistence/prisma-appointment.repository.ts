@@ -78,4 +78,8 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
     });
     return rows.map((row) => AppointmentMapper.toDomain(row));
   }
+
+  async deleteById(id: string): Promise<void> {
+    await this.prisma.appointment.delete({ where: { id } });
+  }
 }

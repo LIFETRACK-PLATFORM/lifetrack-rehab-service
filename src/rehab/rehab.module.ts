@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { CreateRecoveryPlanUseCase } from './application/use-cases/create-recovery-plan.use-case';
 import { AddExerciseUseCase } from './application/use-cases/add-exercise.use-case';
 import { DeleteExerciseUseCase } from './application/use-cases/delete-exercise.use-case';
+import { UpdateExerciseUseCase } from './application/use-cases/update-exercise.use-case';
 import { LogExerciseUseCase } from './application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from './application/use-cases/add-appointment.use-case';
 import { MarkAppointmentAttendanceUseCase } from './application/use-cases/mark-appointment-attendance.use-case';
+import { DeleteAppointmentUseCase } from './application/use-cases/delete-appointment.use-case';
 import { AddMeasurementUseCase } from './application/use-cases/add-measurement.use-case';
 import { AddProgressPhotoUseCase } from './application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryPlansByUserUseCase } from './application/use-cases/list-recovery-plans-by-user.use-case';
@@ -112,6 +114,14 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
       inject: [RECOVERY_PLAN_REPOSITORY, EXERCISE_REPOSITORY],
     },
     {
+      provide: UpdateExerciseUseCase,
+      useFactory: (
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+        exerciseRepo: ExerciseRepositoryPort,
+      ) => new UpdateExerciseUseCase(recoveryPlanRepo, exerciseRepo),
+      inject: [RECOVERY_PLAN_REPOSITORY, EXERCISE_REPOSITORY],
+    },
+    {
       provide: LogExerciseUseCase,
       useFactory: (
         recoveryPlanRepo: RecoveryPlanRepositoryPort,
@@ -165,6 +175,14 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
         recoveryPlanRepo: RecoveryPlanRepositoryPort,
       ) =>
         new MarkAppointmentAttendanceUseCase(appointmentRepo, recoveryPlanRepo),
+      inject: [APPOINTMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
+    },
+    {
+      provide: DeleteAppointmentUseCase,
+      useFactory: (
+        appointmentRepo: AppointmentRepositoryPort,
+        recoveryPlanRepo: RecoveryPlanRepositoryPort,
+      ) => new DeleteAppointmentUseCase(appointmentRepo, recoveryPlanRepo),
       inject: [APPOINTMENT_REPOSITORY, RECOVERY_PLAN_REPOSITORY],
     },
     {
