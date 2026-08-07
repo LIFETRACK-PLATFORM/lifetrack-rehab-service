@@ -4,6 +4,7 @@ import { ExerciseEntity } from '../../../domain/entities/exercise.entity';
 import type {
   CreateExerciseInput,
   ExerciseRepositoryPort,
+  UpdateExerciseInput,
 } from '../../../domain/ports/exercise.repository.port';
 import { ExerciseMapper } from './exercise.mapper';
 
@@ -24,6 +25,20 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
         targetSets: data.targetSets,
         targetReps: data.targetReps,
         referenceMediaUrl: data.referenceMediaUrl,
+        phase: data.phase,
+        daysOfWeek: data.daysOfWeek ?? [],
+      },
+    });
+    return ExerciseMapper.toDomain(raw);
+  }
+
+  async update(id: string, data: UpdateExerciseInput): Promise<ExerciseEntity> {
+    const raw = await this.prisma.exercise.update({
+      where: { id },
+      data: {
+        name: data.name,
+        targetSets: data.targetSets,
+        targetReps: data.targetReps,
         phase: data.phase,
         daysOfWeek: data.daysOfWeek ?? [],
       },

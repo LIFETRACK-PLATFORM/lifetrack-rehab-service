@@ -6,9 +6,11 @@ import { ListRecoveryPlansByUserUseCase } from '../../application/use-cases/list
 import { UpdateRecoveryPlanStatusUseCase } from '../../application/use-cases/update-recovery-plan-status.use-case';
 import { AddExerciseUseCase } from '../../application/use-cases/add-exercise.use-case';
 import { DeleteExerciseUseCase } from '../../application/use-cases/delete-exercise.use-case';
+import { UpdateExerciseUseCase } from '../../application/use-cases/update-exercise.use-case';
 import { LogExerciseUseCase } from '../../application/use-cases/log-exercise.use-case';
 import { AddAppointmentUseCase } from '../../application/use-cases/add-appointment.use-case';
 import { MarkAppointmentAttendanceUseCase } from '../../application/use-cases/mark-appointment-attendance.use-case';
+import { DeleteAppointmentUseCase } from '../../application/use-cases/delete-appointment.use-case';
 import { AddMeasurementUseCase } from '../../application/use-cases/add-measurement.use-case';
 import { AddProgressPhotoUseCase } from '../../application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryProgressUseCase } from '../../application/use-cases/list-recovery-progress.use-case';
@@ -21,9 +23,11 @@ import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
 import { UpdateRecoveryPlanStatusDto } from '../dtos/update-recovery-plan-status.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
 import { DeleteExerciseDto } from '../dtos/delete-exercise.dto';
+import { UpdateExerciseDto } from '../dtos/update-exercise.dto';
 import { LogExerciseDto } from '../dtos/log-exercise.dto';
 import { AddAppointmentDto } from '../dtos/add-appointment.dto';
 import { MarkAppointmentAttendanceDto } from '../dtos/mark-appointment-attendance.dto';
+import { DeleteAppointmentDto } from '../dtos/delete-appointment.dto';
 import { AddMeasurementDto } from '../dtos/add-measurement.dto';
 import { AddProgressPhotoDto } from '../dtos/add-progress-photo.dto';
 import { ListRecoveryProgressDto } from '../dtos/list-recovery-progress.dto';
@@ -44,9 +48,11 @@ export class RehabController {
     private readonly updateRecoveryPlanStatusUseCase: UpdateRecoveryPlanStatusUseCase,
     private readonly addExerciseUseCase: AddExerciseUseCase,
     private readonly deleteExerciseUseCase: DeleteExerciseUseCase,
+    private readonly updateExerciseUseCase: UpdateExerciseUseCase,
     private readonly logExerciseUseCase: LogExerciseUseCase,
     private readonly addAppointmentUseCase: AddAppointmentUseCase,
     private readonly markAppointmentAttendanceUseCase: MarkAppointmentAttendanceUseCase,
+    private readonly deleteAppointmentUseCase: DeleteAppointmentUseCase,
     private readonly addMeasurementUseCase: AddMeasurementUseCase,
     private readonly addProgressPhotoUseCase: AddProgressPhotoUseCase,
     private readonly listRecoveryProgressUseCase: ListRecoveryProgressUseCase,
@@ -102,6 +108,12 @@ export class RehabController {
     });
   }
 
+  @GrpcMethod('RehabService', 'UpdateExercise')
+  updateExercise(data: UpdateExerciseDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.updateExerciseUseCase.execute({ userId, ...data });
+  }
+
   @GrpcMethod('RehabService', 'LogExercise')
   logExercise(data: LogExerciseDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
@@ -123,6 +135,15 @@ export class RehabController {
     return this.markAppointmentAttendanceUseCase.execute({
       userId,
       ...data,
+    });
+  }
+
+  @GrpcMethod('RehabService', 'DeleteAppointment')
+  deleteAppointment(data: DeleteAppointmentDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.deleteAppointmentUseCase.execute({
+      userId,
+      appointmentId: data.appointmentId,
     });
   }
 
