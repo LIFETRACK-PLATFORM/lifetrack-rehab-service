@@ -8,7 +8,7 @@ import type { MeasurementRepositoryPort } from '../../domain/ports/measurement.r
 import type { ProgressPhotoRepositoryPort } from '../../domain/ports/progress-photo.repository.port';
 import type { PainLogRepositoryPort } from '../../domain/ports/pain-log.repository.port';
 import type { ListRecoveryProgressInput } from '../dtos/list-recovery-progress.input';
-import { addDays, startOfDay } from '../utils/schedule.util';
+import { addDays, isSameDay, startOfDay } from '../utils/schedule.util';
 
 const PAIN_LOG_LOOKBACK_DAYS = 30;
 
@@ -34,11 +34,15 @@ export class ListRecoveryProgressUseCase {
     const exercises = await this.exerciseRepository.listByRecoveryPlan(
       input.recoveryPlanId,
     );
+    const today = startOfDay(new Date());
     const exercisesWithLogs = await Promise.all(
       exercises.map(async (exercise) => {
-        const logs = await this.exerciseLogRepository.listByExercise(
+        // El progreso (current/target) es por día: solo cuentan los logs de hoy,
+        // si no cada tap de + acumularía sobre el historial de todos los días.
+        const allLogs = await this.exerciseLogRepository.listByExercise(
           exercise.id,
         );
+        const logs = allLogs.filter((log) => isSameDay(log.date, today));
         const completions =
           await this.exerciseCompletionRepository.listByExerciseIds([
             exercise.id,
@@ -75,7 +79,6 @@ export class ListRecoveryProgressUseCase {
       await this.progressPhotoRepository.listByRecoveryPlan(
         input.recoveryPlanId,
       );
-    const today = startOfDay(new Date());
     const painLogs = await this.painLogRepository.listByRecoveryPlanInRange(
       input.recoveryPlanId,
       addDays(today, -PAIN_LOG_LOOKBACK_DAYS),
