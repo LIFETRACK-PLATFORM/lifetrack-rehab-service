@@ -99,6 +99,7 @@ export class AddAppointmentUseCase {
         provider: appointment.provider,
         type: appointment.type,
         notes: appointment.notes ?? undefined,
+        attended: appointment.attended ?? undefined,
       })),
     };
   }

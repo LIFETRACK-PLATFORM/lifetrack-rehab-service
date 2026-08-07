@@ -3,6 +3,7 @@ import { RpcException } from '@nestjs/microservices';
 import { status as GrpcStatus } from '@grpc/grpc-js';
 import { Observable, throwError } from 'rxjs';
 import {
+  AppointmentNotFoundError,
   DomainError,
   ExerciseNotFoundError,
   RecoveryPlanNotFoundError,
@@ -13,6 +14,7 @@ type DomainErrorConstructor = new (...args: unknown[]) => DomainError;
 const ERROR_CODE_MAP = new Map<DomainErrorConstructor, GrpcStatus>([
   [RecoveryPlanNotFoundError, GrpcStatus.NOT_FOUND],
   [ExerciseNotFoundError, GrpcStatus.NOT_FOUND],
+  [AppointmentNotFoundError, GrpcStatus.NOT_FOUND],
 ]);
 
 @Catch(DomainError)
