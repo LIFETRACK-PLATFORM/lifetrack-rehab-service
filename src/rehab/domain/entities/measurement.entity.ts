@@ -6,6 +6,9 @@ export enum MeasurementType {
   EXTENSION_DEGREES = 'EXTENSION_DEGREES',
   QUAD_CIRCUMFERENCE_CM = 'QUAD_CIRCUMFERENCE_CM',
   WEIGHT_KG = 'WEIGHT_KG',
+  WAIST_CM = 'WAIST_CM',
+  HIP_CM = 'HIP_CM',
+  NECK_CM = 'NECK_CM',
 }
 
 export type MeasurementProps = {
@@ -23,6 +26,9 @@ export class MeasurementEntity extends Entity<MeasurementProps> {
       throw new InvalidRehabEntityDataError('recoveryPlanId es obligatorio');
     if (typeof props.value !== 'number' || Number.isNaN(props.value)) {
       throw new InvalidRehabEntityDataError('value debe ser un número');
+    }
+    if (props.value <= 0) {
+      throw new InvalidRehabEntityDataError('value debe ser mayor a 0');
     }
     super(props, id);
   }

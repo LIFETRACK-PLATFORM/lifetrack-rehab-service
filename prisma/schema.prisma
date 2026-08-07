@@ -22,6 +22,9 @@ enum MeasurementType {
   EXTENSION_DEGREES
   QUAD_CIRCUMFERENCE_CM
   WEIGHT_KG
+  WAIST_CM
+  HIP_CM
+  NECK_CM
 }
 
 enum AppointmentType {
