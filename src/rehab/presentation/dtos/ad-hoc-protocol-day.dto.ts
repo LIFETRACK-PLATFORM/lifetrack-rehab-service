@@ -1,4 +1,4 @@
-import { IsDateString, IsString } from 'class-validator';
+import { IsDateString, IsOptional, IsString } from 'class-validator';
 
 export class SetAdHocProtocolDayDto {
   @IsString()
@@ -9,6 +9,10 @@ export class SetAdHocProtocolDayDto {
 
   @IsDateString()
   sourceDate: string;
+
+  @IsOptional()
+  @IsString()
+  todayIso?: string;
 }
 
 export class ClearAdHocProtocolDayDto {

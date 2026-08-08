@@ -7,4 +7,8 @@ export class GetWeeklySummaryDto {
   @IsOptional()
   @IsDateString()
   referenceDate?: string;
+
+  @IsOptional()
+  @IsString()
+  todayIso?: string;
 }

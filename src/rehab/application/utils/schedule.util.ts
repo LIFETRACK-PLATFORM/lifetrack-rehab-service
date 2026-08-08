@@ -24,3 +24,11 @@ export function dayOfWeek(date: Date): number {
 export function startOfWeek(date: Date): Date {
   return addDays(startOfDay(date), -dayOfWeek(date));
 }
+
+/**
+ * Día calendario "hoy" según el cliente (zona horaria local del usuario).
+ * Sin `todayIso` cae a la fecha UTC del servidor (compatibilidad).
+ */
+export function resolveToday(todayIso?: string): Date {
+  return todayIso ? startOfDay(new Date(todayIso)) : startOfDay(new Date());
+}

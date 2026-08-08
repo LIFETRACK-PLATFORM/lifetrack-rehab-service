@@ -3,12 +3,7 @@ import type { RecoveryPlanRepositoryPort } from '../../domain/ports/recovery-pla
 import type { ExerciseRepositoryPort } from '../../domain/ports/exercise.repository.port';
 import type { ExerciseCompletionRepositoryPort } from '../../domain/ports/exercise-completion.repository.port';
 import type { GetTodayExercisesInput } from '../dtos/get-today-exercises.input';
-import {
-  addDays,
-  dayOfWeek,
-  isSameDay,
-  startOfDay,
-} from '../utils/schedule.util';
+import { addDays, dayOfWeek, isSameDay, resolveToday } from '../utils/schedule.util';
 
 export class GetTodayExercisesUseCase {
   constructor(
@@ -24,7 +19,7 @@ export class GetTodayExercisesUseCase {
     );
     if (!plan) throw new RecoveryPlanNotFoundError(input.recoveryPlanId);
 
-    const today = startOfDay(new Date());
+    const today = resolveToday(input.todayIso);
     const yesterday = addDays(today, -1);
     const exercises = await this.exerciseRepository.listByRecoveryPlan(
       input.recoveryPlanId,

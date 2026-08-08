@@ -187,6 +187,26 @@ describe('GetWeeklySummaryUseCase', () => {
     expect(result.days).toHaveLength(7);
   });
 
+  it('usa el todayIso del cliente en vez de la fecha UTC del servidor cerca de medianoche', async () => {
+    // Reloj del servidor: 2026-08-08T02:00 UTC (ya es sábado en UTC),
+    // pero en Perú (UTC-5) todavía es viernes 2026-08-07 21:00.
+    jest.setSystemTime(new Date('2026-08-08T02:00:00.000Z'));
+    const useCase = buildUseCase([]);
+
+    const result = await useCase.execute({
+      userId: 'user-1',
+      recoveryPlanId: 'plan-1',
+      todayIso: '2026-08-07',
+    });
+
+    const saturday = result.days.find((d) => d.date === '2026-08-08');
+    const friday = result.days.find((d) => d.date === '2026-08-07');
+    // Sin el fix, "hoy" se calcularía en UTC (sábado): el sábado no
+    // aparecería como futuro y el streak contaría desde el sábado.
+    expect(saturday?.isFuture).toBe(true);
+    expect(friday?.isFuture).toBe(false);
+  });
+
   describe('protocolo prestado (ad-hoc)', () => {
     // 2026-08-06 es jueves (dow 4); 2026-08-03 es lunes (dow 1).
     const thursday = startOfDay(new Date('2026-08-06T00:00:00.000Z'));

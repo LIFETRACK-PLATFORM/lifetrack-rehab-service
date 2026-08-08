@@ -216,7 +216,11 @@ export class RehabController {
   getTodayExercises(data: GetTodayExercisesDto, metadata: Metadata) {
     const userId = getAuthenticatedUserId(metadata);
     return this.getTodayExercisesUseCase
-      .execute({ userId, recoveryPlanId: data.recoveryPlanId })
+      .execute({
+        userId,
+        recoveryPlanId: data.recoveryPlanId,
+        todayIso: data.todayIso,
+      })
       .then((exercises) => ({ exercises }));
   }
 

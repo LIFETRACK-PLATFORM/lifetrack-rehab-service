@@ -6,7 +6,7 @@ import type { AdHocProtocolDayRepositoryPort } from '../../domain/ports/ad-hoc-p
 import type { ExerciseRepositoryPort } from '../../domain/ports/exercise.repository.port';
 import type { RecoveryPlanRepositoryPort } from '../../domain/ports/recovery-plan.repository.port';
 import type { SetAdHocProtocolDayInput } from '../dtos/set-ad-hoc-protocol-day.input';
-import { dayOfWeek, startOfDay } from '../utils/schedule.util';
+import { dayOfWeek, resolveToday, startOfDay } from '../utils/schedule.util';
 
 function toDateOnly(iso: string): Date {
   return startOfDay(new Date(iso.slice(0, 10)));
@@ -28,7 +28,7 @@ export class SetAdHocProtocolDayUseCase {
 
     const targetDate = toDateOnly(input.targetDate);
     const sourceDate = toDateOnly(input.sourceDate);
-    const today = startOfDay(new Date());
+    const today = resolveToday(input.todayIso);
 
     if (targetDate.getTime() > today.getTime()) {
       throw new InvalidRehabEntityDataError(

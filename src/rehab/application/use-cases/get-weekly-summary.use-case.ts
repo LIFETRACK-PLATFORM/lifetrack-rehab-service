@@ -12,6 +12,7 @@ import {
   addDays,
   dayOfWeek,
   isSameDay,
+  resolveToday,
   startOfDay,
   startOfWeek,
 } from '../utils/schedule.util';
@@ -51,7 +52,7 @@ export class GetWeeklySummaryUseCase {
     );
     if (!plan) throw new RecoveryPlanNotFoundError(input.recoveryPlanId);
 
-    const today = startOfDay(new Date());
+    const today = resolveToday(input.todayIso);
     const referenceDate = input.referenceDate
       ? startOfDay(new Date(input.referenceDate))
       : today;
