@@ -18,6 +18,7 @@ export type UpdateAppointmentInput = {
   provider: string;
   type: AppointmentType;
   notes?: string;
+  rescheduledFromDate?: Date | null;
 };
 
 export interface AppointmentRepositoryPort {
@@ -30,10 +31,7 @@ export interface AppointmentRepositoryPort {
     from: Date,
     to: Date,
   ): Promise<AppointmentEntity[]>;
-  updateAttendance(
-    id: string,
-    attended: boolean,
-  ): Promise<AppointmentEntity>;
+  updateAttendance(id: string, attended: boolean): Promise<AppointmentEntity>;
   updateById(
     id: string,
     data: UpdateAppointmentInput,
