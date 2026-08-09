@@ -64,14 +64,15 @@ pipeline {
 
     stage("Docker Build") {
       steps {
-        sh "docker build -t rehab-service:latest ."
+        sh "docker buildx build --builder lifetrack-builder -t rehab-service:latest --load ."
       }
     }
   }
 
   post {
     always {
-      sh 'docker image prune -f'
+      sh 'docker image prune -af'
+      sh 'docker buildx prune -af --builder lifetrack-builder'
     }
     success {
       echo "Pipeline OK - rehab-service #${env.BUILD_NUMBER}"
