@@ -64,18 +64,14 @@ pipeline {
 
     stage("Docker Build") {
       steps {
-        lock('docker-build') {
-          sh "docker build -t rehab-service:latest ."
-        }
+        sh "docker build -t rehab-service:latest ."
       }
     }
   }
 
   post {
     always {
-      lock('docker-build') {
-        sh 'docker image prune -f'
-      }
+      sh 'docker image prune -f'
     }
     success {
       echo "Pipeline OK - rehab-service #${env.BUILD_NUMBER}"
