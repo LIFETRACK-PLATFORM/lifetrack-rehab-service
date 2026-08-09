@@ -14,6 +14,7 @@ export type AppointmentProps = {
   notes?: string | null;
   type: AppointmentType;
   attended?: boolean | null;
+  rescheduledFromDate?: Date | null;
   createdAt: Date;
 };
 
@@ -49,5 +50,8 @@ export class AppointmentEntity extends AggregateRoot<AppointmentProps> {
   }
   get attended(): boolean | null | undefined {
     return this.props.attended;
+  }
+  get rescheduledFromDate(): Date | null | undefined {
+    return this.props.rescheduledFromDate;
   }
 }

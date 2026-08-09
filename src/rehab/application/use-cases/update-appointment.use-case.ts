@@ -28,14 +28,21 @@ export class UpdateAppointmentUseCase {
       throw new RecoveryPlanNotFoundError(appointment.recoveryPlanId);
     }
 
+    const newDate = new Date(input.date);
+    const dateChanged = appointment.date.getTime() !== newDate.getTime();
+    const rescheduledFromDate = dateChanged
+      ? appointment.date
+      : appointment.rescheduledFromDate;
+
     const updated = await this.appointmentRepository.updateById(
       input.appointmentId,
       {
         title: input.title,
-        date: new Date(input.date),
+        date: newDate,
         provider: input.provider,
         type: input.type,
         notes: input.notes,
+        rescheduledFromDate,
       },
     );
 
@@ -48,6 +55,8 @@ export class UpdateAppointmentUseCase {
       type: updated.type,
       notes: updated.notes ?? undefined,
       attended: updated.attended ?? undefined,
+      rescheduledFromDate:
+        updated.rescheduledFromDate?.toISOString() ?? undefined,
     };
   }
 }

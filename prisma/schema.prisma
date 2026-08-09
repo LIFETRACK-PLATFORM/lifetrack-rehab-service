@@ -117,6 +117,7 @@ model Appointment {
   notes          String?
   type           AppointmentType @default(MEDICAL)
   attended       Boolean?
+  rescheduledFromDate DateTime?
   createdAt      DateTime        @default(now())
 }
 

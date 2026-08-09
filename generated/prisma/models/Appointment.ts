@@ -33,6 +33,7 @@ export type AppointmentMinAggregateOutputType = {
   notes: string | null
   type: $Enums.AppointmentType | null
   attended: boolean | null
+  rescheduledFromDate: Date | null
   createdAt: Date | null
 }
 
@@ -45,6 +46,7 @@ export type AppointmentMaxAggregateOutputType = {
   notes: string | null
   type: $Enums.AppointmentType | null
   attended: boolean | null
+  rescheduledFromDate: Date | null
   createdAt: Date | null
 }
 
@@ -57,6 +59,7 @@ export type AppointmentCountAggregateOutputType = {
   notes: number
   type: number
   attended: number
+  rescheduledFromDate: number
   createdAt: number
   _all: number
 }
@@ -71,6 +74,7 @@ export type AppointmentMinAggregateInputType = {
   notes?: true
   type?: true
   attended?: true
+  rescheduledFromDate?: true
   createdAt?: true
 }
 
@@ -83,6 +87,7 @@ export type AppointmentMaxAggregateInputType = {
   notes?: true
   type?: true
   attended?: true
+  rescheduledFromDate?: true
   createdAt?: true
 }
 
@@ -95,6 +100,7 @@ export type AppointmentCountAggregateInputType = {
   notes?: true
   type?: true
   attended?: true
+  rescheduledFromDate?: true
   createdAt?: true
   _all?: true
 }
@@ -180,6 +186,7 @@ export type AppointmentGroupByOutputType = {
   notes: string | null
   type: $Enums.AppointmentType
   attended: boolean | null
+  rescheduledFromDate: Date | null
   createdAt: Date
   _count: AppointmentCountAggregateOutputType | null
   _min: AppointmentMinAggregateOutputType | null
@@ -213,6 +220,7 @@ export type AppointmentWhereInput = {
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
   type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   attended?: Prisma.BoolNullableFilter<"Appointment"> | boolean | null
+  rescheduledFromDate?: Prisma.DateTimeNullableFilter<"Appointment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
 }
@@ -226,6 +234,7 @@ export type AppointmentOrderByWithRelationInput = {
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   attended?: Prisma.SortOrderInput | Prisma.SortOrder
+  rescheduledFromDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   recoveryPlan?: Prisma.RecoveryPlanOrderByWithRelationInput
 }
@@ -242,6 +251,7 @@ export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
   type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   attended?: Prisma.BoolNullableFilter<"Appointment"> | boolean | null
+  rescheduledFromDate?: Prisma.DateTimeNullableFilter<"Appointment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
   recoveryPlan?: Prisma.XOR<Prisma.RecoveryPlanScalarRelationFilter, Prisma.RecoveryPlanWhereInput>
 }, "id">
@@ -255,6 +265,7 @@ export type AppointmentOrderByWithAggregationInput = {
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   attended?: Prisma.SortOrderInput | Prisma.SortOrder
+  rescheduledFromDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.AppointmentCountOrderByAggregateInput
   _max?: Prisma.AppointmentMaxOrderByAggregateInput
@@ -273,6 +284,7 @@ export type AppointmentScalarWhereWithAggregatesInput = {
   notes?: Prisma.StringNullableWithAggregatesFilter<"Appointment"> | string | null
   type?: Prisma.EnumAppointmentTypeWithAggregatesFilter<"Appointment"> | $Enums.AppointmentType
   attended?: Prisma.BoolNullableWithAggregatesFilter<"Appointment"> | boolean | null
+  rescheduledFromDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Appointment"> | Date | string
 }
 
@@ -284,6 +296,7 @@ export type AppointmentCreateInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
   recoveryPlan: Prisma.RecoveryPlanCreateNestedOneWithoutAppointmentsInput
 }
@@ -297,6 +310,7 @@ export type AppointmentUncheckedCreateInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -308,6 +322,7 @@ export type AppointmentUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recoveryPlan?: Prisma.RecoveryPlanUpdateOneRequiredWithoutAppointmentsNestedInput
 }
@@ -321,6 +336,7 @@ export type AppointmentUncheckedUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -333,6 +349,7 @@ export type AppointmentCreateManyInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -344,6 +361,7 @@ export type AppointmentUpdateManyMutationInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -356,6 +374,7 @@ export type AppointmentUncheckedUpdateManyInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -378,6 +397,7 @@ export type AppointmentCountOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   type?: Prisma.SortOrder
   attended?: Prisma.SortOrder
+  rescheduledFromDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -390,6 +410,7 @@ export type AppointmentMaxOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   type?: Prisma.SortOrder
   attended?: Prisma.SortOrder
+  rescheduledFromDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -402,6 +423,7 @@ export type AppointmentMinOrderByAggregateInput = {
   notes?: Prisma.SortOrder
   type?: Prisma.SortOrder
   attended?: Prisma.SortOrder
+  rescheduledFromDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -455,6 +477,10 @@ export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type AppointmentCreateWithoutRecoveryPlanInput = {
   id?: string
   title?: string | null
@@ -463,6 +489,7 @@ export type AppointmentCreateWithoutRecoveryPlanInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -474,6 +501,7 @@ export type AppointmentUncheckedCreateWithoutRecoveryPlanInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -515,6 +543,7 @@ export type AppointmentScalarWhereInput = {
   notes?: Prisma.StringNullableFilter<"Appointment"> | string | null
   type?: Prisma.EnumAppointmentTypeFilter<"Appointment"> | $Enums.AppointmentType
   attended?: Prisma.BoolNullableFilter<"Appointment"> | boolean | null
+  rescheduledFromDate?: Prisma.DateTimeNullableFilter<"Appointment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Appointment"> | Date | string
 }
 
@@ -526,6 +555,7 @@ export type AppointmentCreateManyRecoveryPlanInput = {
   notes?: string | null
   type?: $Enums.AppointmentType
   attended?: boolean | null
+  rescheduledFromDate?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -537,6 +567,7 @@ export type AppointmentUpdateWithoutRecoveryPlanInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -548,6 +579,7 @@ export type AppointmentUncheckedUpdateWithoutRecoveryPlanInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -559,6 +591,7 @@ export type AppointmentUncheckedUpdateManyWithoutRecoveryPlanInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumAppointmentTypeFieldUpdateOperationsInput | $Enums.AppointmentType
   attended?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  rescheduledFromDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -573,6 +606,7 @@ export type AppointmentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   notes?: boolean
   type?: boolean
   attended?: boolean
+  rescheduledFromDate?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -586,6 +620,7 @@ export type AppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   notes?: boolean
   type?: boolean
   attended?: boolean
+  rescheduledFromDate?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -599,6 +634,7 @@ export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   notes?: boolean
   type?: boolean
   attended?: boolean
+  rescheduledFromDate?: boolean
   createdAt?: boolean
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["appointment"]>
@@ -612,10 +648,11 @@ export type AppointmentSelectScalar = {
   notes?: boolean
   type?: boolean
   attended?: boolean
+  rescheduledFromDate?: boolean
   createdAt?: boolean
 }
 
-export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "title" | "date" | "provider" | "notes" | "type" | "attended" | "createdAt", ExtArgs["result"]["appointment"]>
+export type AppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recoveryPlanId" | "title" | "date" | "provider" | "notes" | "type" | "attended" | "rescheduledFromDate" | "createdAt", ExtArgs["result"]["appointment"]>
 export type AppointmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recoveryPlan?: boolean | Prisma.RecoveryPlanDefaultArgs<ExtArgs>
 }
@@ -640,6 +677,7 @@ export type $AppointmentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     notes: string | null
     type: $Enums.AppointmentType
     attended: boolean | null
+    rescheduledFromDate: Date | null
     createdAt: Date
   }, ExtArgs["result"]["appointment"]>
   composites: {}
@@ -1073,6 +1111,7 @@ export interface AppointmentFieldRefs {
   readonly notes: Prisma.FieldRef<"Appointment", 'String'>
   readonly type: Prisma.FieldRef<"Appointment", 'AppointmentType'>
   readonly attended: Prisma.FieldRef<"Appointment", 'Boolean'>
+  readonly rescheduledFromDate: Prisma.FieldRef<"Appointment", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Appointment", 'DateTime'>
 }
     
