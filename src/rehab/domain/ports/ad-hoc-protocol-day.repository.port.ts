@@ -12,7 +12,5 @@ export interface AdHocProtocolDayRepositoryPort {
     recoveryPlanId: string,
     targetDate: Date,
   ): Promise<void>;
-  listByRecoveryPlan(
-    recoveryPlanId: string,
-  ): Promise<AdHocProtocolDayEntity[]>;
+  listByRecoveryPlan(recoveryPlanId: string): Promise<AdHocProtocolDayEntity[]>;
 }

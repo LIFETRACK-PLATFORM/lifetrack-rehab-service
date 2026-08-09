@@ -142,7 +142,7 @@ describe('AddAppointmentUseCase', () => {
       findById: jest.fn(),
       updateAttendance: jest.fn(),
       deleteById: jest.fn(),
-    updateById: jest.fn(),
+      updateById: jest.fn(),
     };
     const eventPublisher = { publish: jest.fn() };
     const useCase = new AddAppointmentUseCase(

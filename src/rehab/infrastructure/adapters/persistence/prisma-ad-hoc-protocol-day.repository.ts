@@ -8,12 +8,12 @@ import type {
 import { AdHocProtocolDayMapper } from './ad-hoc-protocol-day.mapper';
 
 @Injectable()
-export class PrismaAdHocProtocolDayRepository
-  implements AdHocProtocolDayRepositoryPort
-{
+export class PrismaAdHocProtocolDayRepository implements AdHocProtocolDayRepositoryPort {
   constructor(private readonly prisma: PrismaService) {}
 
-  async upsert(data: UpsertAdHocProtocolDayInput): Promise<AdHocProtocolDayEntity> {
+  async upsert(
+    data: UpsertAdHocProtocolDayInput,
+  ): Promise<AdHocProtocolDayEntity> {
     const raw = await this.prisma.adHocProtocolDay.upsert({
       where: {
         recoveryPlanId_targetDate: {

@@ -1,4 +1,7 @@
-import { ExerciseEntity, ExerciseMetricType } from '../entities/exercise.entity';
+import {
+  ExerciseEntity,
+  ExerciseMetricType,
+} from '../entities/exercise.entity';
 
 export type CreateExerciseInput = {
   recoveryPlanId: string;

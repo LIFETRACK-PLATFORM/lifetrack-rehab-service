@@ -7,7 +7,11 @@ import { envs } from './config/envs';
 import { spanishValidationExceptionFactory } from './shared/utils/spanish-validation-exception-factory';
 
 const contractsProtoPath = (file: string) =>
-  join(dirname(require.resolve('@lifetrack/contracts/package.json')), 'proto', file);
+  join(
+    dirname(require.resolve('@lifetrack/contracts/package.json')),
+    'proto',
+    file,
+  );
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
