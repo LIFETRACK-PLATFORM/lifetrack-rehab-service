@@ -25,9 +25,7 @@ export class ExerciseEntity extends Entity<ExerciseProps> {
       throw new InvalidRehabEntityDataError('recoveryPlanId es obligatorio');
     if (!props.name)
       throw new InvalidRehabEntityDataError('name es obligatorio');
-    if (
-      !Object.values(ExerciseMetricType).includes(props.metricType)
-    ) {
+    if (!Object.values(ExerciseMetricType).includes(props.metricType)) {
       throw new InvalidRehabEntityDataError(
         'metricType debe ser REPS o DURATION',
       );
