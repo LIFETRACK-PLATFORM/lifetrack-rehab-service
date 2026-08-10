@@ -14,6 +14,7 @@ import { DeleteMeasurementUseCase } from './application/use-cases/delete-measure
 import { AddProgressPhotoUseCase } from './application/use-cases/add-progress-photo.use-case';
 import { ListRecoveryPlansByUserUseCase } from './application/use-cases/list-recovery-plans-by-user.use-case';
 import { UpdateRecoveryPlanStatusUseCase } from './application/use-cases/update-recovery-plan-status.use-case';
+import { DeleteRecoveryPlanUseCase } from './application/use-cases/delete-recovery-plan.use-case';
 import { ListRecoveryProgressUseCase } from './application/use-cases/list-recovery-progress.use-case';
 import { MarkExerciseCompletionUseCase } from './application/use-cases/mark-exercise-completion.use-case';
 import { GetTodayExercisesUseCase } from './application/use-cases/get-today-exercises.use-case';
@@ -164,6 +165,12 @@ import type { EventPublisherPort } from './domain/ports/event.publisher.port';
       provide: UpdateRecoveryPlanStatusUseCase,
       useFactory: (recoveryPlanRepo: RecoveryPlanRepositoryPort) =>
         new UpdateRecoveryPlanStatusUseCase(recoveryPlanRepo),
+      inject: [RECOVERY_PLAN_REPOSITORY],
+    },
+    {
+      provide: DeleteRecoveryPlanUseCase,
+      useFactory: (recoveryPlanRepo: RecoveryPlanRepositoryPort) =>
+        new DeleteRecoveryPlanUseCase(recoveryPlanRepo),
       inject: [RECOVERY_PLAN_REPOSITORY],
     },
     {

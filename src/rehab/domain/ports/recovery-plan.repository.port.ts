@@ -22,4 +22,5 @@ export interface RecoveryPlanRepositoryPort {
     id: string,
     status: RecoveryPlanStatus,
   ): Promise<RecoveryPlanEntity>;
+  deleteById(id: string): Promise<void>;
 }

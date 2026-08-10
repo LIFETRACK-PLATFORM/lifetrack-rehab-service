@@ -59,4 +59,33 @@ export class PrismaRecoveryPlanRepository implements RecoveryPlanRepositoryPort 
     });
     return RecoveryPlanMapper.toDomain(raw);
   }
+
+  async deleteById(id: string): Promise<void> {
+    await this.prisma.$transaction(async (tx) => {
+      const exercises = await tx.exercise.findMany({
+        where: { recoveryPlanId: id },
+        select: { id: true },
+      });
+      const exerciseIds = exercises.map((exercise) => exercise.id);
+
+      if (exerciseIds.length > 0) {
+        await tx.exerciseLog.deleteMany({
+          where: { exerciseId: { in: exerciseIds } },
+        });
+        await tx.exerciseCompletion.deleteMany({
+          where: { exerciseId: { in: exerciseIds } },
+        });
+        await tx.exercise.deleteMany({
+          where: { recoveryPlanId: id },
+        });
+      }
+
+      await tx.appointment.deleteMany({ where: { recoveryPlanId: id } });
+      await tx.measurement.deleteMany({ where: { recoveryPlanId: id } });
+      await tx.progressPhoto.deleteMany({ where: { recoveryPlanId: id } });
+      await tx.painLog.deleteMany({ where: { recoveryPlanId: id } });
+      await tx.adHocProtocolDay.deleteMany({ where: { recoveryPlanId: id } });
+      await tx.recoveryPlan.delete({ where: { id } });
+    });
+  }
 }
