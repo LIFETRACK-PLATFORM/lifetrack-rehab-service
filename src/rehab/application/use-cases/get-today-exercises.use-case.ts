@@ -37,6 +37,7 @@ export class GetTodayExercisesUseCase {
       );
 
     const dueToday = exercises.filter((e) => e.isScheduledOn(dayOfWeek(today)));
+    const dueTodayIds = new Set(dueToday.map((e) => e.id));
     const dueYesterday = exercises.filter((e) =>
       e.isScheduledOn(dayOfWeek(yesterday)),
     );
@@ -52,7 +53,12 @@ export class GetTodayExercisesUseCase {
       const completedYesterday = completions.some(
         (c) => c.exerciseId === exercise.id && isSameDay(c.date, yesterday),
       );
-      const urgent = dueYesterdayIds.has(exercise.id) && !completedYesterday;
+      // Si el ejercicio tambien esta agendado hoy, hoy es una ocurrencia
+      // nueva con su propia ventana: no arrastramos el "vencido" de ayer.
+      const urgent =
+        dueYesterdayIds.has(exercise.id) &&
+        !completedYesterday &&
+        !dueTodayIds.has(exercise.id);
 
       return {
         exerciseId: exercise.id,
