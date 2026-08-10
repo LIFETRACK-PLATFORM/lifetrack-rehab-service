@@ -4,6 +4,7 @@ import type { Metadata } from '@grpc/grpc-js';
 import { CreateRecoveryPlanUseCase } from '../../application/use-cases/create-recovery-plan.use-case';
 import { ListRecoveryPlansByUserUseCase } from '../../application/use-cases/list-recovery-plans-by-user.use-case';
 import { UpdateRecoveryPlanStatusUseCase } from '../../application/use-cases/update-recovery-plan-status.use-case';
+import { DeleteRecoveryPlanUseCase } from '../../application/use-cases/delete-recovery-plan.use-case';
 import { AddExerciseUseCase } from '../../application/use-cases/add-exercise.use-case';
 import { DeleteExerciseUseCase } from '../../application/use-cases/delete-exercise.use-case';
 import { UpdateExerciseUseCase } from '../../application/use-cases/update-exercise.use-case';
@@ -26,6 +27,7 @@ import { SetAdHocProtocolDayUseCase } from '../../application/use-cases/set-ad-h
 import { ClearAdHocProtocolDayUseCase } from '../../application/use-cases/clear-ad-hoc-protocol-day.use-case';
 import { CreateRecoveryPlanDto } from '../dtos/create-recovery-plan.dto';
 import { UpdateRecoveryPlanStatusDto } from '../dtos/update-recovery-plan-status.dto';
+import { DeleteRecoveryPlanDto } from '../dtos/delete-recovery-plan.dto';
 import { AddExerciseDto } from '../dtos/add-exercise.dto';
 import { DeleteExerciseDto } from '../dtos/delete-exercise.dto';
 import { UpdateExerciseDto } from '../dtos/update-exercise.dto';
@@ -58,6 +60,7 @@ export class RehabController {
     private readonly createRecoveryPlanUseCase: CreateRecoveryPlanUseCase,
     private readonly listRecoveryPlansByUserUseCase: ListRecoveryPlansByUserUseCase,
     private readonly updateRecoveryPlanStatusUseCase: UpdateRecoveryPlanStatusUseCase,
+    private readonly deleteRecoveryPlanUseCase: DeleteRecoveryPlanUseCase,
     private readonly addExerciseUseCase: AddExerciseUseCase,
     private readonly deleteExerciseUseCase: DeleteExerciseUseCase,
     private readonly updateExerciseUseCase: UpdateExerciseUseCase,
@@ -107,6 +110,15 @@ export class RehabController {
       userId,
       recoveryPlanId: data.recoveryPlanId,
       status: data.status,
+    });
+  }
+
+  @GrpcMethod('RehabService', 'DeleteRecoveryPlan')
+  deleteRecoveryPlan(data: DeleteRecoveryPlanDto, metadata: Metadata) {
+    const userId = getAuthenticatedUserId(metadata);
+    return this.deleteRecoveryPlanUseCase.execute({
+      userId,
+      recoveryPlanId: data.recoveryPlanId,
     });
   }
 

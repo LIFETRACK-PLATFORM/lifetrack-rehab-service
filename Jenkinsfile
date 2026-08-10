@@ -64,7 +64,7 @@ pipeline {
 
     stage("Docker Build") {
       steps {
-        sh "docker buildx build --builder lifetrack-builder -t rehab-service:latest --load ."
+        sh "docker buildx build --builder lifetrack-builder --provenance=false --sbom=false -t rehab-service:latest --load ."
       }
     }
   }
