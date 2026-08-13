@@ -34,6 +34,10 @@ export class AddAppointmentDto {
   notes?: string;
 
   @IsOptional()
+  @IsString()
+  location?: string;
+
+  @IsOptional()
   @IsInt()
   @Min(0)
   @Max(12)

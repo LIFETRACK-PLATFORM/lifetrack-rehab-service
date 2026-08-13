@@ -111,6 +111,7 @@ export class ListRecoveryProgressUseCase {
         provider: a.provider,
         type: a.type,
         notes: a.notes ?? undefined,
+        location: a.location ?? undefined,
         attended: a.attended ?? undefined,
         rescheduledFromDate: a.rescheduledFromDate?.toISOString() ?? undefined,
       })),

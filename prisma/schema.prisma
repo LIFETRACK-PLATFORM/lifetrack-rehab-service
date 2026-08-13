@@ -115,6 +115,7 @@ model Appointment {
   date           DateTime
   provider       String
   notes          String?
+  location       String?
   type           AppointmentType @default(MEDICAL)
   attended       Boolean?
   rescheduledFromDate DateTime?

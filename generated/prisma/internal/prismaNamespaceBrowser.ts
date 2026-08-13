@@ -149,6 +149,7 @@ export const AppointmentScalarFieldEnum = {
   date: 'date',
   provider: 'provider',
   notes: 'notes',
+  location: 'location',
   type: 'type',
   attended: 'attended',
   rescheduledFromDate: 'rescheduledFromDate',

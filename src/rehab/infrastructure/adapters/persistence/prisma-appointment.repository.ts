@@ -21,6 +21,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
         provider: data.provider,
         type: data.type,
         notes: data.notes,
+        location: data.location,
       },
     });
     return AppointmentMapper.toDomain(raw);
@@ -39,6 +40,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
             provider: item.provider,
             type: item.type,
             notes: item.notes,
+            location: item.location,
           },
         }),
       ),
@@ -58,6 +60,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
         provider: data.provider,
         type: data.type,
         notes: data.notes,
+        location: data.location,
         rescheduledFromDate: data.rescheduledFromDate,
         attended: data.attended,
       },

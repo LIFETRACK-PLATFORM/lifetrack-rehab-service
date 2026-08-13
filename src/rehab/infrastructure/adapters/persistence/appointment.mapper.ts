@@ -14,6 +14,7 @@ export class AppointmentMapper {
         provider: raw.provider,
         type: raw.type as AppointmentType,
         notes: raw.notes,
+        location: raw.location,
         attended: raw.attended,
         rescheduledFromDate: raw.rescheduledFromDate,
         createdAt: raw.createdAt,

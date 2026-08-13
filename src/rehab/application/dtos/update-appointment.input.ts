@@ -8,4 +8,5 @@ export type UpdateAppointmentInput = {
   provider: string;
   type: AppointmentType;
   notes?: string;
+  location?: string;
 };
