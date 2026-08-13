@@ -45,6 +45,7 @@ export class UpdateAppointmentUseCase {
         provider: input.provider,
         type: input.type,
         notes: input.notes,
+        location: input.location,
         rescheduledFromDate,
         attended,
       },
@@ -58,6 +59,7 @@ export class UpdateAppointmentUseCase {
       provider: updated.provider,
       type: updated.type,
       notes: updated.notes ?? undefined,
+      location: updated.location ?? undefined,
       attended: updated.attended ?? undefined,
       rescheduledFromDate:
         updated.rescheduledFromDate?.toISOString() ?? undefined,

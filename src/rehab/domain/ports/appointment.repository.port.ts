@@ -10,6 +10,7 @@ export type CreateAppointmentInput = {
   provider: string;
   type: AppointmentType;
   notes?: string;
+  location?: string;
 };
 
 export type UpdateAppointmentInput = {
@@ -18,6 +19,7 @@ export type UpdateAppointmentInput = {
   provider: string;
   type: AppointmentType;
   notes?: string;
+  location?: string;
   rescheduledFromDate?: Date | null;
   attended?: boolean | null;
 };

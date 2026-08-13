@@ -43,6 +43,7 @@ export class AddAppointmentUseCase {
         provider: input.provider,
         type: input.type,
         notes: input.notes,
+        location: input.location,
         createdAt: new Date(),
       });
     });
@@ -57,6 +58,7 @@ export class AddAppointmentUseCase {
               provider: input.provider,
               type: input.type,
               notes: input.notes,
+              location: input.location,
             }),
           ]
         : await this.appointmentRepository.createMany(
@@ -67,6 +69,7 @@ export class AddAppointmentUseCase {
               provider: input.provider,
               type: input.type,
               notes: input.notes,
+              location: input.location,
             })),
           );
 
@@ -103,6 +106,7 @@ export class AddAppointmentUseCase {
         provider: appointment.provider,
         type: appointment.type,
         notes: appointment.notes ?? undefined,
+        location: appointment.location ?? undefined,
         attended: appointment.attended ?? undefined,
       })),
     };

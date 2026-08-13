@@ -8,6 +8,7 @@ export type AddAppointmentInput = {
   provider: string;
   type: AppointmentType;
   notes?: string;
+  location?: string;
   /** Repeticiones semanales adicionales a partir de `date` (0 = solo esta cita). Tope 12. */
   repeatWeeks?: number;
 };
