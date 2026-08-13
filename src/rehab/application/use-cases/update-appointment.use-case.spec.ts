@@ -103,6 +103,56 @@ describe('UpdateAppointmentUseCase', () => {
     );
   });
 
+  it('limpia attended cuando la fecha cambia, porque la reprogramación queda pendiente de confirmar', async () => {
+    const { appointmentRepository, recoveryPlanRepository } = buildRepos(
+      baseProps({ attended: false }),
+    );
+    const useCase = new UpdateAppointmentUseCase(
+      appointmentRepository,
+      recoveryPlanRepository as any,
+    );
+
+    const result = await useCase.execute({
+      userId: 'user-1',
+      appointmentId: 'apt-1',
+      title: 'Control',
+      date: '2026-08-15T09:00:00.000Z',
+      provider: 'Centro Apex',
+      type: AppointmentType.THERAPY,
+    });
+
+    expect(appointmentRepository.updateById).toHaveBeenCalledWith(
+      'apt-1',
+      expect.objectContaining({ attended: null }),
+    );
+    expect(result.attended).toBeUndefined();
+  });
+
+  it('preserva attended existente cuando la fecha no cambia', async () => {
+    const { appointmentRepository, recoveryPlanRepository } = buildRepos(
+      baseProps({ attended: true }),
+    );
+    const useCase = new UpdateAppointmentUseCase(
+      appointmentRepository,
+      recoveryPlanRepository as any,
+    );
+
+    const result = await useCase.execute({
+      userId: 'user-1',
+      appointmentId: 'apt-1',
+      title: 'Control (notas actualizadas)',
+      date: '2026-08-10T09:00:00.000Z',
+      provider: 'Centro Apex',
+      type: AppointmentType.THERAPY,
+    });
+
+    expect(appointmentRepository.updateById).toHaveBeenCalledWith(
+      'apt-1',
+      expect.objectContaining({ attended: true }),
+    );
+    expect(result.attended).toBe(true);
+  });
+
   it('lanza AppointmentNotFoundError si la cita no existe', async () => {
     const appointmentRepository = {
       create: jest.fn(),

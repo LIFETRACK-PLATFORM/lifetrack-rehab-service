@@ -19,6 +19,7 @@ export type UpdateAppointmentInput = {
   type: AppointmentType;
   notes?: string;
   rescheduledFromDate?: Date | null;
+  attended?: boolean | null;
 };
 
 export interface AppointmentRepositoryPort {

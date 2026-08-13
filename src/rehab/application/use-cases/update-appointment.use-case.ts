@@ -33,6 +33,9 @@ export class UpdateAppointmentUseCase {
     const rescheduledFromDate = dateChanged
       ? appointment.date
       : appointment.rescheduledFromDate;
+    // Una cita reprogramada vuelve a estar pendiente de confirmar: la
+    // asistencia marcada en la fecha anterior ya no aplica a la nueva fecha.
+    const attended = dateChanged ? null : appointment.attended;
 
     const updated = await this.appointmentRepository.updateById(
       input.appointmentId,
@@ -43,6 +46,7 @@ export class UpdateAppointmentUseCase {
         type: input.type,
         notes: input.notes,
         rescheduledFromDate,
+        attended,
       },
     );
 
