@@ -59,6 +59,7 @@ export class PrismaAppointmentRepository implements AppointmentRepositoryPort {
         type: data.type,
         notes: data.notes,
         rescheduledFromDate: data.rescheduledFromDate,
+        attended: data.attended,
       },
     });
     return AppointmentMapper.toDomain(raw);
